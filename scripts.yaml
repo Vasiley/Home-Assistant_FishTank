@@ -1,0 +1,457 @@
+######### Script for bedtime Tell Alexa Turn on Bedtime######
+  lamps_on:
+    sequence:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.thermostat
+          hold_mode: "sleep" 
+      - delay: '00:00:02'
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Sleep is Activated Good Night'   
+      - delay: '00:00:02'    
+      - service: media_player.turn_off 
+        data:
+          entity_id: media_player.onkyo
+      - service: remote.turn_off
+        data:     
+          entity_id: remote.entertainment
+      - service: fan.turn_off
+        data:
+          entity_id: fan.living_room_fan        
+      - service: light.turn_on
+        data:
+          entity_id: light.kitchen
+          color_temp: 426
+          brightness: 125
+      - service: light.turn_on
+        data:
+          entity_id: light.lamps
+          xy_color: [0.4575,0.4099]
+          brightness: 125
+      - service: light.turn_on
+        data:
+          entity_id: light.master_hallway
+          color_temp: 426
+          brightness: 125
+      - service: light.turn_on
+        data:
+          entity_id: light.master
+          color_temp: 426
+          brightness: 125    
+      - service: light.turn_on
+        data:
+          entity_id: light.bathroom
+          color_temp: 426
+          brightness: 125
+      - service: switch.turn_off 
+        data:
+          entity_id: switch.network_switch_blue_iris_monitor 
+#      - service: switch.turn_off
+#        data:
+#          entity_id: switch.tv_control    
+      - delay: '00:00:45'
+      - service: light.turn_off
+        data:
+          entity_id: light.lamps
+      - service: light.turn_on
+        data:
+          entity_id: light.dawns_lamp
+          color_temp: 426
+          brightness: 125
+      - delay: '00:00:10'    
+      - service: light.turn_off
+        data:
+          entity_id: light.kitchen
+      - delay: '00:00:10'    
+      - service: light.turn_off
+        data:
+          entity_id: light.master_hallway 
+      - delay: '00:00:45'          
+      - service: light.turn_off
+        data:      
+          entity_id: light.bathroom
+      - delay: '00:00:45'
+      - service: light.turn_off
+        data: 
+          entity_id: light.master    
+      - service: rest_command.sleep
+      - service: rest_command.sleep      
+ ############## Script for Herb Early Morning ###########
+  herbearly_on:
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.network_switch_blue_iris_monitor
+      - delay: '00:00:01'    
+      - service: light.turn_on
+        data:      
+          entity_id: light.herbs_lamp
+          color_temp: 200
+          brightness: 175
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Good Morning Herb how are you this morning'
+      - service: rest_command.no_motion
+      - service: rest_command.no_motion      
+######  Dawns daytime Scene aka NORMAL ########
+  bright_on:
+    sequence:
+      - service: climate.set_away_mode
+        data:    
+          entity_id: climate.thermostat
+          away_mode: 'off'
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.thermostat
+          hold_mode: "home"
+      - service: fan.turn_on
+        data:
+          entity_id: fan.living_room_fan    
+      - service: rest_command.no_motion 
+      - service: rest_command.no_motion       
+      - service: switch.turn_on
+        data:
+          entity_id: switch.network_switch_blue_iris_monitor
+      - delay: '00:00:01'
+      - service: light.turn_on
+        data:
+          entity_id: light.lamps
+          color_temp: 154
+          brightness: 255
+#      - service: light.hue_activate_scene
+#        data:
+#          group_name: "Lamps"
+#          scene_name: "Concentrate"
+      - service: light.turn_on
+        data:
+          entity_id: light.kitchen  
+          color_temp: 154
+          brightness: 224
+      - service: light.turn_on
+        data:
+          entity_id: light.master_hallway  
+          color_temp: 154
+          brightness: 224 
+      - service: light.turn_on
+        data:
+          entity_id: light.kids_hallway
+          color_temp: 154
+          brightness: 224          
+      - delay: '00:00:01'
+      - service: light.turn_off
+        data:
+          entity_id: light.master_hallway
+      - delay: '00:00:01'
+      - service: light.turn_off
+        data:
+          entity_id: light.kitchen 
+      - delay: '00:00:01'
+      - service: light.turn_off
+        data:
+          entity_id: light.kids_hallway  
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Home Mode is Activated'
+######## Knight Rider ################- alias: knight rider effect
+  knightrider_on:
+  ####### DOOR LAMP #########
+  ###### Forward #########
+    sequence: 
+      - delay: '00:00:00'
+      - service: light.turn_on
+        data:
+          entity_id: light.door_lamp
+          xy_color: [0.167,0.04]
+          brightness: 255
+#      - delay: '00:00:01'
+      - service: light.turn_on      
+        data:
+          entity_id: light.door_lamp
+          xy_color: [0.167,0.04]
+          brightness: 125
+  ####### Dawns LAMP  #######        
+      - service: light.turn_on
+        data:
+          entity_id: light.dawns_lamp
+          xy_color: [0.167,0.04]
+          brightness: 125
+#      - delay: '00:00:01'
+      - service: light.turn_on      
+        data:
+          entity_id: light.dawns_lamp
+          xy_color: [0.167,0.04]
+          brightness: 255  
+      - service: light.turn_off
+        data:
+          entity_id: light.door_lamp
+   ##### Herbs LAMP   #######           
+      - service: light.turn_on
+        data:
+          entity_id: light.herbs_lamp
+          xy_color: [0.167,0.04]
+          brightness: 125
+#      - delay: '00:00:01'
+      - service: light.turn_on      
+        data:
+          entity_id: light.herbs_lamp
+          xy_color: [0.167,0.04]
+          brightness: 255
+      - service: light.turn_off
+        data:
+          entity_id: light.dawns_lamp  
+   ###### Backwards ######          
+      - service: light.turn_on
+        data:
+          entity_id: light.dawns_lamp
+          xy_color: [0.167,0.04]
+          brightness: 125
+      - service: light.turn_on
+        data:
+          entity_id: light.herbs_lamp
+          xy_color: [0.167,0.04]
+          brightness: 125
+      - service: light.turn_off
+        data: 
+          entity_id: light.herbs_lamp         
+####### Dawns Lamp #####          
+      - service: light.turn_on
+        data:
+          entity_id: light.dawns_lamp 
+          xy_color: [0.167,0.04]
+          brightness: 255
+      - service: light.turn_on
+        data:
+          entity_id: light.door_lamp
+          xy_color: [0.167,0.04]
+          brightness: 125
+      - service: light.turn_off
+        data:
+          entity_id: light.dawns_lamp
+      - service: light.turn_on
+        data:
+          entity_id: light.door_lamp
+          xy_color: [0.167,0.04]
+          brightness: 255          
+      - service: script.turn_on
+        data:
+          entity_id: script.rerunknightrider_on
+  rerunknightrider_on:
+    sequence:
+      - delay: '00:00:00'   
+      - service: script.turn_on
+        data:
+          entity_id: script.knightrider_on
+          
+  knightrider_off:
+    sequence:
+      - delay: '00:00:00'
+      - service: script.turn_off
+        data:
+          entity_id: script.rerunknightrider_on
+      - service: script.turn_off
+        data:      
+          entity_id: script.knightrider_on
+      - delay: '00:00:01'    
+      - service: script.turn_on    
+        data:
+          entity_id: script.bright_on
+#  samsungtv_off:
+#    sequence:
+#      - service: switch.turn_off
+#        data:
+#          entity_id: switch.tv_control
+#  samsungtv_on:
+#    sequence:
+#      - service: switch.turn_on
+#        data:
+#          entity_id: switch.tv_control       
+          
+  ####### Hue Scenes ##########
+
+  spring:
+    sequence:
+      - delay: '00:00:01'   
+      - service: light.hue_activate_scene
+        data:
+          group_name: "Lamps"
+          scene_name: "Spring blossom"
+  savanna:
+    sequence:
+      - delay: '00:00:01'     
+      - service: light.hue_activate_scene
+        data:
+          group_name: "Lamps"
+          scene_name: "Savanna sunset"
+  arctic:
+    sequence:
+      - delay: '00:00:01'     
+      - service: light.hue_activate_scene
+        data:
+          group_name: "Lamps"
+          scene_name: "Arctic aurora"        
+  tropical:
+    sequence:
+      - delay: '00:00:01'     
+      - service: light.hue_activate_scene
+        data:
+          group_name: "Lamps"
+          scene_name: "Tropical twilight"
+  supernatural:
+    sequence:
+      - delay: '00:00:01'
+      - service: light.hue_activate_scene
+        data:
+          group_name: "Lamps"
+          scene_name: "Supernatural"
+######## Away Mode Script   #############
+  gone_on:
+    sequence:
+      - delay: '00:00:00'
+      - service: light.turn_off
+        data:
+          entity_id: group.all_lights
+      - service: fan.turn_off
+        data:
+          entity_id: fan.living_room_fan    
+      - service: switch.turn_off 
+        data:
+          entity_id: switch.network_switch_blue_iris_monitor  
+      - service: media_player.turn_off 
+        data:
+          entity_id: media_player.onkyo
+      - service: remote.turn_off
+        data:     
+          entity_id: remote.entertainment  
+      - service: climate.set_away_mode
+        data:    
+          entity_id: climate.thermostat
+          away_mode: 'on'
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.thermostat
+          hold_mode: "away"    
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Away Mode is Activated Have a good day' 
+      - service: rest_command.lock_down
+      - service: rest_command.lock_down      
+  alarm_flashonoff:
+    sequence:
+      - service: light.turn_on
+        data:
+          entity_id: group.all_lights
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'You are detected and recorded'
+      - delay: '00:00:03'    
+      - service: light.turn_off
+        data:
+          entity_id: group.all_lights          
+      - service: script.turn_on
+        data:
+          entity_id: script.alarm_repeat 
+      - delay: '00:00:03'    
+  alarm_repeat:
+    sequence: 
+      - delay: '00:00:03'
+      - service: script.turn_on
+        data:
+          entity_id: script.alarm_flashonoff      
+  start_washer:
+    sequence:
+      - delay: '00:00:03'
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: 'running'
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Washer is Started'          
+  ######### Script for naptime Tell Alexa Turn on Bedtime######
+  nap_time:
+    sequence:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.thermostat
+          hold_mode: "sleep" 
+      - delay: '00:00:02'
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Nap Time'   
+      - service: switch.turn_off 
+        data:
+          entity_id: switch.network_switch_blue_iris_monitor 
+#      - service: switch.turn_off
+#        data:
+#          entity_id: switch.tv_control    
+      - delay: '00:00:45'
+      - service: light.turn_off
+        data:
+          entity_id: light.lamps
+      - service: light.turn_on
+        data:
+          entity_id: light.dawns_lamp
+          color_temp: 426
+          brightness: 125
+      - delay: '00:00:10'    
+      - service: light.turn_off
+        data:
+          entity_id: light.kitchen
+      - delay: '00:00:10'    
+      - service: light.turn_off
+        data:
+          entity_id: light.master_hallway 
+      - delay: '00:00:45'          
+      - service: light.turn_off
+        data:      
+          entity_id: light.bathroom
+      - delay: '00:00:45'
+      - service: light.turn_off
+        data: 
+          entity_id: light.master    
+#### reboot websitch clients  ####################          
+  webswitch_reboot:
+    sequence:
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'WebSwitch Reboot'
+      - delay: '00:00:05'          
+      - service: rest_command.webswitch_reboot
+###### reboot network equipment only    ########
+  network_reboot:
+    sequence:
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Network is going down Gabbie and Grandma chill it will be okay'
+      - delay: '00:00:01'
+      - service: rest_command.modem_reboot
+      - delay: '00:01:30'
+      - service: rest_command.router_reboot
+      - delay: '00:02:30'
+      - service: rest_command.switch1_reboot
+      - delay: '00:01:30'
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Network is back up'
+#################### Pi Hole    ##################################
+  ad_blocker:
+    sequence:
+      - service: switch.toggle
+        entity_id: switch.pihole
+  pihole_on:
+    sequence:
+       - service: shell_command.pihole_on
+  pihole_off:
+    sequence:
+       - service: shell_command.pihole_off      

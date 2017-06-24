@@ -1,0 +1,697 @@
+######## Weather ###################
+- platform: wunderground
+  api_key: !secret wunderground_api
+  monitored_conditions:
+    - alerts
+    - feelslike_f
+    - observation_time
+    - precip_1hr_in
+    - precip_today_in
+    - relative_humidity
+    - temp_f
+    - visibility_mi
+    - weather
+    - wind_dir
+    - wind_gust_mph
+    - wind_mph
+
+
+- platform: darksky
+  api_key: !secret darksky_api
+#  forecast:
+#  - 1
+#  - 2
+  monitored_conditions:
+    - summary
+    - nearest_storm_distance
+    - nearest_storm_bearing
+    - precip_probability
+    - minutely_summary
+    - hourly_summary
+    - daily_summary
+    - temperature_max
+    - temperature_min
+    - temperature
+    - humidity
+    - precip_probability
+    - precip_intensity
+    - wind_speed
+    - pressure
+    - wind_bearing
+    - apparent_temperature
+    - icon
+############### USPS Sensor   ###############################
+- platform: usps
+  username: !secret usps_username
+  password: !secret usps_password
+- platform: ups
+  username: !secret ups_username
+  password: !secret ups_password
+- platform: fedex
+  username: !secret fedex_username
+  password: !secret fedex_password
+- platform: template
+  sensors:
+    packages_in_transit:
+      friendly_name: "Packages in Transit"
+      value_template: >
+          {% macro in_transit(sensor) %}
+            {{sensor.state|int - delivered(sensor)|int}}
+          {% endmacro %}
+          {% macro delivered(sensor) %}
+            {% if 'delivered' in sensor.attributes %}
+              {{sensor.attributes.delivered}}
+            {% else %}
+               0
+            {% endif %}
+          {% endmacro %}
+          {{in_transit(states.sensor.usps_packages)|int + in_transit(states.sensor.ups)|int  + in_transit(states.sensor.fedex)|int}}
+    deliveries_today:
+      friendly_name: "Today's Deliveries"
+      value_template: >
+          {% macro delivered(sensor) %}
+            {% if 'delivered' in sensor.attributes %}
+              {{sensor.attributes.delivered}}
+            {% else %}
+               0
+            {% endif %}
+          {% endmacro %}
+          {{delivered(states.sensor.usps_packages)|int + delivered(states.sensor.ups)|int + delivered(states.sensor.fedex)|int}}
+############################################################
+############## Public Ip
+- platform: dnsip
+
+######## Equipment ########
+- platform: speedtest
+  minute:
+    - 0
+    - 59
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /home
+    - type: memory_free
+    - type: processor_use
+
+####### Motion Sensor Data #########
+- platform: rest
+  resource: !secret MS_rest_5
+  value_template: '{{ value_json.state.temperature | float / 100 }}'
+  unit_of_measurement: °C
+  name: 'Kitchen Temperature'
+- platform: rest
+  resource: !secret MS_rest_5
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Motion Sensor Kitchen Battery'
+- platform: rest
+  resource: !secret MS_rest_6
+  value_template: '{{ value_json.state.presence }}'
+  scan_interval: 2
+  name: 'Kitchen Motion'
+- platform: rest
+  resource: !secret MS_rest_11
+  value_template: '{{ value_json.state.temperature | float / 100 }}'
+  unit_of_measurement: °C
+  name: 'Hallway Temperature'
+- platform: rest
+  resource: !secret MS_rest_11
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Motion Sensor Hallway Battery'
+- platform: rest
+  resource: !secret MS_rest_12
+  value_template: '{{ value_json.state.presence }}'
+  scan_interval: 2
+  name: 'Hallway Motion'
+- platform: rest
+  resource: !secret MS_rest_19
+  value_template: '{{ value_json.state.temperature | float / 100 }}'
+  unit_of_measurement: °C
+  name: 'Laundry Temperature'
+- platform: rest
+  resource: !secret MS_rest_20
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Motion Sensor Laundry Battery'
+- platform: rest
+  resource: !secret MS_rest_20
+  value_template: '{{ value_json.state.presence }}'
+  scan_interval: 2
+  name: 'Laundry Room Motion'
+- platform: rest
+  resource: !secret MS_rest_23
+  value_template: '{{ value_json.state.temperature | float / 100 }}'
+  unit_of_measurement: °C
+  name: 'Kids Hallway Temperature'
+- platform: rest
+  resource: !secret MS_rest_23
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Motion Sensor Kids Hall Battery'
+- platform: rest
+  resource: !secret MS_rest_24
+  value_template: '{{ value_json.state.presence }}'
+  scan_interval: 2
+  name: 'Kids Hallway Motion'
+- platform: rest
+  resource: !secret MS_rest_30
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Motion Sensor Kids Bathroom Battery'
+- platform: rest
+  resource: !secret MS_rest_30
+  value_template: '{{ value_json.state.presence }}'
+  scan_interval: 2
+  name: 'Kids Bathroom Motion'
+- platform: rest
+  resource: !secret MS_rest_29
+  value_template: '{{ value_json.state.temperature | float / 100 }}'
+  unit_of_measurement: °C
+  name: 'Kids Bathroom Temperature'
+- platform: rest
+  resource: !secret MS_rest_35
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Motion Sensor Bathroom Battery'
+- platform: rest
+  resource: !secret MS_rest_36
+  value_template: '{{ value_json.state.presence }}'
+  scan_interval: 2
+  name: 'Bathroom Motion'
+- platform: rest
+  resource: !secret MS_rest_35
+  value_template: '{{ value_json.state.temperature | float / 100 }}'
+  unit_of_measurement: °C
+  name: 'Bathroom Temperature'
+- platform: rest
+  resource: !secret MS_rest_39
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Motion Sensor Master Battery'
+- platform: rest
+  resource: !secret MS_rest_40
+  value_template: '{{ value_json.state.presence }}'
+  scan_interval: 2
+  name: 'Master Motion'
+- platform: rest
+  resource: !secret MS_rest_39
+  value_template: '{{ value_json.state.temperature | float / 100 }}'
+  unit_of_measurement: °C
+  name: 'Master Temperature'
+
+#########################################################################################################################
+##                               Dimmers
+#########################################################################################################################
+##### Master Bath
+- platform: rest
+  resource: !secret dimmer_rest_33
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Master Bathroom Dimmer Battery'
+- platform: rest
+  resource: !secret dimmer_rest_33
+  value_template: '{{ value_json.state.buttonevent }}'
+  scan_interval: 1
+  name: 'Master Bathroom Dimmer State'
+- platform: template
+  sensors:
+    master_bathroom_dimmer_state:
+      friendly_name: 'Master Bath Dimmer Last Button Push'
+      value_template: >-
+                      {% if states('sensor.master_bathroom_dimmer_state_2')[0] == "1" %}
+                        On
+                      {% elif states('sensor.master_bathroom_dimmer_state_2')[0] == "4" %}
+                        Off
+                      {% else %}
+                        None
+                      {% endif %}
+- platform: rest
+  resource: !secret dimmer_rest_33
+  value_template: '{{ value_json.state.lastupdated }}'
+  scan_interval: 10
+  name: 'Master Bathroom Dimmer Last Update'
+
+- platform: template
+  sensors:
+    master_bathroom_dimmer_last_update:
+      friendly_name: 'Master Bath Last Used'
+      value_template: >-
+        {{ as_timestamp(strptime(states('sensor.master_bathroom_dimmer_last_update_2')[:19], "%Y-%m-%dT%X"))|timestamp_custom("%a, %B %d")}}
+
+      ######## Kids Bathroom
+- platform: rest
+  resource: !secret dimmer_rest_27
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Kids Bathroom Dimmer Battery'
+- platform: rest
+  resource: !secret dimmer_rest_27
+  value_template: '{{ value_json.state.buttonevent }}'
+  scan_interval: 1
+  name: 'Kids Bathroom Dimmer State'
+- platform: template
+  sensors:
+    kids_bathroom_dimmer_state:
+      friendly_name: 'Kids Bath Dimmer Last Button Push'
+      value_template: >-
+                      {% if states('sensor.kids_bathroom_dimmer_state_2')[0] == "1" %}
+                        On
+                      {% elif states('sensor.kids_bathroom_dimmer_state_2')[0] == "4" %}
+                        Off
+                      {% else %}
+                        None
+                      {% endif %}
+- platform: rest
+  resource: !secret dimmer_rest_27
+  value_template: '{{ value_json.state.lastupdated }}'
+  scan_interval: 10
+  name: 'Kids Bathroom Dimmer Last Update'
+- platform: template
+  sensors:
+    kids_bathroom_dimmer_last_update:
+      friendly_name: 'Kids Bathroom Last Used'
+      value_template: >-
+        {{ as_timestamp(strptime(states('sensor.kids_bathroom_dimmer_last_update_2')[:19], '%Y-%m-%dT%X'))|timestamp_custom('%a, %B %d') }}
+
+############ Kitchen Table Dimmer
+- platform: rest
+  resource: !secret dimmer_rest_9
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Kitchen Table Dimmer Battery'
+- platform: rest
+  resource: !secret dimmer_rest_9
+  value_template: '{{ value_json.state.buttonevent }}'
+  scan_interval: 1
+  name: 'Kitchen Table Dimmer State'
+- platform: template
+  sensors:
+    kitchen_table_dimmer_state:
+      friendly_name: 'Kitchen Table Dimmer Last Button Push'
+      value_template: >-
+                      {% if states('sensor.kitchen_table_dimmer_state_2')[0] == "1" %}
+                        On
+                      {% elif states('sensor.kitchen_table_dimmer_state_2')[0] == "4" %}
+                        Off
+                      {% else %}
+                        None
+                      {% endif %}
+- platform: rest
+  resource: !secret dimmer_rest_9
+  value_template: '{{ value_json.state.lastupdated }}'
+  scan_interval: 10
+  name: 'kitchen table dimmer last update'
+- platform: template
+  sensors:
+    kitchen_table_dimmer_last_update:
+      friendly_name: 'Kitchen Table Last Used'
+      value_template: >-
+        {{as_timestamp(strptime(states('sensor.kitchen_table_dimmer_last_update_2')[:19], "%Y-%m-%dT%X"))|timestamp_custom("%a, %B %d")}}
+
+###### Table Lamps Dimmer
+- platform: rest
+  resource: !secret dimmer_rest_3
+  value_template: '{{ value_json.config.battery }}'
+  unit_of_measurement: '%'
+  scan_interval: 1800
+  name: 'Table Lamps Dimmer Battery'
+- platform: rest
+  resource: !secret dimmer_rest_3
+  value_template: '{{ value_json.state.buttonevent }}'
+  scan_interval: 1
+  name: 'Table Lamps Dimmer State'
+- platform: template
+  sensors:
+    table_lamps_dimmer_state:
+      friendly_name: 'Table Lamps Dimmer Last Button Push'
+      value_template: >-
+                      {% if states('sensor.table_lamps_dimmer_state_2')[0] == "1" %}
+                        On
+                      {% elif states('sensor.table_lamps_dimmer_state_2')[0] == "4" %}
+                        Off
+                      {% else %}
+                        None
+                      {% endif %}
+- platform: rest
+  resource: !secret dimmer_rest_3
+  value_template: '{{ value_json.state.lastupdated }}'
+  scan_interval: 10
+  name: 'table lamps dimmer last update'
+- platform: template
+  sensors:
+    table_lamps_dimmer_last_update:
+      friendly_name: 'Table Lamps Last Used'
+      value_template: >-
+        {{as_timestamp(strptime(states('sensor.table_lamps_dimmer_last_update_2')[:19], "%Y-%m-%dT%X"))|timestamp_custom("%a, %B %d")}}
+################# Network Bandwith ################
+
+- platform: snmp
+  name: snmp_wan_in
+  host: 192.168.1.1
+  baseoid: 1.3.6.1.2.1.2.2.1.16.4
+
+- platform: snmp
+  name: snmp_wan_out
+  host: 192.168.1.1
+  baseoid: 1.3.6.1.2.1.2.2.1.10.4
+
+- platform: snmp
+  name: snmp lan load in
+  host: 192.168.1.1
+  baseoid: 1.3.6.1.2.1.2.2.1.16.7
+
+- platform: snmp
+  name: snmp lan load out
+  host: 192.168.1.1
+  baseoid: 1.3.6.1.2.1.2.2.1.10.7
+
+
+- platform: template
+  sensors:
+    lan_load_in:
+      friendly_name: 'Lan Load'
+      value_template: "{{ ((states('input_slider.lan_load_delta_in') | float ) / 1000000 ) | round(2) }}"
+      unit_of_measurement: 'Mbps'
+
+- platform: template
+  sensors:
+    lan_load_out:
+      friendly_name: 'Lan Load'
+      value_template: "{{ ((states('input_slider.lan_load_delta_out') | float ) / 1000000 ) | round(2) }}"
+      unit_of_measurement: 'Mbps'
+
+- platform: template
+  sensors:
+    internet_speed_in:
+      friendly_name: 'Internet Speed Down'
+      value_template: "{{ ((states('input_slider.internet_traffic_delta_in') | float ) / 1000000 ) | round(2) }}"
+      unit_of_measurement: 'Mbps'
+
+- platform: template
+  sensors:
+    internet_speed_out:
+      friendly_name: 'Internet Speed Up'
+      value_template: "{{ ((states('input_slider.internet_traffic_delta_out') | float ) / 1000000 ) | round(2) }}"
+      unit_of_measurement: 'Mbps'
+
+- platform: statistics
+  name: 'WAN Traffic IN'
+  entity_id: sensor.internet_speed_in
+
+- platform: statistics
+  name: 'WAN Traffic OUT'
+  entity_id: sensor.internet_speed_out
+
+- platform: statistics
+  name: 'LAN LOAD IN'
+  entity_id: sensor.lan_load_in
+
+- platform: statistics
+  name: 'LAN LOAD OUT'
+  entity_id: sensor.lan_load_out
+
+#  ecobee3 Mode Sensors
+- platform: template
+  sensors:
+    operating_mode:
+      friendly_name: 'Current Operation'
+      value_template: "{{ states.climate.thermostat.attributes.operation }}"
+- platform: template
+  sensors:
+    set_hold_mode:
+      friendly_name: 'Current Mode'
+      value_template: "{{ states.climate.thermostat.attributes.hold_mode }}"
+- platform: template
+  sensors:
+    target_temp:
+      friendly_name: 'Target Temperature'
+      value_template: "{{ states.climate.thermostat.attributes.target_temp_high }}"
+- platform: template
+  sensors:
+    current_temp:
+      friendly_name: 'Current Temperature'
+      value_template: "{{ states.climate.thermostat.attributes.current_temperature }}"      
+- platform: template
+  sensors:
+    hvac_fan:
+      friendly_name: 'Hvac Fan'
+      value_template: "{{ states.climate.thermostat.attributes.fan }}" 
+####### ceiling fan   ###########################      
+- platform: template
+  sensors:
+    fan_speed:
+      friendly_name: 'Fan Speed'
+      value_template: "{{ states.fan.living_room_fan.attributes.speed }}"      
+######## Harmony remote  ######
+
+- platform: template
+  sensors:
+    remote_entertainment:
+      value_template: '{{ states.remote.entertainment.attributes.current_activity }}'
+      friendly_name: 'Living Room'
+
+###### VERSIONS
+- platform: command_line
+  command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
+  name: Current Version
+
+- platform: command_line
+  name: Installed Version
+  command: /srv/homeassistant/bin/hass --version
+
+###### CUSTOM HA/Version
+- platform: template
+  sensors:
+    ha_version:
+      value_template: >-
+        {% if is_state('sensor.current_version', states('sensor.installed_version')) %}
+          {{ states('sensor.installed_version') }}
+        {% else %}
+          {{ states('sensor.current_version') }} Available
+        {% endif %}
+      icon_template: >-
+        {% if is_state('sensor.current_version', states('sensor.installed_version')) %}
+          mdi:checkbox-marked
+        {% else %}
+          mdi:checkbox-blank-outline
+        {% endif %}
+
+- platform: template
+  sensors:
+    washer_status:
+      friendly_name: 'Washing Machine Status'
+      value_template: "{{ states('input_select.washing_machine_status') }}"
+
+#######################################################################################################################
+###### Sets profile on blue iris   ###################################################################################
+#######################################################################################################################
+- platform: rest
+  resource: !secret rest_blue_iris_profile
+  value_template: >-
+       {% if 'profile=1' in value %}
+         No Motion Detection
+       {% elif 'profile=5' in value %}
+         Lockdown Full Motion Detection
+       {% elif 'profile=6' in value %}
+         Sleep
+       {% endif %}
+  name: 'Blue Iris Profile'
+
+#######################################################################################################################
+###### Motion sensor templates for blue Iris  #########################################################################
+#######################################################################################################################
+- platform: template
+  sensors:
+    motion_outdoor_shed:
+      friendly_name: 'Shed Cam'
+      value_template: >-
+          {% if states('binary_sensor.blueirisshed') %}
+          {% if is_state('binary_sensor.blueirisshed', 'on') %}
+             True
+          {% elif is_state('binary_sensor.blueirisshed', 'off') %}
+             False
+          {% else %}
+          {{ states('binary_sensor.blueirisshed') }}
+          {% endif %}
+          {% else %}
+            False
+          {% endif %}
+- platform: template
+  sensors:
+    motion_outdoor_driveway:
+      friendly_name: 'Drive way'
+      value_template: >-
+          {% if states('binary_sensor.blueiriscam2') %}
+          {% if is_state('binary_sensor.blueiriscam2', 'on') %}
+             True
+          {% elif is_state('binary_sensor.blueiriscam2', 'off') %}
+             False
+          {% else %}
+          {{ states('binary_sensor.blueiriscam2') }}
+          {% endif %}
+          {% else %}
+            False
+          {% endif %}
+- platform: template
+  sensors:
+    motion_outdoor_number12:
+      friendly_name: 'Number 12'
+      value_template: >-
+          {% if states('binary_sensor.blueiriscam6') %}
+          {% if is_state('binary_sensor.blueiriscam6', 'on') %}
+             True
+          {% elif is_state('binary_sensor.blueiriscam6', 'off') %}
+             False
+          {% else %}
+          {{ states('binary_sensor.blueiriscam6') }}
+          {% endif %}
+          {% else %}
+            False
+          {% endif %}
+- platform: template
+  sensors:
+    motion_outdoor_swamp:
+      friendly_name: 'Swamp'
+      value_template: >-
+          {% if states('binary_sensor.blueiriscam5') %}
+          {% if is_state('binary_sensor.blueiriscam5', 'on') %}
+             True
+          {% elif is_state('binary_sensor.blueiriscam5', 'off') %}
+             False
+          {% else %}
+          {{ states('binary_sensor.blueiriscam5') }}
+          {% endif %}
+          {% else %}
+            False
+          {% endif %}
+- platform: template
+  sensors:
+    motion_outdoor_frontdoor:
+      friendly_name: 'Front Door'
+      value_template: >-
+          {% if states('binary_sensor.blueiriscam4') %}
+          {% if is_state('binary_sensor.blueiriscam4', 'on') %}
+             True
+          {% elif is_state('binary_sensor.blueiriscam4', 'off') %}
+             False
+          {% else %}
+          {{ states('binary_sensor.blueiriscam4') }}
+          {% endif %}
+          {% else %}
+            False
+          {% endif %}
+########################################################################
+### cert expire check lets encrpt
+########################################################################
+- platform: cert_expiry
+  host: !secret host_cert_expiry
+  port: !secret port_expiry
+  name: SSL Expire
+  scan_interval: 120
+########################################################################
+#### dynamic battery levels
+########################################################################
+- platform: template
+  sensors:
+    kitchen_battery_motion:
+      unit_of_measurement: '%'
+      entity_id: sensor.motion_sensor_kitchen_battery
+      value_template: >
+          {% if states('sensor.motion_sensor_kitchen_battery') != "unknown" %}
+            {{ states('sensor.motion_sensor_kitchen_battery')| int }}
+          {% else %}
+            0
+          {% endif %}
+      icon_template: >-
+          {% if states('sensor.kitchen_battery_motion') != "unknown" %}
+            {% set battery_level = states('sensor.kitchen_battery_motion')|int (-1)%}
+            {% if battery_level == -1 %}
+              mdi:battery-unknown
+            {% else %}
+              {% set battery_round = (battery_level|int / 10)|int * 10 %}
+              {% if battery_round >= 100 %}
+                mdi:battery
+              {% elif battery_round > 0 %}
+                mdi:battery-{{ battery_round }}
+              {% else %}
+                mdi:battery-alert
+              {% endif %}
+            {% endif %}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+###############################################################################
+#### PI Hole
+###############################################################################
+#- platform: pi_hole
+- platform: rest
+  name: dns_queries_today
+  resource: !secret rest_pi_hole
+  value_template: '{{ value_json.dns_queries_today }}'
+- platform: rest
+  name: domains_being_blocked
+  resource: !secret rest_pi_hole
+  value_template: '{{ value_json.domains_being_blocked }}'
+- platform: rest
+  name: ads_blocked_today
+  resource: !secret rest_pi_hole
+  value_template: '{{ value_json.ads_blocked_today }}'
+- platform: rest
+  name: ads_percentage_today
+  resource: !secret rest_pi_hole
+  value_template: '{{ value_json.ads_percentage_today }}'
+- platform: rest
+  name: unique_domains
+  resource: !secret rest_pi_hole
+  value_template: '{{ value_json.unique_domains }}'
+- platform: rest
+  name: queries_forwarded
+  resource: !secret rest_pi_hole
+  value_template: '{{ value_json.queries_forwarded }}'
+- platform: rest
+  name: queries_cached
+  resource: !secret rest_pi_hole
+  value_template: '{{ value_json.queries_cached }}'
+
+###### I had to provide access in sudoers file for this script to run.
+- platform: command_line
+  command: 'bash /home/homeassistant/.homeassistant/shell/pihole.sh'
+  name: 'pihole_status_raw'
+  scan_interval: 60
+
+
+- platform: template
+  sensors:
+    pihole_dns:
+      value_template: "{{ states('sensor.pihole_status_raw').split(':::')[1] }}"
+      icon_template: >-
+        {% if is_state('sensor.pihole_dns', 'DNS service is running') %}
+           mdi:checkbox-marked
+        {% else %}
+           mdi:checkbox-blank-outline
+        {% endif %}
+- platform: template
+  sensors:
+    pihole_blocking:
+      value_template: "{{ states('sensor.pihole_status_raw').split(':::')[2] }}"
+      icon_template: >-
+        {% if is_state('binary_sensor.pihole_status', 'on') %}
+           mdi:checkbox-blank-outline
+        {% else %}
+           mdi:checkbox-marked
+        {% endif %}

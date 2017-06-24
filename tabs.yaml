@@ -1,0 +1,431 @@
+  Default_view:
+   view: yes
+   name: Vas and Squrriels Castle
+   entities:
+     - group.House_mode   
+     - light.lamps
+     - light.dawns_lamp
+     - light.door_lamp
+     - light.herbs_lamp
+     - light.kitchen
+     - light.master_hallway
+     - light.kitchen_table
+     - light.laundry_room
+     - light.kids_hallway
+     - light.bathroom
+     - light.kids_bathroom
+     - light.living_room
+     - light.master
+     - light.carport
+     - light.light_bulb
+     - group.Family
+     - camera.dawn
+     - camera.herb
+     - group.Climate_temp
+     - group.alarm_panel
+     - group.Usps_Mail
+     - group.LivingRoomFan
+     
+  Devicesview:
+   view: yes
+   name: Equipment
+   entities:
+     - group.PI
+     - group.Ads_Blocked
+     - group.DigitalLoggers
+     - group.NetworkNmap
+     - group.NetworkDrives
+     - group.Workstations
+     - group.cameras
+     - group.NetworkSnmp
+     - group.homeass_version
+  media:
+   view: yes
+   name: Media Players
+   entities:
+     - group.Kodi_media_player
+     - group.Blue_iris_media_player
+     - group.Samsung_tv_media_player
+     - group.Onkyo_avr
+     - group.Ruths_roku_media_player
+     - group.KodiBlueIris_media_player
+#     - media_player.kodi
+#     - media_player._living_room_un65ju6400
+#     - media_player.smart_tv
+#     - media_player.blueiris2
+#     - media_player.onkyo
+#     - media_player.ruths_roku
+   
+  Weather_view:
+   view: yes
+   name: Weather
+   entities:
+     - group.Conditions
+     - group.ForecastWeather
+    
+  RoomSensors:
+   view: yes
+   name: Sensors
+   entities:
+     - group.Temperature_Info
+     - group.Motion
+     - group.Battery
+     - group.room_occupancy
+     - group.Dimmers_status
+     - group.blue_iris_motion
+#     - group.LivingRoomFan
+#  LivingRoom_view:
+#   view: no
+#   name: Living Room
+#   entities:
+#    - group.TVRoom
+#     - light.living_room
+#     - camera.Living_Room_Camera
+#     - group.LivingRoomFan
+  
+  MyCameras:
+   view: yes
+   name: Cameras
+   entities:
+     - group.camera12
+     - group.camera_driveway
+     - group.camera_swamp
+     - group.camera_yard
+     - group.camera_backdoor
+     - group.camera_livingroom
+  camera12:
+   name: Park Driveway Rear
+   entities:
+     - camera.number_12 
+  camera_driveway:
+   name: Driveway
+   entities:
+     - camera.driveway
+  camera_swamp:
+   name: Swamp
+   entities:
+     - camera.swamp   
+  camera_yard:
+   name: Yard
+   entities:
+     - camera.yard 
+  camera_backdoor:
+   name: Back Door
+   entities:
+     - camera.back_door 
+  camera_livingroom:
+   name: Living Room
+   entities:
+     - camera.Living_Room_Camera   
+  Fun_Stuff:
+   view: yes
+   name: Fun Stuff
+   entities:
+     - group.Effects
+     - script.spring
+     - script.savanna
+     - script.arctic
+     - script.tropical
+     - script.supernatural
+     - group.Routines
+  PI:
+   name: HA
+   entities:
+     - sensor.speedtest_download  
+     - sensor.speedtest_upload
+     - sensor.speedtest_ping
+     - sensor.cpu_use
+     - sensor.ram_free
+     - sensor.disk_use_home     
+     - sensor.ssl_expire
+     - sensor.myipopendnscom
+     - input_select.log_level
+  ForecastWeather:
+   name: Predication
+   entities:
+     - sensor.dark_sky_summary   
+     - sensor.dark_sky_daily_summary
+     - sensor.dark_sky_hourly_summary
+     - sensor.dark_sky_minutely_summary
+     - sensor.dark_sky_daily_high_temperature
+     - sensor.dark_sky_daily_low_temperature
+     - sensor.dark_sky_precip_probability
+     - sensor.dark_sky_nearest_storm_bearing
+     - sensor.dark_sky_nearest_storm_distance
+#     - sensor.dark_sky_daily_high_temperature_1
+  Conditions:
+   name: Current Weather
+   entities:
+     - sensor.pws_observation_time
+     - sensor.pws_alerts
+     - sensor.pws_weather
+     - sensor.pws_Temp_f
+     - sensor.pws_feelslike_f 
+     - sensor.pws_wind_dir
+     - sensor.pws_wind_mph
+     - sensor.pws_wind_gust_mph
+     - sensor.pws_relative_humidity
+     - sensor.pws_precip_1hr_in
+     - sensor.pws_precip_today_in
+     - sensor.pws_visibility_mi
+     - camera.radar
+     - sun.sun 
+  TVRoom: 
+   name: Table Lamps  
+   entities:
+     - light.herbs_lamp
+     - light.dawns_lamp
+     - light.door_lamp
+  DigitalLoggers:
+   name: Network Switch
+   entities:
+     - switch.network_switch_charter_modem
+     - switch.network_switch_asus_router
+     - switch.network_switch_blue_iris_monitor
+     - switch.network_switch_blue_iris_pc
+     - switch.network_switch_comnet_switch
+     - switch.network_switch_hue
+     - script.webswitch_reboot
+     - script.network_reboot
+  NetworkNmap:
+   name: Network Equipment
+   entities:
+     - device_tracker.routerasuscom
+     - device_tracker.pan_shedvasiley
+     - device_tracker.switch1vasiley
+     - device_tracker.blueirispcvasiley
+     
+  NetworkDrives:
+   name: Nas Drives
+   entities:
+     - device_tracker.medianasvasiley
+     - device_tracker.nasnetworkvasiley 
+  Workstations:
+     - device_tracker.blueiris2vasiley
+     - device_tracker.networkpcvasiley     
+  Cameras:
+     - device_tracker.number12vasiley
+     - device_tracker.drivewaycamvasiley
+     - device_tracker.shedvasiley
+     - device_tracker.backdoorvasiley
+     - device_tracker.frontdoorvasiley
+  Family:
+     - device_tracker.herb_herb 
+     - device_tracker.dawn_baby
+  Routines:
+     - script.lamps_on  
+     - script.herbearly_on
+     - script.bright_on
+     - script.gone_on
+     - scene.all_on
+     - scene.all_off
+     - script.alarm_repeat
+     - script.alarm_flashonoff
+     - script.start_washer
+     - script.nap_time
+  Effects:
+     - script.knightrider_off
+     - script.knightrider_on     
+     - script.rerunknightrider_on
+     - script.samsungtv_off
+     - script.samsungtv_on
+  Kitchen_sensor:
+   name: Kitchen Info
+   entities:
+     - sensor.kitchen_temperature
+#     - sensor.motion_sensor_kitchen_battery
+     - sensor.kitchen_battery_motion
+     - sensor.kitchen_motion     
+  Hallway_sensor:
+   name: Hallway Info
+   entities:
+     - sensor.motion_sensor_hallway_battery
+     - sensor.hallway_temperature
+     - sensor.hallway_motion
+  LaundryRoom_sensor:
+   name: Laundry Room Info
+   entities:
+     - sensor.motion_sensor_laundry_battery
+     - sensor.laundry_temperature
+     - sensor.laundry_room_motion
+  KidsHallway_sensor:
+   name: Kids Hallway Info
+   entities:
+     - sensor.kids_hallway_temperature
+     - sensor.motion_sensor_kids_hall_battery
+     - sensor.kids_hallway_motion
+  Temperature_Info: 
+   name: Temperature
+   entities:
+     - sensor.kitchen_temperature
+     - sensor.hallway_temperature
+     - sensor.laundry_temperature
+     - sensor.kids_hallway_temperature
+     - sensor.master_temperature
+     - sensor.bathroom_temperature
+     - sensor.kids_bathroom_temperature
+  KidsBathroom1:
+   name: Ruths Bathroom
+   entities:    
+     - sensor.kids_bathroom_temperature
+     - sensor.kids_bathroom_motion
+  Motion:
+   name: Motion
+   entities:
+     - sensor.kids_bathroom_motion
+     - sensor.kids_hallway_motion
+     - sensor.laundry_room_motion
+     - sensor.kitchen_motion
+     - sensor.hallway_motion
+     - sensor.bathroom_motion
+     - sensor.master_motion
+  Battery:
+   name: Battery
+   entities:
+     - sensor.motion_sensor_kids_hall_battery
+     - sensor.motion_sensor_laundry_battery
+     - sensor.motion_sensor_hallway_battery
+#     - sensor.motion_sensor_kitchen_battery
+     - sensor.kitchen_battery_motion
+     - sensor.motion_sensor_kids_bathroom_battery
+     - sensor.motion_sensor_master_battery
+     - sensor.motion_sensor_bathroom_battery
+     - sensor.master_bathroom_dimmer_battery
+     - sensor.kids_bathroom_dimmer_battery
+     - sensor.kitchen_table_dimmer_battery
+     - sensor.table_lamps_dimmer_battery
+  Dimmers_status:
+   name: Dimmers
+   entities:
+     - sensor.master_bathroom_dimmer_last_update
+     - sensor.master_bathroom_dimmer_state 
+     - sensor.kitchen_table_dimmer_last_update     
+     - sensor.kitchen_table_dimmer_state
+     - sensor.kids_bathroom_dimmer_last_update
+     - sensor.kids_bathroom_dimmer_state
+     - sensor.table_lamps_dimmer_last_update
+     - sensor.table_lamps_dimmer_state     
+  Ecobee_sensors:
+   name: Ecobee Temp Sensors
+   entities:
+     - sensor.master_bedroom_temperature   
+     - sensor.living_room_temperature
+     - sensor.ruths_room_temperature
+     - sensor.thermostat_humidity
+  NetworkSnmp:
+   name: Bandwidth
+   entities:
+#    - sensor.internet_speed_in
+#    - sensor.internet_speed_out
+     - sensor.ping_time
+     - sensor.wan_traffic_in_mean
+     - sensor.wan_traffic_out_mean
+     - sensor.lan_load_in_mean
+     - sensor.lan_load_out_mean
+    
+  Climate_temp:
+   name: Climate
+   entities:
+     - climate.thermostat
+     - sensor.operating_mode
+     - sensor.hvac_fan
+     - sensor.thermostat_humidity
+     - sensor.thermostat_temperature
+     - sensor.master_bedroom_temperature   
+     - sensor.living_room_temperature
+     - sensor.ruths_room_temperature
+     - sensor.pws_Temp_f
+  Kodi_media_player:
+   name: Kodi
+   entities:
+     - media_player.kodi
+  Blue_iris_media_player:
+   name: Plex
+   entities:
+     - media_player.blueiris2
+  Samsung_tv_media_player:
+   name: Samsung
+   entities:
+     - media_player._living_room_un65ju6400
+     - media_player.smart_tv
+  Onkyo_avr:
+   name: Onkyo Amp
+   entities:
+     - media_player.onkyo     
+  Ruths_roku_media_player:
+   name: Ruths Roku
+   entities:
+     - media_player.ruths_roku
+  KodiBlueIris_media_player:
+   name: Kodi Blue Iris
+   entities:
+     - media_player.kodi_blue_iris 
+  House_mode:
+   name: Home Mode
+   entities:
+     - sensor.set_hold_mode
+     - script.lamps_on  
+     - script.bright_on
+     - script.gone_on
+     - script.nap_time
+     - remote.entertainment
+     - sensor.remote_entertainment
+     - input_select.washing_machine_status
+     - sensor.washer_status
+     
+  room_occupancy:
+   name: Occupancy
+   entities:
+     - binary_sensor.thermostat_occupancy   
+     - binary_sensor.ruths_room_occupancy
+     - binary_sensor.master_bedroom_occupancy
+     - binary_sensor.living_room_occupancy
+  alarm_panel:
+   name: Alarm
+   entities:
+     - alarm_control_panel.ha_alarm
+     - sensor.blue_iris_profile     
+  homeass_version:
+   name: Home Assistant Version
+   entities:
+     - sensor.ha_version
+     - sensor.installed_version
+  blue_iris_motion:
+   name: Camera Motion
+   entities:
+     - sensor.motion_outdoor_shed 
+     - sensor.motion_outdoor_driveway
+     - sensor.motion_outdoor_number12
+     - sensor.motion_outdoor_swamp
+     - sensor.motion_outdoor_frontdoor
+  Ads_Blocked:
+   name: Ads Blocked  
+   entities:
+     - switch.pihole
+     - sensor.ads_blocked_today
+     - sensor.ads_percentage_today
+     - sensor.dns_queries_today
+     - sensor.domains_being_blocked
+     - sensor.ads_blocked_today
+     - sensor.unique_domains
+     - sensor.queries_forwarded
+     - sensor.queries_cached
+     - sensor.pihole_dns
+     - sensor.pihole_blocking
+        
+  Usps_Mail:
+   name: Mail
+   entities:
+     - sensor.usps_mail
+     - sensor.usps_packages     
+     - sensor.packages_in_transit
+     - sensor.deliveries_today
+     - sensor.fedex
+     - sensor.ups
+  LivingRoomFan:
+   name: Living Room Fan
+   entities:
+     - fan.living_room_fan
+     - script.living_room_fan_auto
+     - sensor.fan_speed
+     - binary_sensor.gang

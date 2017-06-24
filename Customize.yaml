@@ -1,0 +1,289 @@
+########CUSTOMIZE DEVICES########
+########Network######
+     sensor.speedtest_download:
+        entity_picture: /local/speedtest.png
+     sensor.speedtest_upload:
+        entity_picture: /local/speedtest.png
+     sensor.speedtest_ping:
+        entity_picture: /local/ping.jpg
+#########Weather#################        
+     sensor.pws_alerts:
+        icon: mdi:alert-outline 
+        friendly_name: Alerts 
+     sensor.pws_feelslike_f:
+        friendly_name: Feels Like
+     sensor.pws_temp_f:
+        friendly_name: Temperature
+     sensor.pws_observation_time:
+        icon: mdi:timer-sand
+        friendly_name: Observation Time 
+     sensor.pws_weather:
+        friendly_name: Conditions 
+     sensor.pws_wind_dir:
+        icon: mdi:compass-outline
+        friendly_name: Direction   
+     sensor.pws_wind_mph:
+        icon: mdi:speedometer
+        friendly_name: Wind Speed 
+     sensor.pws_wind_gust_mph:
+        icon: mdi:speedometer
+        friendly_name: Gust
+     sensor.pws_precip_today_in:
+        icon: mdi:weather-pouring       
+        friendly_name: Rain Today
+     sensor.pws_precip_1hr_in:
+        icon: mdi:weather-pouring
+        friendly_name: Inch Per Hour
+     sensor.pws_relative_humidity:
+        entity_picture: /local/drop.png   
+        friendly_name: Humidity  
+     sensor.pws_visibility_mi:
+        friendly_name: Visibility
+     sensor.dark_sky_daily_summary:
+        friendly_name: Daily      
+     sensor.dark_sky_hourly_summary:
+        friendly_name: Hourly 
+     sensor.dark_sky_minutely_summary:
+        friendly_name: To the Minute     
+##########Living Rooms###################
+     light.herbs_table_lamp:
+        friendly_name: Herbs Table Lamp
+     light.fan:
+        friendly_name: Fan
+     light.squirells_table_lamp:
+        friendly_name: Squrells Table Lamp
+     light.table_lamp_door:
+        friendly_name: Door Table Lamp
+     light.living_room:
+        friendly_name: Living Room Lights
+     camera.living_room_camera:
+        friendly_name: Living Room Camera
+     switch.network_switch_charter_modem:
+        friendly_name: Charter Modem
+     switch.network_switch_blue_iris_monitor:
+        friendly_name: Blue Iris Monitor
+     switch.network_switch_blue_iris_pc:
+        friendly_name: Blue Iris Pc
+     switch.network_switch_asus_router:
+        friendly_name: Asus Router
+     switch.network_switch_comnet_switch:
+        friendly_name: Comnet Switch
+     switch.network_switch_hue:
+        friendly_name: Phillips Hue 
+     light.lamps:
+        friendly_name: Table Lamps 
+     light.light_bulb:
+        friendly_name: Living Room Fan Light     
+##### Media Player   #######
+     media_player.living_room:
+        friendly_name: Plex
+###### Scripts ##########
+     script.lamps_on:
+        friendly_name: Sleep
+        icon: mdi:sleep
+     script.herbearly_on:
+        friendly_name: Morning
+     script.bright_on:
+        friendly_name: Home
+        icon: mdi:home        
+     script.knightrider_off:
+        friendly_name: Disable "KnightRiderLights"
+     script.knightrider_on:    
+        friendly_name: Knight Rider Lights
+     script.rerunknightrider_on:
+        friendly_name: Knight Rider RERUN     
+     switch.tv_control:
+        friendly_name: Living Room Tv 
+     script.samsungtv_off:
+        friendly_name: Tv Off
+     script.samsungtv_on:
+        friendly_name: Tv On    
+     script.spring:
+        friendly_name: Spring Blossum
+     script.savanna:
+        friendly_name: Savanna Sunset
+     script.arctic:
+        friendly_name: Arctic Aurora
+     script.tropical:
+        friendly_name: Tropical Twilight
+     script.supernatural:
+        friendly_name: SuperNatural
+     script.gone_on:
+        friendly_name: Away   
+        icon: mdi:security-home
+     script.webswitch_reboot:
+        friendly_name: Webswitch Reboot
+        icon: mdi:power-settings 
+     script.network_reboot:
+        friendly_name: Network Reboot
+        icon: mdi:power-settings 
+###### Motion Sensors    ############
+     sensor.kids_hallway_motion:
+        icon: mdi:walk
+     sensor.hallway_motion:
+        icon: mdi:walk
+     sensor.kitchen_motion:
+        icon: mdi:walk
+     sensor.laundry_room_motion:
+        icon: mdi:walk     
+     sensor.master_motion:
+        icon: mdi:walk
+     sensor.bathroom_motion:
+        icon: mdi:walk
+     sensor.kids_bathroom_motion:
+        icon: mdi:walk
+##### Hue motion and dimmer battery levels   ####
+     sensor.motion_sensor_kids_hall_battery:
+        icon: mdi:battery     
+     sensor.motion_sensor_laundry_battery:
+        icon: mdi:battery    
+     sensor.motion_sensor_hallway_battery:
+        icon: mdi:battery
+#     sensor.motion_sensor_kitchen_battery:
+#        icon: mdi:battery
+     sensor.kitchen_battery_motion:
+        friendly_name: Kitchen Motion Battery
+     sensor.motion_sensor_kids_bathroom_battery:
+        icon: mdi:battery
+     sensor.motion_sensor_master_battery:
+        icon: mdi:battery
+     sensor.motion_sensor_bathroom_battery:
+        icon: mdi:battery
+     sensor.master_bathroom_dimmer_battery:
+        icon: mdi:battery
+     sensor.kids_bathroom_dimmer_battery:
+        icon: mdi:battery
+     sensor.kitchen_table_dimmer_battery:
+        icon: mdi:battery
+     sensor.table_lamps_dimmer_battery:
+        icon: mdi:battery     
+        
+        
+##### Network Sensors #####        
+     sensor.download_speed_mean:
+        friendly_name: 'Speedtest Download Average'
+        icon: mdi:speedometer
+     sensor.upload_speed_mean:
+        friendly_name: 'Speedtest Upload Average'
+        icon: mdi:speedometer
+     sensor.ping_time_mean:
+        friendly_name: 'Speedtest Ping Average'
+        icon: mdi:clock-fast
+     sensor.wan_traffic_in_mean:
+        friendly_name: 'WAN Download Average'
+        icon: mdi:download
+     sensor.wan_traffic_out_mean:
+        friendly_name: 'WAN Upload Average'
+        icon: mdi:upload
+     sensor.internet_speed_in:
+        friendly_name: Internet In
+     sensor.internet_speed_out:
+        friendly_name: Internet Out 
+     sensor.lan_load_in_mean:
+        friendly_name: Lan Load In
+     sensor.lan_load_out_mean:
+        friendly_name: Lan Load Out        
+#################   HOUSE MODE  ###########
+     sensor.set_hold_mode:         
+        icon: mdi:home
+     sensor.remote_entertainment:
+        icon: mdi:theater
+     sensor.ha_version:   
+        friendly_name: New Ha Release     
+     
+     script.start_washer:
+        friendly_name: Washer
+     script.nap_time:
+        friendly_name: Nap     
+        icon: mdi:sleep
+############ DIMMERS #################        
+     sensor.master_bathroom_dimmer_last_update:
+        icon: mdi:clock
+     sensor.master_bathroom_dimmer_state:
+        icon: mdi:remote     
+     sensor.kitchen_table_dimmer_last_update: 
+        icon: mdi:clock     
+     sensor.kitchen_table_dimmer_state:
+        icon: mdi:remote
+     sensor.kids_bathroom_dimmer_last_update:
+        icon: mdi:clock
+     sensor.kids_bathroom_dimmer_state:
+        icon: mdi:remote
+     sensor.table_lamps_dimmer_last_update:
+        icon: mdi:clock
+     sensor.table_lamps_dimmer_state:
+        icon: mdi:remote   
+################# Blue Iris Motion   #################################        
+     sensor.motion_outdoor_shed:
+        friendly_name: Shed Cam
+        icon: mdi:walk 
+     sensor.motion_outdoor_driveway:
+        friendly_name: Driveway
+        icon: mdi:walk
+     sensor.motion_outdoor_number12:
+        friendly_name: Number 12
+        icon: mdi:walk        
+     sensor.motion_outdoor_swamp:
+        friendly_name: Swamp
+        icon: mdi:walk  
+     sensor.motion_outdoor_frontdoor:
+        friendly_name: Front Door
+        icon: mdi:walk     
+####################### PI HOLE CUSTOMIZE   #######################################
+     switch.pihole:
+        friendly_name: Pi-Hole
+        entity_picture: /local/pihole.jpg
+     sensor.ads_percentage_today:
+        friendly_name: Percentage of Ad Traffic Blocked
+        unit_of_measurement: '%'
+        icon: mdi:ticket-percent
+     sensor.domains_being_blocked:
+        friendly_name: Total Domains Blocking
+        icon: mdi:do-not-disturb
+     sensor.ads_blocked_today:
+        friendly_name: Ads Blocked Today
+        icon: mdi:do-not-disturb
+     sensor.dns_queries_today:
+        friendly_name: DNS Queries Today
+        icon: mdi:note-text
+     sensor.unique_domains:
+        friendly_name: Unique Domains
+        icon: mdi:approval
+     sensor.queries_forwarded:
+        friendly_name: Queries Forwarded
+        icon: mdi:arrange-send-backward
+     sensor.queries_cached:
+        friendly_name: Queries Cached
+        icon: mdi:animation
+     script.ad_blocker:
+        friendly_name: Ad Blocker
+     script.pihole_off:
+        friendly_name: Turn Pi-Hole Off
+        icon: mdi:do-not-disturb
+     script.pihole_on:
+        friendly_name: Turn Pi-Hole On
+        icon: mdi:power
+     sensor.pihole_dns:
+        friendly_name: DNS Service
+     sensor.pihole_blocking:
+        friendly_name: Ad Blocking 
+#### Mail ######
+     sensor.deliveries_today:
+        icon: mdi:package-variant
+     sensor.packages_in_transit:
+        icon: mdi:truck-fast
+     sensor.fedex:
+        icon: mdi:truck-fast
+#        friendly_name: Fed Ex Truck         
+######### Wan Ip 
+     sensor.myipopendnscom:
+        friendly_name: Wan Ip
+        icon: mdi:wan
+########### ceiling fan    #########
+     sensor.fan_speed:
+        icon: mdi:speedometer     
+     sensor.hvac_fan:
+        icon: mdi:fan
+     binary_sensor.gang:
+        friendly_name: Fan Connection
+        icon: mdi:nfc        

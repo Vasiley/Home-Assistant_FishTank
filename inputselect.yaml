@@ -1,0 +1,20 @@
+################# Washing machine
+  washing_machine_status:
+    name: Laundry
+    options:
+     - running
+     - clean 
+    initial: clean
+################### Logger level
+  log_level:
+    name: Log Level
+    options:
+     - critical
+     - fatal
+     - error
+     - warning
+     - warn
+     - info
+     - debug
+     - notset
+    initial: debug

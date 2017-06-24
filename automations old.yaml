@@ -1,0 +1,342 @@
+- alias: Monitor Traffic
+
+  trigger:
+    platform: state
+    entity_id: sensor.snmp_wan_in
+
+  action:
+    - service: input_slider.select_value
+      data_template:
+        entity_id: input_slider.internet_traffic_delta_in
+        value: '{{ ((trigger.to_state.state | int - trigger.from_state.state | int) * 1 ) / ( as_timestamp(trigger.to_state.last_updated) - as_timestamp(trigger.from_state.last_updated) ) }}'
+
+- alias: Monitor Traffic
+
+  trigger:
+    platform: state
+    entity_id: sensor.snmp_wan_out
+
+  action:
+    - service: input_slider.select_value
+      data_template:
+        entity_id: input_slider.internet_traffic_delta_out
+        value: '{{ ((trigger.to_state.state | int - trigger.from_state.state | int) * 1 ) / ( as_timestamp(trigger.to_state.last_updated) - as_timestamp(trigger.from_state.last_updated) ) }}'
+
+- alias: Monitor Traffic Lan Traffic
+
+  trigger:
+    platform: state
+    entity_id: sensor.snmp_lan_load_in
+
+  action:
+    - service: input_slider.select_value
+      data_template:
+        entity_id: input_slider.lan_load_delta_in
+        value: '{{ ((trigger.to_state.state | int - trigger.from_state.state | int) * 1 ) / ( as_timestamp(trigger.to_state.last_updated) - as_timestamp(trigger.from_state.last_updated) ) }}'   
+        
+- alias: Monitor Traffic Lan Traffic
+
+  trigger:
+    platform: state
+    entity_id: sensor.snmp_lan_load_out
+
+  action:
+    - service: input_slider.select_value
+      data_template:
+        entity_id: input_slider.lan_load_delta_out
+        value: '{{ ((trigger.to_state.state | int - trigger.from_state.state | int) * 1 ) / ( as_timestamp(trigger.to_state.last_updated) - as_timestamp(trigger.from_state.last_updated) ) }}'      
+                
+##### Master Bedroom light using home mode   #######
+
+- alias: Motion Master Bedroom Motion sensor
+  trigger:
+    - platform: state
+      entity_id: sensor.master_motion
+      to: 'True'
+  condition:
+    - condition: state
+      entity_id: sensor.set_hold_mode
+      state: 'home'  
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.master
+        color_temp: 154
+        brightness: 255        
+#- alias: Automation to rerun alarm
+- alias: rerun alarm
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'triggered'
+  condition:
+    - condition: state
+      entity_id: sensor.set_hold_mode
+      state: 'away' 
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: 'triggered'        
+#      entity_id: alarm_control_panel.ha_alarm
+#      state: 'triggered' 
+  action:
+    - delay: '00:00:02' 
+    - service: tts.google_say
+      data:
+        entity_id: media_player.kodi_blue_iris
+        message: 'You are detected and recorded'
+    - service: light.turn_on
+      data:
+        entity_id: group.all_lights
+        flash: short
+        
+
+########################################################
+#        Alarm setting for away mode 
+########################################################
+- alias: 'Trigger alarm when house mode is in away mode'
+  trigger:
+    - platform: state
+      entity_id: sensor.kids_bathroom_motion
+      to: 'True'
+    - platform: state
+      entity_id: sensor.kids_hallway_motion
+      to: 'True'
+    - platform: state
+      entity_id: sensor.laundry_room_motion
+      to: 'True'
+    - platform: state
+      entity_id: sensor.kitchen_motion
+      to: 'True'   
+    - platform: state
+      entity_id: sensor.hallway_motion
+      to: 'True'
+    - platform: state
+      entity_id: sensor.bathroom_motion
+      to: 'True'
+    - platform: state
+      entity_id: sensor.master_motion
+      to: 'True'
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_away
+#      entity_id: sensor.set_hold_mode
+#      state: 'away'
+       
+  action:
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.ha_alarm 
+#      data:
+#        code: 9937      
+    - service: tts.google_say
+      data:
+        entity_id: media_player.kodi_blue_iris
+        message: 'Motion Detected'
+    - service: light.turn_on
+      data:
+        entity_id: group.all_lights
+        flash: short
+    - service: notify.Pushbullet
+      data:
+        message: 'An alarm has been Triggered!'
+      data_template:
+        message: >
+          An alarm has been Triggered in the {% if is_state('sensor.kids_bathroom_motion', 'True') %}
+          Kids Bathroom{% elif is_state('sensor.kids_hallway_motion', 'True') %}
+          Kids Hallway{% elif is_state('sensor.kitchen_motion', 'True') %}
+          Kitchen{% elif is_state('sensor.hallway_motion', 'True') %}
+          Hallway{%elif is_state('sensor.bathroom_motion', 'True') %}
+          Master Bath{%elif is_state('sensor.master_motion', 'True') %} 
+          Master{% elif is_state('sensor.laundry_room_motion', 'True') %}
+          Laundry Room{% endif %}
+       
+      
+#################################################
+# triggers for armed home mode
+#################################################
+- alias: 'Triggers for arm_home'
+  trigger:
+    - platform: state
+      entity_id: sensor.laundry_room_motion
+      to: 'True'
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_home
+  action:
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.ha_alarm
+    - service: tts.google_say
+      data:
+        entity_id: media_player.kodi_blue_iris
+        message: 'Motion Detected in Laundry Room'
+    - service: notify.Pushbullet
+      data:
+        message: 'An alarm has been Triggered! In Laundry Room'
+        
+      
+#################################################
+#             Alarm Auto Arm Away when LEAVE                       #
+#################################################
+- alias: 'Alarm Away when Leave home'
+  trigger:
+    - platform: state
+      entity_id: sensor.set_hold_mode
+      to: 'away'
+  action:
+    - service: alarm_control_panel.alarm_arm_away
+      entity_id: alarm_control_panel.ha_alarm
+#      data: 
+#        code: 9937
+
+#################################################
+#          Alarm Auto DISARM when RETURN                         #
+#################################################
+- alias: 'Alarm disarm when return home'
+  trigger:
+    - platform: state
+      entity_id: sensor.set_hold_mode
+      to: 'home'
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.ha_alarm
+#      data:
+#        code: 9937
+#    - service: script.turn_off
+#      entity_id: script.alarm_flashonoff
+#    - service: script.turn_off
+#      entity_id: script.alarm_repeat
+#    - service: light.turn_off
+#      entity_id: group.all_lights
+######################################################
+#        Alarm auto arm home when house is in sleep   
+######################################################
+- alias: 'Alarm set armed home'
+  trigger:
+    - platform: state
+      entity_id: sensor.set_hold_mode
+      to: 'sleep'
+  action:
+    - service: alarm_control_panel.alarm_arm_home
+      entity_id: alarm_control_panel.ha_alarm
+######################################################
+
+######################################################
+# Washer timer automation
+#######################################################    
+- alias: Washer Completes Wash
+  trigger:
+    - platform: state
+      entity_id: sensor.washer_status
+      to: 'running'
+      for:
+        minutes: 36
+  action:
+    - service: tts.google_say
+      data:
+        entity_id: media_player.kodi_blue_iris
+        message: 'Washer is Finished'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.washing_machine_status
+        option: 'clean'
+        
+######################################################
+# Flash Door lamp when motion at shed camera
+######################################################
+- alias: Flash Red on Motion
+  trigger:
+    - platform: state
+      entity_id: sensor.motion_outdoor_shed 
+      to: 'True'
+  condition: 
+    - condition: state
+      entity_id: sensor.set_hold_mode
+      state: 'home'
+    - condition: time
+      after: '07:00:00'
+      before: '20:00:00'  
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.door_lamp    
+        flash: short
+        color_name: Red
+- alias: Back to White after Motion
+  trigger:
+    - platform: state
+      entity_id: sensor.motion_outdoor_shed 
+      to: 'False'
+  condition: 
+    - condition: state
+      entity_id: sensor.set_hold_mode
+      state: 'home'
+    - condition: time
+      after: '07:00:00'
+      before: '20:00:00'  
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.door_lamp
+        color_temp: 154
+        brightness: 255        
+
+############################# Sets Logging Level 
+- alias: Log Level
+  trigger:
+    - platform: state
+      entity_id: input_select.log_level
+  action:
+    - service: logger.set_level
+      data_template:
+        homeassistant.components: "{{ trigger.to_state.state }}"
+        
+################### Porch lights on at night  ###########################
+- alias: Porch Lights on
+  trigger:
+    - platform: sun
+      event: sunset
+#      offset: "00:30:00"
+  action:
+    - service: light.turn_on
+      entity_id: light.carport
+- alias: Porch Lights off
+  trigger:
+    - platform: sun
+      event: sunrise
+#      offset: "-00:30:00"
+  action:
+    - service: light.turn_off
+      entity_id: light.carport     
+
+############################  cieling fan automation     #################
+- alias: Fan Meduim with Hvac automation
+  trigger:
+    - platform: state
+      entity_id: sensor.hvac_fan
+      from: 'off'
+      to: 'on' 
+  condition: 
+    - condition: state
+      entity_id: sensor.set_hold_mode
+      state: 'home'    
+  action:
+    - service: fan.turn_on
+      data:
+        entity_id: fan.living_room_fan
+        speed: medium
+- alias: Fan low with hvac automation
+  trigger:
+    - platform: state
+      entity_id: sensor.hvac_fan
+      from: 'on'
+      to: 'off' 
+  condition: 
+    - condition: state
+      entity_id: sensor.set_hold_mode
+      state: 'home'    
+  action:
+    - service: fan.turn_on
+      data:
+        entity_id: fan.living_room_fan
+        speed: low        

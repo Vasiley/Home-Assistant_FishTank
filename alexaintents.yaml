@@ -1,0 +1,78 @@
+  intents:
+    WhereAreWeIntent:
+      speech:
+         type: plaintext
+         text: >
+           {%- if is_state('device_tracker.dawn_baby', 'home') and
+                  is_state('device_tracker.herb_herb', 'home') -%}
+             You are both home, you fool
+           {%- else -%}
+             Dawn is at {{ states("device_tracker.dawn_baby") }}
+             and Herb is at {{ states("device_tracker.herb_herb") }}
+           {% endif %}
+    LocateIntent:
+      #action:
+       # service: notify.notify
+        #data_template:
+         # message: The location of {{ User }} has been queried via Alexa.
+      speech:
+         type: plaintext
+         text: >
+           {%- for state in states.device_tracker -%}
+           {%- if state.name.lower() == User.lower() -%}
+           {{ state.name }} is at {{ state.state }}
+           {%- elif loop.last -%}
+           {%- endif -%}
+           {%- else -%}
+             Sorry, I don't have any trackers registered.
+           {%- endfor -%}
+    OverviewIntent:
+      speech:
+        type: plaintext
+        text: >
+          {% for state in states.sensor -%}
+          {%- if loop.first %}The {% elif loop.last %} and the {% else %}, the {% endif -%}
+          {{ state.name | lower }} is {{state.state}} {{- state.attributes.unit_of_measurement}}
+          {%- endfor -%}     
+    KitchenIntent:
+      speech:
+        type: plaintext
+        text: The Kitchen has a Temperature of {{states('sensor.kitchen_temperature')}}
+              degrees 
+    HallwayIntent:
+      speech:
+        type: plaintext
+        text: The Hallway has a Temperature of {{states('sensor.hallway_temperature')}}
+              degrees 
+    LaundryroomIntent:
+      speech:
+        type: plaintext
+        text: The Laundry Room has a Temperature of {{states('sensor.laundry_temperature')}}
+              degrees 
+    KidsHallwayIntent:
+      speech:
+        type: plaintext
+        text: The Kids Hallway has a Temperature of {{states('sensor.kids_hallway_temperature')}}
+              degrees               
+    BatteryLevelsIntent:
+      speech:
+        type: plaintext
+        text: The Kids Hallway Motion Sensor Battery level is {{states('sensor.motion_sensor_kids_hall_battery')}} percent and Kitchen Motion Sensor
+              is {{states('sensor.motion_sensor_kitchen_battery')}} percent and the Hallway Battery Level is {{states('sensor.motion_sensor_hallway_battery')}} percent
+              and the Laundry Room battery level is {{states('sensor.motion_sensor_laundry_battery')}} percent
+    ActivateSceneIntent:
+      action:
+        service: scene.turn_on
+        data_template:
+          entity_id: scene.{{ Scene | replace(" ", "_") }}
+      speech:
+        type: plaintext
+        text: !include alexa_confirm.yaml     
+    RunScriptIntent:
+      action:
+        service: script.turn_on
+        data_template:
+          entity_id: script.{{ Script | replace(" ", ".") }}
+      speech:
+        type: plaintext
+        text: !include alexa_confirm.yaml    
