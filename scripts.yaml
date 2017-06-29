@@ -455,3 +455,11 @@
   pihole_off:
     sequence:
        - service: shell_command.pihole_off      
+################ Update Hass    ###################
+  update_home_assistant_home:
+    sequence: 
+      - service: shell_command.update_hass
+  update_github:
+    sequence:
+      - service: shell_command.update_git     
+         

@@ -39,6 +39,7 @@
      - group.cameras
      - group.NetworkSnmp
      - group.homeass_version
+     - script.update_github
   media:
    view: yes
    name: Media Players
@@ -62,7 +63,8 @@
    entities:
      - group.Conditions
      - group.ForecastWeather
-    
+     - group.animated_radar
+     - camera.radar    
   RoomSensors:
    view: yes
    name: Sensors
@@ -168,7 +170,7 @@
      - sensor.pws_precip_1hr_in
      - sensor.pws_precip_today_in
      - sensor.pws_visibility_mi
-     - camera.radar
+     
      - sun.sun 
   TVRoom: 
    name: Table Lamps  
@@ -390,6 +392,7 @@
    entities:
      - sensor.ha_version
      - sensor.installed_version
+     - script.update_home_assistant_home
   blue_iris_motion:
    name: Camera Motion
    entities:
@@ -398,6 +401,7 @@
      - sensor.motion_outdoor_number12
      - sensor.motion_outdoor_swamp
      - sensor.motion_outdoor_frontdoor
+     - sensor.motion_outdoor_backdoor
   Ads_Blocked:
    name: Ads Blocked  
    entities:
@@ -429,3 +433,7 @@
      - script.living_room_fan_auto
      - sensor.fan_speed
      - binary_sensor.gang
+  animated_radar:
+   name: Animated Radar
+   entities:
+     - camera.Radar_Animated   

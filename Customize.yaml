@@ -228,7 +228,10 @@
         icon: mdi:walk  
      sensor.motion_outdoor_frontdoor:
         friendly_name: Front Door
-        icon: mdi:walk     
+        icon: mdi:walk    
+     sensor.motion_outdoor_backdoor:
+        friendly_name: Back Door
+        icon: mdi:walk        
 ####################### PI HOLE CUSTOMIZE   #######################################
      switch.pihole:
         friendly_name: Pi-Hole
@@ -286,4 +289,8 @@
         icon: mdi:fan
      binary_sensor.gang:
         friendly_name: Fan Connection
-        icon: mdi:nfc        
+        icon: mdi:nfc
+##############33 Update HA   ############
+     script.update_home_assistant_home:
+        friendly_name: Home Assistant Update
+        icon: mdi:update        

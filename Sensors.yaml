@@ -595,6 +595,22 @@
           {% else %}
             False
           {% endif %}
+- platform: template
+  sensors:
+    motion_outdoor_backdoor:
+      friendly_name: 'Back Door'
+      value_template: >-
+          {% if states('binary_sensor.blueiriscam3') %}
+          {% if is_state('binary_sensor.blueiriscam3', 'on') %}
+             True
+          {% elif is_state('binary_sensor.blueiriscam3', 'off') %}
+             False
+          {% else %}
+          {{ states('binary_sensor.blueiriscam3') }}
+          {% endif %}
+          {% else %}
+            False
+          {% endif %}          
 ########################################################################
 ### cert expire check lets encrpt
 ########################################################################

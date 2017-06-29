@@ -3,6 +3,9 @@
   still_image_url: !secret radar 
   name: Radar
 - platform: generic
+  still_image_url: 'http://images.intellicast.com/WxImages/RadarLoop/msy_None_anim.gif'
+  name: Radar Animated 
+- platform: generic
   still_image_url: http://192.168.1.194/jpg/image.jpg
   name: Living_Room_Camera
   username: !secret iqeye_username

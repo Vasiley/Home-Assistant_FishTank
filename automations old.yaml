@@ -88,7 +88,8 @@
       data:
         entity_id: group.all_lights
         flash: short
-        
+    - service: light.turn_off
+      entity_id: light.light_bulb     
 
 ########################################################
 #        Alarm setting for away mode 
@@ -136,6 +137,8 @@
       data:
         entity_id: group.all_lights
         flash: short
+    - service: light.turn_off
+      entity_id: light.light_bulb    
     - service: notify.Pushbullet
       data:
         message: 'An alarm has been Triggered!'
@@ -200,6 +203,8 @@
   action:
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
+    - service: light.turn_off
+      entity_id: light.light_bulb   
 #      data:
 #        code: 9937
 #    - service: script.turn_off
@@ -255,7 +260,7 @@
       state: 'home'
     - condition: time
       after: '07:00:00'
-      before: '20:00:00'  
+      before: '19:00:00:00'  
   action:
     - service: light.turn_on
       data:
@@ -273,7 +278,7 @@
       state: 'home'
     - condition: time
       after: '07:00:00'
-      before: '20:00:00'  
+      before: '19:00:00'  
   action:
     - service: light.turn_on
       data:
@@ -340,3 +345,21 @@
       data:
         entity_id: fan.living_room_fan
         speed: low        
+############ auto renew ssl   with notification if fails ####################
+- alias: Auto Renew SSL Cert
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.ssl_expire
+      below: 29
+  action:
+    - service: shell_command.renew_ssl 
+
+- alias: 'SSL expiry notification'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.ssl_expire
+      below: 21
+  action:
+    - service: notify.Pushbullet
+      data:
+        message: 'Warning - SSL certificate expires in 21 days and has not been automatically renewed'    
