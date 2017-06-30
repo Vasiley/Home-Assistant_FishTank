@@ -451,12 +451,8 @@
     hvac_fan:
       friendly_name: 'Hvac Fan'
       value_template: "{{ states.climate.thermostat.attributes.fan }}" 
-####### ceiling fan   ###########################      
-- platform: template
-  sensors:
-    fan_speed:
-      friendly_name: 'Fan Speed'
-      value_template: "{{ states.fan.living_room_fan.attributes.speed }}"      
+      
+      
 ######## Harmony remote  ######
 
 - platform: template
