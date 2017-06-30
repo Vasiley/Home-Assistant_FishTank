@@ -46,23 +46,9 @@
         entity_id: input_slider.lan_load_delta_out
         value: '{{ ((trigger.to_state.state | int - trigger.from_state.state | int) * 1 ) / ( as_timestamp(trigger.to_state.last_updated) - as_timestamp(trigger.from_state.last_updated) ) }}'      
                 
-##### Master Bedroom light using home mode   #######
 
-- alias: Motion Master Bedroom Motion sensor
-  trigger:
-    - platform: state
-      entity_id: sensor.master_motion
-      to: 'True'
-  condition:
-    - condition: state
-      entity_id: sensor.set_hold_mode
-      state: 'home'  
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.master
-        color_temp: 154
-        brightness: 255        
+
+   
 #- alias: Automation to rerun alarm
 - alias: rerun alarm
   trigger:
@@ -314,37 +300,7 @@
     - service: light.turn_off
       entity_id: light.carport     
 
-############################  cieling fan automation     #################
-- alias: Fan Meduim with Hvac automation
-  trigger:
-    - platform: state
-      entity_id: sensor.hvac_fan
-      from: 'off'
-      to: 'on' 
-  condition: 
-    - condition: state
-      entity_id: sensor.set_hold_mode
-      state: 'home'    
-  action:
-    - service: fan.turn_on
-      data:
-        entity_id: fan.living_room_fan
-        speed: medium
-- alias: Fan low with hvac automation
-  trigger:
-    - platform: state
-      entity_id: sensor.hvac_fan
-      from: 'on'
-      to: 'off' 
-  condition: 
-    - condition: state
-      entity_id: sensor.set_hold_mode
-      state: 'home'    
-  action:
-    - service: fan.turn_on
-      data:
-        entity_id: fan.living_room_fan
-        speed: low        
+
 ############ auto renew ssl   with notification if fails ####################
 - alias: Auto Renew SSL Cert
   trigger:

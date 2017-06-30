@@ -2,3 +2,5 @@
   sensors:
     pihole_status:
       value_template: "{{ is_state('sensor.pihole_blocking', 'Pi-hole blocking is Enabled') }}"
+
+      

@@ -117,46 +117,8 @@
      script.network_reboot:
         friendly_name: Network Reboot
         icon: mdi:power-settings 
-###### Motion Sensors    ############
-     sensor.kids_hallway_motion:
-        icon: mdi:walk
-     sensor.hallway_motion:
-        icon: mdi:walk
-     sensor.kitchen_motion:
-        icon: mdi:walk
-     sensor.laundry_room_motion:
-        icon: mdi:walk     
-     sensor.master_motion:
-        icon: mdi:walk
-     sensor.bathroom_motion:
-        icon: mdi:walk
-     sensor.kids_bathroom_motion:
-        icon: mdi:walk
-##### Hue motion and dimmer battery levels   ####
-     sensor.motion_sensor_kids_hall_battery:
-        icon: mdi:battery     
-     sensor.motion_sensor_laundry_battery:
-        icon: mdi:battery    
-     sensor.motion_sensor_hallway_battery:
-        icon: mdi:battery
-#     sensor.motion_sensor_kitchen_battery:
-#        icon: mdi:battery
-     sensor.kitchen_battery_motion:
-        friendly_name: Kitchen Motion Battery
-     sensor.motion_sensor_kids_bathroom_battery:
-        icon: mdi:battery
-     sensor.motion_sensor_master_battery:
-        icon: mdi:battery
-     sensor.motion_sensor_bathroom_battery:
-        icon: mdi:battery
-     sensor.master_bathroom_dimmer_battery:
-        icon: mdi:battery
-     sensor.kids_bathroom_dimmer_battery:
-        icon: mdi:battery
-     sensor.kitchen_table_dimmer_battery:
-        icon: mdi:battery
-     sensor.table_lamps_dimmer_battery:
-        icon: mdi:battery     
+
+     
         
         
 ##### Network Sensors #####        
@@ -282,15 +244,11 @@
      sensor.myipopendnscom:
         friendly_name: Wan Ip
         icon: mdi:wan
-########### ceiling fan    #########
-     sensor.fan_speed:
-        icon: mdi:speedometer     
-     sensor.hvac_fan:
-        icon: mdi:fan
-     binary_sensor.gang:
-        friendly_name: Fan Connection
-        icon: mdi:nfc
+
+     
 ##############33 Update HA   ############
      script.update_home_assistant_home:
         friendly_name: Home Assistant Update
         icon: mdi:update        
+        
+             

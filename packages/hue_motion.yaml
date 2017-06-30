@@ -1,0 +1,195 @@
+homeassistant:
+  customize:
+  ################################################
+  ## Binary Sensor
+  ################################################
+  
+    binary_sensor.kitchen_motion:
+      friendly_name: Kitchen Motion
+      device_class: motion
+    binary_sensor.hallway_motion:
+      friendly_name: Hallway Motion
+      device_class: motion 
+    binary_sensor.laundry_room_motion:
+      friendly_name: Laundry Room Motion
+      device_class: motion       
+    binary_sensor.kids_hallway_motion:
+      friendly_name: Kids Hallway Motion
+      device_class: motion
+    binary_sensor.kids_bathroom_motion:
+      friendly_name: Kids Bathroom Motion
+      device_class: motion 
+    binary_sensor.bathroom_motion:
+      friendly_name: Bathroom Motion
+      device_class: motion      
+    binary_sensor.master_motion:
+      friendly_name: Master Motion
+      device_class: motion
+  ################################################
+  ##  Sensor Battery Icon
+  ################################################    
+    sensor.motion_sensor_kids_hall_battery:
+      icon: mdi:battery     
+    sensor.motion_sensor_laundry_battery:
+      icon: mdi:battery    
+    sensor.motion_sensor_hallway_battery:
+      icon: mdi:battery
+#     sensor.motion_sensor_kitchen_battery:
+#        icon: mdi:battery
+    sensor.kitchen_battery_motion:
+      friendly_name: Kitchen Motion Battery
+    sensor.motion_sensor_kids_bathroom_battery:
+      icon: mdi:battery
+    sensor.motion_sensor_master_battery:
+      icon: mdi:battery
+    sensor.motion_sensor_bathroom_battery:
+      icon: mdi:battery
+    sensor.master_bathroom_dimmer_battery:
+      icon: mdi:battery
+    sensor.kids_bathroom_dimmer_battery:
+      icon: mdi:battery
+    sensor.kitchen_table_dimmer_battery:
+      icon: mdi:battery
+    sensor.table_lamps_dimmer_battery:
+      icon: mdi:battery 
+####### Binary sensor motion   #############  
+binary_sensor:  
+  - platform: rest
+    resource: !secret MS_rest_6
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: kitchen_motion 
+  - platform: rest
+    resource: !secret MS_rest_12
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: hallway_motion    
+  - platform: rest
+    resource: !secret MS_rest_20
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: laundry_room_motion 
+  - platform: rest
+    resource: !secret MS_rest_24
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: kids_hallway_motion   
+  - platform: rest
+    resource: !secret MS_rest_30
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: kids_bathroom_motion  
+  - platform: rest
+    resource: !secret MS_rest_36
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: bathroom_motion  
+  - platform: rest
+    resource: !secret MS_rest_40
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: master_motion   
+################# sensor temp ########################
+sensor:
+  - platform: rest
+    resource: !secret MS_rest_39
+    value_template: '{{ value_json.state.temperature | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Master Temperature'    
+  - platform: rest
+    resource: !secret MS_rest_35
+    value_template: '{{ value_json.state.temperature | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Bathroom Temperature'
+  - platform: rest
+    resource: !secret MS_rest_23
+    value_template: '{{ value_json.state.temperature | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Kids Hallway Temperature'    
+  - platform: rest
+    resource: !secret MS_rest_11
+    value_template: '{{ value_json.state.temperature | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Hallway Temperature'
+  - platform: rest
+    resource: !secret MS_rest_5
+    value_template: '{{ value_json.state.temperature | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Kitchen Temperature' 
+  - platform: rest
+    resource: !secret MS_rest_29
+    value_template: '{{ value_json.state.temperature | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Kids Bathroom Temperature'    
+
+##################### sensor battery   ##############################
+  - platform: rest
+    resource: !secret MS_rest_5
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Motion Sensor Kitchen Battery'
+  - platform: rest
+    resource: !secret MS_rest_11
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Motion Sensor Hallway Battery'
+  - platform: rest
+    resource: !secret MS_rest_19
+    value_template: '{{ value_json.state.temperature | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Laundry Temperature'
+  - platform: rest
+    resource: !secret MS_rest_20
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Motion Sensor Laundry Battery'
+  - platform: rest
+    resource: !secret MS_rest_23
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Motion Sensor Kids Hall Battery'
+  - platform: rest
+    resource: !secret MS_rest_30
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Motion Sensor Kids Bathroom Battery'
+  - platform: rest
+    resource: !secret MS_rest_35
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Motion Sensor Bathroom Battery'
+  - platform: rest
+    resource: !secret MS_rest_39
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Motion Sensor Master Battery'  
+    
+#######################################################################################################
+#####    When home mode set on ecobee then master light turns on in bedroom (not while sleeping  ###### 
+#####    ie house is in sleep mode                                                               ######
+#####    use case app only allows set times and we go to bed at diff times                       ######
+#######################################################################################################
+
+automation:
+  - alias: Motion Master Bedroom Motion sensor
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.master_motion
+        to: 'on'
+    condition:
+      - condition: state
+        entity_id: sensor.set_hold_mode
+        state: 'home'  
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.master
+          color_temp: 154
+          brightness: 255       

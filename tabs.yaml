@@ -75,6 +75,7 @@
      - group.room_occupancy
      - group.Dimmers_status
      - group.blue_iris_motion
+     
 #     - group.LivingRoomFan
 #  LivingRoom_view:
 #   view: no
@@ -274,13 +275,13 @@
   Motion:
    name: Motion
    entities:
-     - sensor.kids_bathroom_motion
-     - sensor.kids_hallway_motion
-     - sensor.laundry_room_motion
-     - sensor.kitchen_motion
-     - sensor.hallway_motion
-     - sensor.bathroom_motion
-     - sensor.master_motion
+     - binary_sensor.kitchen_motion
+     - binary_sensor.hallway_motion
+     - binary_sensor.laundry_room_motion
+     - binary_sensor.kids_hallway_motion
+     - binary_sensor.kids_bathroom_motion
+     - binary_sensor.bathroom_motion
+     - binary_sensor.master_motion
   Battery:
    name: Battery
    entities:
