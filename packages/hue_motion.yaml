@@ -44,14 +44,7 @@ homeassistant:
       icon: mdi:battery
     sensor.motion_sensor_bathroom_battery:
       icon: mdi:battery
-    sensor.master_bathroom_dimmer_battery:
-      icon: mdi:battery
-    sensor.kids_bathroom_dimmer_battery:
-      icon: mdi:battery
-    sensor.kitchen_table_dimmer_battery:
-      icon: mdi:battery
-    sensor.table_lamps_dimmer_battery:
-      icon: mdi:battery 
+    
 ####### Binary sensor motion   #############  
 binary_sensor:  
   - platform: rest

@@ -237,16 +237,6 @@ ecobee:
   api_key: !secret ecobee_api_key
   hold_temp: True
 
-input_slider: !include inputsliders.yaml
-
-alarm_control_panel:
-  - platform: manual
-#    code: 9937 # move this to secrets when you have time
-    # code: !secret alarm_control_panel_code
-    trigger_time: 1
-    pending_time: 5
-
-
 notify:
   - name: Pushbullet
     platform: pushbullet

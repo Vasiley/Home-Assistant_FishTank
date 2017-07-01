@@ -56,6 +56,8 @@
         friendly_name: Door Table Lamp
      light.living_room:
         friendly_name: Living Room Lights
+     light.master_closet:
+        friendly_name: Master Closet     
      camera.living_room_camera:
         friendly_name: Living Room Camera
      switch.network_switch_charter_modem:
@@ -108,9 +110,7 @@
         friendly_name: Tropical Twilight
      script.supernatural:
         friendly_name: SuperNatural
-     script.gone_on:
-        friendly_name: Away   
-        icon: mdi:security-home
+     
      script.webswitch_reboot:
         friendly_name: Webswitch Reboot
         icon: mdi:power-settings 
@@ -131,20 +131,7 @@
      sensor.ping_time_mean:
         friendly_name: 'Speedtest Ping Average'
         icon: mdi:clock-fast
-     sensor.wan_traffic_in_mean:
-        friendly_name: 'WAN Download Average'
-        icon: mdi:download
-     sensor.wan_traffic_out_mean:
-        friendly_name: 'WAN Upload Average'
-        icon: mdi:upload
-     sensor.internet_speed_in:
-        friendly_name: Internet In
-     sensor.internet_speed_out:
-        friendly_name: Internet Out 
-     sensor.lan_load_in_mean:
-        friendly_name: Lan Load In
-     sensor.lan_load_out_mean:
-        friendly_name: Lan Load Out        
+             
 #################   HOUSE MODE  ###########
      sensor.set_hold_mode:         
         icon: mdi:home
@@ -158,7 +145,15 @@
      script.nap_time:
         friendly_name: Nap     
         icon: mdi:sleep
-############ DIMMERS #################        
+############ DIMMERS ################# 
+     sensor.master_bathroom_dimmer_battery:
+        icon: mdi:battery
+     sensor.kids_bathroom_dimmer_battery:
+        icon: mdi:battery
+     sensor.kitchen_table_dimmer_battery:
+        icon: mdi:battery
+     sensor.master_closet_dimmer_battery:
+        icon: mdi:battery        
      sensor.master_bathroom_dimmer_last_update:
         icon: mdi:clock
      sensor.master_bathroom_dimmer_state:
@@ -171,29 +166,11 @@
         icon: mdi:clock
      sensor.kids_bathroom_dimmer_state:
         icon: mdi:remote
-     sensor.table_lamps_dimmer_last_update:
+     sensor.master_closet_dimmer_last_update:
         icon: mdi:clock
-     sensor.table_lamps_dimmer_state:
+     sensor.master_closet_dimmer_state:
         icon: mdi:remote   
-################# Blue Iris Motion   #################################        
-     sensor.motion_outdoor_shed:
-        friendly_name: Shed Cam
-        icon: mdi:walk 
-     sensor.motion_outdoor_driveway:
-        friendly_name: Driveway
-        icon: mdi:walk
-     sensor.motion_outdoor_number12:
-        friendly_name: Number 12
-        icon: mdi:walk        
-     sensor.motion_outdoor_swamp:
-        friendly_name: Swamp
-        icon: mdi:walk  
-     sensor.motion_outdoor_frontdoor:
-        friendly_name: Front Door
-        icon: mdi:walk    
-     sensor.motion_outdoor_backdoor:
-        friendly_name: Back Door
-        icon: mdi:walk        
+
 ####################### PI HOLE CUSTOMIZE   #######################################
      switch.pihole:
         friendly_name: Pi-Hole

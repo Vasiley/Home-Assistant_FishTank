@@ -18,6 +18,7 @@
      - light.master
      - light.carport
      - light.light_bulb
+     - light.master_closet
      - group.Family
      - camera.dawn
      - camera.herb
@@ -282,6 +283,8 @@
      - binary_sensor.kids_bathroom_motion
      - binary_sensor.bathroom_motion
      - binary_sensor.master_motion
+     
+     
   Battery:
    name: Battery
    entities:
@@ -296,7 +299,7 @@
      - sensor.master_bathroom_dimmer_battery
      - sensor.kids_bathroom_dimmer_battery
      - sensor.kitchen_table_dimmer_battery
-     - sensor.table_lamps_dimmer_battery
+     - sensor.master_closet_dimmer_battery
   Dimmers_status:
    name: Dimmers
    entities:
@@ -306,8 +309,8 @@
      - sensor.kitchen_table_dimmer_state
      - sensor.kids_bathroom_dimmer_last_update
      - sensor.kids_bathroom_dimmer_state
-     - sensor.table_lamps_dimmer_last_update
-     - sensor.table_lamps_dimmer_state     
+     - sensor.master_closet_dimmer_last_update
+     - sensor.master_closet_dimmer_state
   Ecobee_sensors:
    name: Ecobee Temp Sensors
    entities:
@@ -397,12 +400,12 @@
   blue_iris_motion:
    name: Camera Motion
    entities:
-     - sensor.motion_outdoor_shed 
-     - sensor.motion_outdoor_driveway
-     - sensor.motion_outdoor_number12
-     - sensor.motion_outdoor_swamp
-     - sensor.motion_outdoor_frontdoor
-     - sensor.motion_outdoor_backdoor
+     - binary_sensor.motion_outdoor_shed 
+     - binary_sensor.motion_outdoor_driveway
+     - binary_sensor.motion_outdoor_number12
+     - binary_sensor.motion_outdoor_swamp
+     - binary_sensor.motion_outdoor_frontdoor
+     - binary_sensor.motion_outdoor_backdoor
   Ads_Blocked:
    name: Ads Blocked  
    entities:
