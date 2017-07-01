@@ -144,7 +144,7 @@ automation:
     trigger:
       - platform: state
         entity_id: binary_sensor.motion_outdoor_shed 
-        to: 'True'
+        to: 'on'
     condition: 
       - condition: state
         entity_id: sensor.set_hold_mode
@@ -162,7 +162,7 @@ automation:
     trigger:
       - platform: state
         entity_id: binary_sensor.motion_outdoor_shed 
-        to: 'False'
+        to: 'off'
     condition: 
       - condition: state
         entity_id: sensor.set_hold_mode

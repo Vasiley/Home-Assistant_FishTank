@@ -182,7 +182,7 @@ browser:
   url: !secret browser
 
 # Sensors
-binary_sensor: !include binary_sensors.yaml
+
 sensor: !include Sensors.yaml
 
 # Text to speech
@@ -247,8 +247,6 @@ rest_command: !include restcommands.yaml
 config:
 
 shell_command:
-  pihole_on: !secret pi_hole_on
-  pihole_off: !secret pi_hole_off
   renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
   update_hass: hassctl update-hass && hassctl config && hassctl restart
   update_git: gitupdate.sh

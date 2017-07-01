@@ -389,17 +389,7 @@
         data:
           entity_id: media_player.kodi_blue_iris
           message: 'Network is back up'
-#################### Pi Hole    ##################################
-  ad_blocker:
-    sequence:
-      - service: switch.toggle
-        entity_id: switch.pihole
-  pihole_on:
-    sequence:
-       - service: shell_command.pihole_on
-  pihole_off:
-    sequence:
-       - service: shell_command.pihole_off      
+      
 ################ Update Hass    ###################
   update_home_assistant_home:
     sequence: 

@@ -171,44 +171,8 @@
      sensor.master_closet_dimmer_state:
         icon: mdi:remote   
 
-####################### PI HOLE CUSTOMIZE   #######################################
-     switch.pihole:
-        friendly_name: Pi-Hole
-        entity_picture: /local/pihole.jpg
-     sensor.ads_percentage_today:
-        friendly_name: Percentage of Ad Traffic Blocked
-        unit_of_measurement: '%'
-        icon: mdi:ticket-percent
-     sensor.domains_being_blocked:
-        friendly_name: Total Domains Blocking
-        icon: mdi:do-not-disturb
-     sensor.ads_blocked_today:
-        friendly_name: Ads Blocked Today
-        icon: mdi:do-not-disturb
-     sensor.dns_queries_today:
-        friendly_name: DNS Queries Today
-        icon: mdi:note-text
-     sensor.unique_domains:
-        friendly_name: Unique Domains
-        icon: mdi:approval
-     sensor.queries_forwarded:
-        friendly_name: Queries Forwarded
-        icon: mdi:arrange-send-backward
-     sensor.queries_cached:
-        friendly_name: Queries Cached
-        icon: mdi:animation
-     script.ad_blocker:
-        friendly_name: Ad Blocker
-     script.pihole_off:
-        friendly_name: Turn Pi-Hole Off
-        icon: mdi:do-not-disturb
-     script.pihole_on:
-        friendly_name: Turn Pi-Hole On
-        icon: mdi:power
-     sensor.pihole_dns:
-        friendly_name: DNS Service
-     sensor.pihole_blocking:
-        friendly_name: Ad Blocking 
+
+ 
 #### Mail ######
      sensor.deliveries_today:
         icon: mdi:package-variant

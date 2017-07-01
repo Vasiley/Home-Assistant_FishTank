@@ -5,14 +5,3 @@
   cycletime: 5
   
   
-######################### PI Hole #########################
-- platform: template
-  switches:
-    pihole:
-      value_template: "{{ is_state('binary_sensor.pihole_status', 'on') }}"
-      turn_on:
-        service: script.turn_on
-        entity_id: script.pihole_on
-      turn_off:
-        service: script.turn_on
-        entity_id: script.pihole_off  
