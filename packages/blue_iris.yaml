@@ -136,10 +136,11 @@ binary_sensor:
             False
           {% endif %}        
       
-automation:
+
   ######################################################
 # Flash Door lamp when motion at shed camera
 ######################################################
+automation:
   - alias: Flash Red on Motion
     trigger:
       - platform: state
@@ -176,4 +177,13 @@ automation:
           entity_id: light.door_lamp
           color_temp: 154
           brightness: 255        
-      
+#############################################################################
+############3 rest commands to change blue iris profile               #######
+#############################################################################
+rest_command:
+  no_motion:
+    url: 'http://192.168.1.80:81/admin?profile=1&user=admin&pw=Princess2011!' 
+  lock_down:
+    url: 'http://192.168.1.80:81/admin?profile=5&user=admin&pw=Princess2011!'  
+  sleep:
+    url: 'http://192.168.1.80:81/admin?profile=6&user=admin&pw=Princess2011!'      
