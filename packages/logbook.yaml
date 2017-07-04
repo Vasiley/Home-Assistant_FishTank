@@ -1,0 +1,11 @@
+logbook:
+ exclude:
+   domains:
+      - input_select
+      - media_player
+      - automation
+      - input_slider
+      - rest_command
+      - camera
+      - notify
+      - scene

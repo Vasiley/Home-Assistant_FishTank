@@ -13,24 +13,21 @@ homeassistant:
     script.living_room_fan_auto:
       friendly_name: "Breeze"
       icon: mdi:fan
-      
+
     sensor.fan_speed:
       icon: mdi:speedometer
-        
-    sensor.hvac_fan:
-      icon: mdi:fan
-        
+   
     binary_sensor.gang:
       friendly_name: Fan Connection
-      icon: mdi:nfc  
+      icon: mdi:nfc
 
 sensor:
   - platform: template
     sensors:
       fan_speed:
         friendly_name: 'Fan Speed'
-        value_template: "{{ states.fan.living_room_fan.attributes.speed }}" 
-        
+        value_template: "{{ states.fan.living_room_fan.attributes.speed }}"
+
 automation:
   - alias: fan_set_speed
     initial_state: 'on'
@@ -101,39 +98,37 @@ automation:
           entity_id:
             - automation.fan_set_speed
             - automation.fan_turn_on
-##########################################################################            
+##########################################################################
 ############################  cieling fan automation with Hvac    #################
 ##########################################################################
   - alias: Fan Meduim with Hvac automation
     trigger:
       - platform: state
         entity_id: sensor.hvac_fan
-        from: 'off'
-        to: 'on' 
-    condition: 
+        to: 'on'
+    condition:
       - condition: state
         entity_id: sensor.set_hold_mode
-        state: 'home'    
+        state: 'home'
     action:
       - service: fan.turn_on
         data:
           entity_id: fan.living_room_fan
-          speed: medium
+          speed: 'medium'
   - alias: Fan low with hvac automation
     trigger:
       - platform: state
         entity_id: sensor.hvac_fan
-        from: 'on'
-        to: 'off' 
-    condition: 
+        to: 'off'
+    condition:
       - condition: state
         entity_id: sensor.set_hold_mode
-        state: 'home'    
+        state: 'home'
     action:
       - service: fan.turn_on
         data:
           entity_id: fan.living_room_fan
-          speed: low                           
+          speed: 'low'
 
   # - alias: turn_the_damn_fan_on
     # trigger:

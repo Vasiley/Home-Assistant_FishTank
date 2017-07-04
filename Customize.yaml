@@ -6,7 +6,7 @@
         entity_picture: /local/speedtest.png
      sensor.speedtest_ping:
         entity_picture: /local/ping.jpg
-#########Weather#################        
+        
      sensor.pws_alerts:
         icon: mdi:alert-outline 
         friendly_name: Alerts 
@@ -133,8 +133,7 @@
         icon: mdi:clock-fast
              
 #################   HOUSE MODE  ###########
-     sensor.set_hold_mode:         
-        icon: mdi:home
+    
      sensor.remote_entertainment:
         icon: mdi:theater
      sensor.ha_version:   
@@ -145,33 +144,6 @@
      script.nap_time:
         friendly_name: Nap     
         icon: mdi:sleep
-############ DIMMERS ################# 
-     sensor.master_bathroom_dimmer_battery:
-        icon: mdi:battery
-     sensor.kids_bathroom_dimmer_battery:
-        icon: mdi:battery
-     sensor.kitchen_table_dimmer_battery:
-        icon: mdi:battery
-     sensor.master_closet_dimmer_battery:
-        icon: mdi:battery        
-     sensor.master_bathroom_dimmer_last_update:
-        icon: mdi:clock
-     sensor.master_bathroom_dimmer_state:
-        icon: mdi:remote     
-     sensor.kitchen_table_dimmer_last_update: 
-        icon: mdi:clock     
-     sensor.kitchen_table_dimmer_state:
-        icon: mdi:remote
-     sensor.kids_bathroom_dimmer_last_update:
-        icon: mdi:clock
-     sensor.kids_bathroom_dimmer_state:
-        icon: mdi:remote
-     sensor.master_closet_dimmer_last_update:
-        icon: mdi:clock
-     sensor.master_closet_dimmer_state:
-        icon: mdi:remote   
-
-
  
 #### Mail ######
      sensor.deliveries_today:

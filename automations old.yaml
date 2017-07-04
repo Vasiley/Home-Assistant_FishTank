@@ -2,7 +2,7 @@
 
 ######################################################
 # Washer timer automation
-#######################################################    
+#######################################################
 - alias: Washer Completes Wash
   trigger:
     - platform: state
@@ -19,18 +19,10 @@
       data:
         entity_id: input_select.washing_machine_status
         option: 'clean'
-        
 
-############################# Sets Logging Level 
-- alias: Log Level
-  trigger:
-    - platform: state
-      entity_id: input_select.log_level
-  action:
-    - service: logger.set_level
-      data_template:
-        homeassistant.components: "{{ trigger.to_state.state }}"
-        
+
+
+
 ################### Porch lights on at night  ###########################
 - alias: Porch Lights on
   trigger:
@@ -47,7 +39,7 @@
 #      offset: "-00:30:00"
   action:
     - service: light.turn_off
-      entity_id: light.carport     
+      entity_id: light.carport
 
 
 ############ auto renew ssl   with notification if fails ####################
@@ -57,7 +49,7 @@
       entity_id: sensor.ssl_expire
       below: 29
   action:
-    - service: shell_command.renew_ssl 
+    - service: shell_command.renew_ssl
 
 - alias: 'SSL expiry notification'
   trigger:
@@ -67,4 +59,16 @@
   action:
     - service: notify.Pushbullet
       data:
-        message: 'Warning - SSL certificate expires in 21 days and has not been automatically renewed'    
+        message: 'Warning - SSL certificate expires in 21 days and has not been automatically renewed'
+
+############# Non automated lights to turn off if left on   ##########
+- alias: Turn off Non Automated lights if left On
+  trigger:
+    - platform: state
+      entity_id: light.master_closet
+      to: 'on'
+      for: 
+        minutes: 59
+  action:
+    - service: light.turn_off
+      entity_id: light.master_closet
