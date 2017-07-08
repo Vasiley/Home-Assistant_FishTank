@@ -46,7 +46,7 @@ homeassistant:
       entity_picture: /local/8PortSwitch.jpeg 
     sensor.switch1:
       friendly_name: Switch 1
-      entity_picture: /local/8portSwitch.jpeg
+      entity_picture: /local/8PortSwitch.jpeg
     sensor.media_nas:
       friendly_name: Media Nas
       entity_picture: /local/Worldbook.jpeg 

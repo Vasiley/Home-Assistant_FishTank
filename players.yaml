@@ -5,6 +5,7 @@
   password: !secret media_player_kodi_password 
 - platform: samsungtv
   host: 192.168.1.18
+  port: 8001
   name: Smart Tv
 - platform: plex
   include_non_clients: false

@@ -182,8 +182,8 @@ automation:
 #############################################################################
 rest_command:
   no_motion:
-    url: 'http://192.168.1.80:81/admin?profile=1&user=admin&pw=Princess2011!' 
+    url: !secret rest_command_no_motion 
   lock_down:
-    url: 'http://192.168.1.80:81/admin?profile=5&user=admin&pw=Princess2011!'  
+    url: !secret rest_command_lockdown  
   sleep:
-    url: 'http://192.168.1.80:81/admin?profile=6&user=admin&pw=Princess2011!'      
+    url: !secret rest_command_sleep      
