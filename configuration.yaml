@@ -80,12 +80,8 @@ remote:
 
 group: !include tabs.yaml
 camera: !include cameras.yaml
-switch: !include switches.yaml
 
-device_tracker:
-  - platform: nmap_tracker
-    hosts: 192.168.1.1-255
-  - platform: owntracks
+#switch: # Moved to packages
 
 mqtt:
   broker: m10.cloudmqtt.com
@@ -133,3 +129,5 @@ shell_command:
 wink:
   access_token: !secret wink_access_token
 #  refresh_token: Y68ELx0nrLagi_NphUl8vD4HYhcmRoEg
+
+

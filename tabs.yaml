@@ -194,25 +194,26 @@
   NetworkNmap:
    name: Network Equipment
    entities:
-     - device_tracker.routerasuscom
-     - device_tracker.pan_shedvasiley
-     - device_tracker.switch1vasiley
-     - device_tracker.blueirispcvasiley
+     - sensor.asus_router
+     - sensor.cisco_router
+     - sensor.switch1
+     - sensor.switch2
      
   NetworkDrives:
    name: Nas Drives
    entities:
-     - device_tracker.medianasvasiley
-     - device_tracker.nasnetworkvasiley 
+     - sensor.media_nas
+     - sensor.network_nas
   Workstations:
-     - device_tracker.blueiris2vasiley
-     - device_tracker.networkpcvasiley     
+     - sensor.blue_iris_workstation
+     - sensor.network_workstation    
   Cameras:
-     - device_tracker.number12vasiley
-     - device_tracker.drivewaycamvasiley
-     - device_tracker.shedvasiley
-     - device_tracker.backdoorvasiley
-     - device_tracker.frontdoorvasiley
+     - sensor.number12_camera
+     - sensor.driveway_camera
+     - sensor.shed_camera
+     - sensor.backdoor_camera
+     - sensor.frontdoor_camera
+     - sensor.swamp_camera
   Family:
      - device_tracker.herb_herb 
      - device_tracker.dawn_baby
@@ -437,6 +438,7 @@
      - script.living_room_fan_auto
      - sensor.fan_speed
      - binary_sensor.gang
+     - script.refresh_wink
   animated_radar:
    name: Animated Radar
    entities:

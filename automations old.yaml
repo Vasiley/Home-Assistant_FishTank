@@ -50,25 +50,20 @@
       below: 29
   action:
     - service: shell_command.renew_ssl
-
-- alias: 'SSL expiry notification'
+########## Evening Time ##############
+- alias: Evening Time
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.ssl_expire
-      below: 21
-  action:
-    - service: notify.Pushbullet
-      data:
-        message: 'Warning - SSL certificate expires in 21 days and has not been automatically renewed'
-
-############# Non automated lights to turn off if left on   ##########
-- alias: Turn off Non Automated lights if left On
-  trigger:
-    - platform: state
-      entity_id: light.master_closet
-      to: 'on'
-      for: 
-        minutes: 59
-  action:
-    - service: light.turn_off
-      entity_id: light.master_closet
+    - platform: time
+      after: '19:01'
+  condition:
+    - condition: state
+      entity_id: sensor.set_hold_mode
+      state: 'home'
+  action: 
+   - service: light.turn_on
+     data:
+       entity_id: light.lamps
+       color_temp: 426
+       brightness: 125
+  
+    

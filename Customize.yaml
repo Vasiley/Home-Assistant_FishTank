@@ -1,12 +1,3 @@
-########CUSTOMIZE DEVICES########
-########Network######
-     sensor.speedtest_download:
-        entity_picture: /local/speedtest.png
-     sensor.speedtest_upload:
-        entity_picture: /local/speedtest.png
-     sensor.speedtest_ping:
-        entity_picture: /local/ping.jpg
-     
 ##########Living Rooms###################
      light.herbs_table_lamp:
         friendly_name: Herbs Table Lamp
@@ -20,20 +11,6 @@
         friendly_name: Living Room Lights
      light.master_closet:
         friendly_name: Master Closet     
-     camera.living_room_camera:
-        friendly_name: Living Room Camera
-     switch.network_switch_charter_modem:
-        friendly_name: Charter Modem
-     switch.network_switch_blue_iris_monitor:
-        friendly_name: Blue Iris Monitor
-     switch.network_switch_blue_iris_pc:
-        friendly_name: Blue Iris Pc
-     switch.network_switch_asus_router:
-        friendly_name: Asus Router
-     switch.network_switch_comnet_switch:
-        friendly_name: Comnet Switch
-     switch.network_switch_hue:
-        friendly_name: Phillips Hue 
      light.lamps:
         friendly_name: Table Lamps 
      light.light_bulb:
@@ -72,24 +49,6 @@
         friendly_name: Tropical Twilight
      script.supernatural:
         friendly_name: SuperNatural
-     
-     script.webswitch_reboot:
-        friendly_name: Webswitch Reboot
-        icon: mdi:power-settings 
-     script.network_reboot:
-        friendly_name: Network Reboot
-        icon: mdi:power-settings 
-        
-##### Network Sensors #####        
-     sensor.download_speed_mean:
-        friendly_name: 'Speedtest Download Average'
-        icon: mdi:speedometer
-     sensor.upload_speed_mean:
-        friendly_name: 'Speedtest Upload Average'
-        icon: mdi:speedometer
-     sensor.ping_time_mean:
-        friendly_name: 'Speedtest Ping Average'
-        icon: mdi:clock-fast
              
 #################   HOUSE MODE  ###########
     
@@ -104,14 +63,10 @@
         friendly_name: Nap     
         icon: mdi:sleep
          
-######### Wan Ip 
-     sensor.myipopendnscom:
-        friendly_name: Wan Ip
-        icon: mdi:wan
-     
 ##############33 Update HA   ############
      script.update_home_assistant_home:
         friendly_name: Home Assistant Update
         icon: mdi:update        
         
-             
+               
+         

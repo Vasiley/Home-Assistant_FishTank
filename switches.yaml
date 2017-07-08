@@ -1,7 +1,0 @@
-- platform: digitalloggers
-  host: 192.168.1.40
-  password: !secret digital_loggers_pass
-  name: Network Switch
-  cycletime: 5
-  
-  

@@ -6,14 +6,14 @@
           entity_id: climate.thermostat
           hold_mode: "sleep" 
       - delay: '00:00:02'
-      - service: tts.google_say
-        data:
-          entity_id: media_player.kodi_blue_iris
-          message: 'Sleep is Activated Good Night'   
-      - delay: '00:00:02'    
       - service: media_player.turn_off 
         data:
           entity_id: media_player.onkyo
+      - delay: '00:00:02'      
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Sleep is Activated Good Night'     
       - service: remote.turn_off
         data:     
           entity_id: remote.entertainment
@@ -25,11 +25,11 @@
           entity_id: light.kitchen
           color_temp: 426
           brightness: 125
-      - service: light.turn_on
-        data:
-          entity_id: light.lamps
-          xy_color: [0.4575,0.4099]
-          brightness: 125
+#      - service: light.turn_on
+#        data:
+#          entity_id: light.lamps
+#          xy_color: [0.4575,0.4099]
+#          brightness: 125
       - service: light.turn_on
         data:
           entity_id: light.master_hallway
@@ -96,7 +96,7 @@
           message: 'Good Morning Herb how are you this morning'
       - service: rest_command.no_motion
       - service: rest_command.no_motion      
-######  Dawns daytime Scene aka NORMAL ########
+######  Dawns daytime Scene aka Home Mode ########
   bright_on:
     sequence:
       - service: climate.set_away_mode
@@ -109,7 +109,9 @@
           hold_mode: "home"
       - service: fan.turn_on
         data:
-          entity_id: fan.living_room_fan    
+          entity_id: fan.living_room_fan 
+      - delay: '00:00:05'
+      - service: wink.refresh_state_from_wink       
       - service: rest_command.no_motion 
       - service: rest_command.no_motion       
       - service: switch.turn_on
@@ -362,33 +364,7 @@
       - service: light.turn_off
         data: 
           entity_id: light.master    
-#### reboot websitch clients  ####################          
-  webswitch_reboot:
-    sequence:
-      - service: tts.google_say
-        data:
-          entity_id: media_player.kodi_blue_iris
-          message: 'WebSwitch Reboot'
-      - delay: '00:00:05'          
-      - service: rest_command.webswitch_reboot
-###### reboot network equipment only    ########
-  network_reboot:
-    sequence:
-      - service: tts.google_say
-        data:
-          entity_id: media_player.kodi_blue_iris
-          message: 'Network is going down Gabbie and Grandma chill it will be okay'
-      - delay: '00:00:01'
-      - service: rest_command.modem_reboot
-      - delay: '00:01:30'
-      - service: rest_command.router_reboot
-      - delay: '00:02:30'
-      - service: rest_command.switch1_reboot
-      - delay: '00:01:30'
-      - service: tts.google_say
-        data:
-          entity_id: media_player.kodi_blue_iris
-          message: 'Network is back up'
+
       
 ################ Update Hass    ###################
   update_home_assistant_home:

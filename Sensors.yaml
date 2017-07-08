@@ -1,24 +1,7 @@
 
 
 
-############## Public Ip
-- platform: dnsip
 
-######## Equipment ########
-- platform: speedtest
-  minute:
-    - 0
-    - 59
-  monitored_conditions:
-    - ping
-    - download
-    - upload
-- platform: systemmonitor
-  resources:
-    - type: disk_use_percent
-      arg: /home
-    - type: memory_free
-    - type: processor_use
       
 ######## Harmony remote  ######
 
@@ -101,3 +84,5 @@
             mdi:battery-alert
           {% endif %}
 
+
+        

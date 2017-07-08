@@ -1,0 +1,154 @@
+homeassistant:
+  customize:
+    sensor.speedtest_download:
+      entity_picture: /local/speedtest.png
+    sensor.speedtest_upload:
+      entity_picture: /local/speedtest.png
+    sensor.speedtest_ping:
+      entity_picture: /local/ping.jpg
+    sensor.download_speed_mean:
+      friendly_name: 'Speedtest Download Average'
+      icon: mdi:speedometer
+    sensor.upload_speed_mean:
+      friendly_name: 'Speedtest Upload Average'
+      icon: mdi:speedometer
+    sensor.ping_time_mean:
+      friendly_name: 'Speedtest Ping Average'
+      icon: mdi:clock-fast  
+    camera.living_room_camera:
+      friendly_name: Living Room Camera
+    sensor.shed_camera:
+      friendly_name: Shed Camera
+      entity_picture: /local/ipcameraicon.jpeg 
+    sensor.driveway_camera:
+      friendly_name: Driveway Camera
+      entity_picture: /local/ipcameraicon.jpeg 
+    sensor.number12_camera:
+      friendly_name: Number12 Camera
+      entity_picture: /local/ipcameraicon.jpeg 
+    sensor.swamp_camera:
+      friendly_name: Swamp Camera
+      entity_picture: /local/ipcameraicon.jpeg 
+    sensor.frontdoor_camera:
+      friendly_name: Front Door Camera
+      entity_picture: /local/ipcameraicon.jpeg 
+    sensor.backdoor_camera:
+      friendly_name: Back Door Camera
+      entity_picture: /local/ipcameraicon.jpeg 
+    sensor.asus_router:
+      friendly_name: Asus Merlin
+      entity_picture: /local/AsusMerlin.jpeg 
+    sensor.cisco_router:
+      friendly_name: Cisco Router
+      entity_picture: /local/cisco54.jpeg 
+    sensor.switch2:
+      friendly_name: Switch 2
+      entity_picture: /local/8PortSwitch.jpeg 
+    sensor.switch1:
+      friendly_name: Switch 1
+      entity_picture: /local/8portSwitch.jpeg
+    sensor.media_nas:
+      friendly_name: Media Nas
+      entity_picture: /local/Worldbook.jpeg 
+    sensor.network_nas:
+      friendly_name: Network Nas
+      entity_picture: /local/Worldbook.jpeg
+    sensor.blue_iris_workstation:
+      friendly_name: Blue Iris Server
+      entity_picture: /local/workstation.jpeg 
+    sensor.network_workstation:
+      friendly_name: Network Workstation
+      entity_picture: /local/workstation.jpeg      
+    sensor.myipopendnscom:
+      friendly_name: Wan Ip
+      icon: mdi:wan 
+      
+sensor:
+  ############## Public Ip
+  - platform: dnsip
+
+######## Equipment ########
+  - platform: speedtest
+    minute:
+      - 0
+      - 59
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_free
+      - type: processor_use
+      
+##### show devices as online instead of home   ############################
+  - platform: template
+    sensors:
+      shed_camera:
+        value_template: '{% if is_state("binary_sensor.shed_camera", "on") %}Online{% else %}Offline{% endif %}'      
+  - platform: template
+    sensors:
+      driveway_camera:
+        value_template: '{% if is_state("device_tracker.drivewaycamvasiley", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      number12_camera:
+        value_template: '{% if is_state("device_tracker.number12vasiley", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      swamp_camera:
+        value_template: '{% if is_state("device_tracker.shedvasiley", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      frontdoor_camera:
+        value_template: '{% if is_state("device_tracker.frontdoorvasiley", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      backdoor_camera:
+        value_template: '{% if is_state("device_tracker.backdoorvasiley", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      asus_router:
+        value_template: '{% if is_state("device_tracker.routerasuscom", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      cisco_router:
+        value_template: '{% if is_state("device_tracker.pan_shedvasiley", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      switch2:
+        value_template: '{% if is_state("device_tracker.blueirispcvasiley", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      switch1:
+        value_template: '{% if is_state("device_tracker.switch1vasiley", "home") %}Online{% else %}Offline{% endif %}' 
+  - platform: template
+    sensors:
+      media_nas:
+        value_template: '{% if is_state("device_tracker.medianasvasiley", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      network_nas:
+        value_template: '{% if is_state("device_tracker.nasnetworkvasiley", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      blue_iris_workstation:
+        value_template: '{% if is_state("device_tracker.blueiris2vasiley", "home") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      network_workstation:
+        value_template: '{% if is_state("device_tracker.networkpcvasiley", "home") %}Online{% else %}Offline{% endif %}' 
+        
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.1.1-255
+  - platform: owntracks
+
+binary_sensor:
+  - platform: ping
+    host: 192.168.1.90
+    name: Shed Camera  
+      
+      

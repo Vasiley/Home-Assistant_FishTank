@@ -1,9 +1,9 @@
 
 
 logger:
-  default: debug
+  default: warn
   logs:
-    homeassistant.components.zha: debug
+    homeassistant.components.zha: critical
     homeassistant.components.camera: critical
     homeassistant.components.sun: critical
     homeassistant.components.remote: critical
@@ -23,7 +23,8 @@ logger:
     homeassistant.components.discovery: critical
     homeassistant.components.light: critical
     homeassistant.components.ecobee: critical
-    bellows.uart: debug
+    homeassistant.components.wink: debug
+    bellows.uart: critical
     homeassistant.core: critical
     homeassistant.helpers.script: warn
     homeassistant.helpers.entity: warn
@@ -34,6 +35,8 @@ logger:
     roku: critical
     dlipower.dlipower: warn
     myusps: warn
+    pubnub: debug
+    
     
 
   ################### Logger level
@@ -49,7 +52,7 @@ input_select:
      - info
      - debug
      - notset
-    initial: debug    
+    initial: warn    
     
 
   ############################# Sets Logging Level

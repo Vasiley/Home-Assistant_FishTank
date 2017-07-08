@@ -76,3 +76,7 @@
       speech:
         type: plaintext
         text: !include alexa_confirm.yaml    
+    MailIntent:
+      speech:
+        type: plaintext
+        text: You have {{states('sensor.usps_mail')}} pieces of mail in mail box
