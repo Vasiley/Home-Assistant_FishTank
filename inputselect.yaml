@@ -1,7 +1,0 @@
-################# Washing machine
-  washing_machine_status:
-    name: Laundry
-    options:
-     - running
-     - clean 
-    initial: clean

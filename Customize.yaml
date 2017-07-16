@@ -1,8 +1,6 @@
 ##########Living Rooms###################
      light.herbs_table_lamp:
         friendly_name: Herbs Table Lamp
-     light.fan:
-        friendly_name: Fan
      light.squirells_table_lamp:
         friendly_name: Squrells Table Lamp
      light.table_lamp_door:
@@ -19,15 +17,7 @@
      media_player.living_room:
         friendly_name: Plex
 ###### Scripts ##########
-   
-     script.knightrider_off:
-        friendly_name: Disable "KnightRiderLights"
-     script.knightrider_on:    
-        friendly_name: Knight Rider Lights
-     script.rerunknightrider_on:
-        friendly_name: Knight Rider RERUN     
-     switch.tv_control:
-        friendly_name: Living Room Tv 
+ 
      script.spring:
         friendly_name: Spring Blossum
      script.savanna:
@@ -38,20 +28,12 @@
         friendly_name: Tropical Twilight
      script.supernatural:
         friendly_name: SuperNatural
-             
-#################   HOUSE MODE  ###########
      sensor.remote_entertainment:
         icon: mdi:theater
-     sensor.ha_version:   
-        friendly_name: New Ha Release     
-     
-     script.start_washer:
-        friendly_name: Washer
+    
               
-##############33 Update HA   ############
-     script.update_home_assistant_home:
-        friendly_name: Home Assistant Update
-        icon: mdi:update        
+
+           
         
                
          

@@ -11,46 +11,6 @@
       value_template: '{{ states.remote.entertainment.attributes.current_activity }}'
       friendly_name: 'Living Room'
 
-###### VERSIONS
-- platform: command_line
-  command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
-  name: Current Version
-
-- platform: command_line
-  name: Installed Version
-  command: /srv/homeassistant/bin/hass --version
-
-###### CUSTOM HA/Version
-- platform: template
-  sensors:
-    ha_version:
-      value_template: >-
-        {% if is_state('sensor.current_version', states('sensor.installed_version')) %}
-          {{ states('sensor.installed_version') }}
-        {% else %}
-          {{ states('sensor.current_version') }} Available
-        {% endif %}
-      icon_template: >-
-        {% if is_state('sensor.current_version', states('sensor.installed_version')) %}
-          mdi:checkbox-marked
-        {% else %}
-          mdi:checkbox-blank-outline
-        {% endif %}
-
-- platform: template
-  sensors:
-    washer_status:
-      friendly_name: 'Washing Machine Status'
-      value_template: "{{ states('input_select.washing_machine_status') }}"
-          
-########################################################################
-### cert expire check lets encrpt
-########################################################################
-- platform: cert_expiry
-  host: !secret host_cert_expiry
-  port: !secret port_expiry
-  name: SSL Expire
-  scan_interval: 120
 ########################################################################
 #### dynamic battery levels
 ########################################################################

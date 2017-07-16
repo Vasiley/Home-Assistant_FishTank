@@ -428,6 +428,7 @@
      - binary_sensor.motion_outdoor_swamp
      - binary_sensor.motion_outdoor_frontdoor
      - binary_sensor.motion_outdoor_backdoor
+     
   Ads_Blocked:
    name: Ads Blocked  
    entities:
@@ -452,6 +453,7 @@
      - sensor.deliveries_today
      - sensor.fedex
      - sensor.ups
+     
   livingroomfan:
    control: hidden
    name: Living Room Fan
@@ -462,6 +464,7 @@
      - binary_sensor.gang
      - script.refresh_wink
      - switch.king_of_fans__inc_hdc52eastwindfan_0016b720_1
+     
   animated_radar:
    name: Animated Radar
    entities:
