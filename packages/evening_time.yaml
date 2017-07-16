@@ -1,0 +1,17 @@
+
+########## Evening Time ##############
+automation:
+  - alias: Evening Time
+    trigger:
+      - platform: time
+        after: '19:01'
+    condition:
+      - condition: state
+        entity_id: sensor.set_hold_mode
+        state: 'home'
+    action: 
+     - service: light.turn_on
+       data:
+         entity_id: light.lamps
+         color_temp: 426
+         brightness: 125  

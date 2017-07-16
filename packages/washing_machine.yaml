@@ -30,3 +30,21 @@ script:
         data:
           entity_id: media_player.kodi_blue_iris
           message: 'Washer is Started'            
+  
+automation:
+  - alias: Washer Completes Wash
+    trigger:
+      - platform: state
+        entity_id: sensor.washer_status
+        to: 'running'
+        for:
+          minutes: 36
+    action:
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Washer is Finished'
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: 'clean'  
