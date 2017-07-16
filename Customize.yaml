@@ -19,14 +19,7 @@
      media_player.living_room:
         friendly_name: Plex
 ###### Scripts ##########
-     script.lamps_on:
-        friendly_name: Sleep
-        icon: mdi:sleep
-     script.herbearly_on:
-        friendly_name: Morning
-     script.bright_on:
-        friendly_name: Home
-        icon: mdi:home        
+   
      script.knightrider_off:
         friendly_name: Disable "KnightRiderLights"
      script.knightrider_on:    
@@ -35,10 +28,6 @@
         friendly_name: Knight Rider RERUN     
      switch.tv_control:
         friendly_name: Living Room Tv 
-     script.samsungtv_off:
-        friendly_name: Tv Off
-     script.samsungtv_on:
-        friendly_name: Tv On    
      script.spring:
         friendly_name: Spring Blossum
      script.savanna:
@@ -51,7 +40,6 @@
         friendly_name: SuperNatural
              
 #################   HOUSE MODE  ###########
-    
      sensor.remote_entertainment:
         icon: mdi:theater
      sensor.ha_version:   
@@ -59,10 +47,7 @@
      
      script.start_washer:
         friendly_name: Washer
-     script.nap_time:
-        friendly_name: Nap     
-        icon: mdi:sleep
-         
+              
 ##############33 Update HA   ############
      script.update_home_assistant_home:
         friendly_name: Home Assistant Update

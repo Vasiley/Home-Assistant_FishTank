@@ -137,13 +137,13 @@ automation:
         data:
           entity_id: fan.living_room_fan
           speed: 'medium'
-  - alias: Update wink status
-    trigger:
-      - platform: time
-        minutes: '/1'
-        seconds: 00
-    action:
-      - service: wink.refresh_state_from_wink    
+  # - alias: Update wink status
+    # trigger:
+      # - platform: time
+        # minutes: '/1'
+        # seconds: 00
+    # action:
+      # - service: wink.refresh_state_from_wink    
   # - alias: turn_the_damn_fan_on
     # trigger:
       # ...

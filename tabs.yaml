@@ -25,7 +25,7 @@
      - group.Climate_temp
      - group.alarm_panel
      - group.Usps_Mail
-     - group.LivingRoomFan
+     - group.livingroomfan
      
   Devicesview:
    view: yes
@@ -77,16 +77,6 @@
      - group.Dimmers_status
      - group.blue_iris_motion
      
-#     - group.LivingRoomFan
-#  LivingRoom_view:
-#   view: no
-#   name: Living Room
-#   entities:
-#    - group.TVRoom
-#     - light.living_room
-#     - camera.Living_Room_Camera
-#     - group.LivingRoomFan
-  
   MyCameras:
    view: yes
    name: Cameras
@@ -97,6 +87,7 @@
      - group.camera_yard
      - group.camera_backdoor
      - group.camera_livingroom
+     
   camera12:
    name: Park Driveway Rear
    entities:
@@ -120,7 +111,8 @@
   camera_livingroom:
    name: Living Room
    entities:
-     - camera.Living_Room_Camera   
+     - camera.Living_Room_Camera  
+     
   Fun_Stuff:
    view: yes
    name: Fun Stuff
@@ -132,6 +124,7 @@
      - script.tropical
      - script.supernatural
      - group.Routines
+     
   PI:
    name: HA
    entities:
@@ -144,6 +137,7 @@
      - sensor.ssl_expire
      - sensor.myipopendnscom
      - input_select.log_level
+     
   ForecastWeather:
    name: Predication
    entities:
@@ -156,7 +150,7 @@
      - sensor.dark_sky_precip_probability
      - sensor.dark_sky_nearest_storm_bearing
      - sensor.dark_sky_nearest_storm_distance
-#     - sensor.dark_sky_daily_high_temperature_1
+
   Conditions:
    name: Current Weather
    entities:
@@ -172,14 +166,15 @@
      - sensor.pws_precip_1hr_in
      - sensor.pws_precip_today_in
      - sensor.pws_visibility_mi
-     
      - sun.sun 
+     
   TVRoom: 
    name: Table Lamps  
    entities:
      - light.herbs_lamp
      - light.dawns_lamp
      - light.door_lamp
+     
   DigitalLoggers:
    name: Network Switch
    entities:
@@ -191,6 +186,7 @@
      - switch.network_switch_hue
      - script.webswitch_reboot
      - script.network_reboot
+     
   NetworkNmap:
    name: Network Equipment
    entities:
@@ -204,20 +200,29 @@
    entities:
      - sensor.media_nas
      - sensor.network_nas
+     
   Workstations:
+    entities:
      - sensor.blue_iris_workstation
-     - sensor.network_workstation    
+     - sensor.network_workstation 
+     
   Cameras:
+    entities:
      - sensor.number12_camera
      - sensor.driveway_camera
      - sensor.shed_camera
      - sensor.backdoor_camera
      - sensor.frontdoor_camera
      - sensor.swamp_camera
+     
   Family:
+    entities:
      - device_tracker.herb_herb 
      - device_tracker.dawn_baby
+     
   Routines:
+    control: hidden
+    entities:
      - script.lamps_on  
      - script.herbearly_on
      - script.bright_on
@@ -228,37 +233,45 @@
      - script.alarm_flashonoff
      - script.start_washer
      - script.nap_time
+     
   Effects:
+    control: hidden
+    entities:
      - script.knightrider_off
      - script.knightrider_on     
      - script.rerunknightrider_on
      - script.samsungtv_off
      - script.samsungtv_on
+     
   Kitchen_sensor:
    name: Kitchen Info
    entities:
      - sensor.kitchen_temperature
 #     - sensor.motion_sensor_kitchen_battery
      - sensor.kitchen_battery_motion
-     - sensor.kitchen_motion     
+     - sensor.kitchen_motion   
+     
   Hallway_sensor:
    name: Hallway Info
    entities:
      - sensor.motion_sensor_hallway_battery
      - sensor.hallway_temperature
      - sensor.hallway_motion
+     
   LaundryRoom_sensor:
    name: Laundry Room Info
    entities:
      - sensor.motion_sensor_laundry_battery
      - sensor.laundry_temperature
      - sensor.laundry_room_motion
+     
   KidsHallway_sensor:
    name: Kids Hallway Info
    entities:
      - sensor.kids_hallway_temperature
      - sensor.motion_sensor_kids_hall_battery
      - sensor.kids_hallway_motion
+     
   Temperature_Info: 
    name: Temperature
    entities:
@@ -269,11 +282,13 @@
      - sensor.master_temperature
      - sensor.bathroom_temperature
      - sensor.kids_bathroom_temperature
+     
   KidsBathroom1:
    name: Ruths Bathroom
    entities:    
      - sensor.kids_bathroom_temperature
      - sensor.kids_bathroom_motion
+     
   Motion:
    name: Motion
    entities:
@@ -301,6 +316,7 @@
      - sensor.kids_bathroom_dimmer_battery
      - sensor.kitchen_table_dimmer_battery
      - sensor.master_closet_dimmer_battery
+     
   Dimmers_status:
    name: Dimmers
    entities:
@@ -312,6 +328,7 @@
      - sensor.kids_bathroom_dimmer_state
      - sensor.master_closet_dimmer_last_update
      - sensor.master_closet_dimmer_state
+     
   Ecobee_sensors:
    name: Ecobee Temp Sensors
    entities:
@@ -319,6 +336,7 @@
      - sensor.living_room_temperature
      - sensor.ruths_room_temperature
      - sensor.thermostat_humidity
+     
   NetworkSnmp:
    name: Bandwidth
    entities:
@@ -342,6 +360,7 @@
      - sensor.living_room_temperature
      - sensor.ruths_room_temperature
      - sensor.pws_Temp_f
+     
   Kodi_media_player:
    name: Kodi
    entities:
@@ -367,12 +386,14 @@
    name: Kodi Blue Iris
    entities:
      - media_player.kodi_blue_iris 
+     
   House_mode:
    name: Home Mode
+   control: hidden
    entities:
      - sensor.set_hold_mode
      - script.lamps_on  
-     - script.bright_on
+     - script.home_mode
      - script.gone_on
      - script.nap_time
      - remote.entertainment
@@ -431,7 +452,8 @@
      - sensor.deliveries_today
      - sensor.fedex
      - sensor.ups
-  LivingRoomFan:
+  livingroomfan:
+   control: hidden
    name: Living Room Fan
    entities:
      - fan.living_room_fan
@@ -439,6 +461,7 @@
      - sensor.fan_speed
      - binary_sensor.gang
      - script.refresh_wink
+     - switch.king_of_fans__inc_hdc52eastwindfan_0016b720_1
   animated_radar:
    name: Animated Radar
    entities:

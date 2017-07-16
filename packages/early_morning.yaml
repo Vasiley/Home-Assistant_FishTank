@@ -1,0 +1,30 @@
+homeassistant:
+  customize:
+    script.herbearly_on:
+      friendly_name: Morning
+
+#########################################################################################
+#                                                                                   ##### 
+#                   Early Morning Mode                                              #####
+#                                                                                   #####  
+#########################################################################################
+script:
+  herbearly_on:
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.network_switch_blue_iris_monitor
+      - delay: '00:00:01'    
+      - service: light.turn_on
+        data:      
+          entity_id: light.herbs_lamp
+          color_temp: 200
+          brightness: 175
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Good Morning Herb how are you this morning'
+      - service: rest_command.no_motion
+      - service: rest_command.no_motion      
+      
+# rest_command sets profile of blue iris software      
