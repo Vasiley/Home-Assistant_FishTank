@@ -1,0 +1,16 @@
+homeassistant:
+  customize:
+    sensor.remote_entertainment:
+      icon: mdi:theater
+
+remote:
+  - platform: harmony
+    name: Entertainment
+    host: 192.168.1.193
+
+sensor:
+  - platform: template
+    sensors:
+      remote_entertainment:
+        value_template: '{{ states.remote.entertainment.attributes.current_activity }}'
+        friendly_name: 'Living Room'

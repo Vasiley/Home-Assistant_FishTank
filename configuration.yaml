@@ -71,11 +71,6 @@ tts:
 
 media_player: !include players.yaml
 
-remote:
-  - platform: harmony
-    name: Entertainment
-    host: 192.168.1.193
-
 group: !include tabs.yaml
 camera: !include cameras.yaml
 

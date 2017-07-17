@@ -1,16 +1,3 @@
-
-
-
-
-      
-######## Harmony remote  ######
-
-- platform: template
-  sensors:
-    remote_entertainment:
-      value_template: '{{ states.remote.entertainment.attributes.current_activity }}'
-      friendly_name: 'Living Room'
-
 ########################################################################
 #### dynamic battery levels
 ########################################################################

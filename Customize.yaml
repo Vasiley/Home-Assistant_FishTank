@@ -1,18 +1,10 @@
 ##########Living Rooms###################
-     light.herbs_table_lamp:
-        friendly_name: Herbs Table Lamp
-     light.squirells_table_lamp:
-        friendly_name: Squrells Table Lamp
-     light.table_lamp_door:
-        friendly_name: Door Table Lamp
-     light.living_room:
-        friendly_name: Living Room Lights
      light.master_closet:
         friendly_name: Master Closet     
      light.lamps:
         friendly_name: Table Lamps 
-     light.light_bulb:
-        friendly_name: Living Room Fan Light     
+        persistence: true
+          
 ##### Media Player   #######
      media_player.living_room:
         friendly_name: Plex
@@ -28,8 +20,7 @@
         friendly_name: Tropical Twilight
      script.supernatural:
         friendly_name: SuperNatural
-     sensor.remote_entertainment:
-        icon: mdi:theater
+    
     
               
 

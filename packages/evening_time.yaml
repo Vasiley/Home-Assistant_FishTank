@@ -1,4 +1,7 @@
-
+homeassistant:
+  customize:
+    script.movie_time:
+      friendly_name: Movie Time
 ########## Evening Time ##############
 automation:
   - alias: Evening Time
@@ -15,3 +18,30 @@ automation:
          entity_id: light.lamps
          color_temp: 426
          brightness: 125  
+
+script:
+  movie_time: 
+    sequence:
+      - service: switch.turn_off 
+        data:
+          entity_id: switch.network_switch_blue_iris_monitor
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'It is Movie Time Be Quiet'    
+      - service: light.turn_off
+        data:
+          entity_id: light.door_lamp
+          transition: 10
+      - service: light.turn_on
+        data:
+          entity_id: light.herbs_lamp
+          color_temp: 426
+          brightness: 125
+          transition: 45           
+      - service: light.turn_on
+        data:
+          entity_id: light.dawns_lamp
+          color_temp: 426
+          brightness: 125
+          transition: 45    

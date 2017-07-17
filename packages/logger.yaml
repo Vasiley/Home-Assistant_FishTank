@@ -35,7 +35,7 @@ logger:
     roku: critical
     dlipower.dlipower: warn
     myusps: warn
-    pubnub: debug
+    pubnub: warn
     
     
 

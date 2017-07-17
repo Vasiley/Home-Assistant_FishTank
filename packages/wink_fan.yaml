@@ -24,6 +24,9 @@ homeassistant:
     binary_sensor.gang:
       friendly_name: Fan Connection
       icon: mdi:nfc
+    
+    light.light_bulb:
+      friendly_name: Living Room Fan Light    
 
 sensor:
   - platform: template

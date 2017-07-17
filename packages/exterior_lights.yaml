@@ -1,0 +1,19 @@
+################### Porch lights on at night  ###########################
+automation:
+  - alias: Porch Lights on
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+#      offset: "00:30:00"
+    action:
+      - service: light.turn_on
+        entity_id: light.carport
+  - alias: Porch Lights off
+    trigger:
+      - platform: sun
+        event: sunrise
+#      offset: "-00:30:00"
+    action:
+      - service: light.turn_off
+        entity_id: light.carport
