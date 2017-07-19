@@ -19,6 +19,7 @@
      - light.carport
      - light.light_bulb
      - light.master_closet
+     - light.bathroom_vanity
      - group.Family
      - camera.dawn
      - camera.herb

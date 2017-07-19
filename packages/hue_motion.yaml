@@ -16,9 +16,6 @@ homeassistant:
     binary_sensor.kids_hallway_motion:
       friendly_name: Kids Hallway Motion
       device_class: motion
-    binary_sensor.kids_bathroom_motion:
-      friendly_name: Kids Bathroom Motion
-      device_class: motion 
     binary_sensor.bathroom_motion:
       friendly_name: Bathroom Motion
       device_class: motion      
@@ -72,16 +69,7 @@ binary_sensor:
     value_template: '{{ value_json.state.presence }}'
     scan_interval: 2
     name: kids_bathroom_motion  
-  - platform: rest
-    resource: !secret MS_rest_36
-    value_template: '{{ value_json.state.presence }}'
-    scan_interval: 2
-    name: bathroom_motion  
-  - platform: rest
-    resource: !secret MS_rest_40
-    value_template: '{{ value_json.state.presence }}'
-    scan_interval: 2
-    name: master_motion   
+   
 ################# sensor temp ########################
 sensor:
   - platform: rest
@@ -164,25 +152,10 @@ sensor:
     scan_interval: 1800
     name: 'Motion Sensor Master Battery'  
     
-#######################################################################################################
-#####    When home mode set on ecobee then master light turns on in bedroom (not while sleeping  ###### 
-#####    ie house is in sleep mode                                                               ######
-#####    use case app only allows set times and we go to bed at diff times                       ######
-#######################################################################################################
 
-automation:
-  - alias: Motion Master Bedroom Motion sensor
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.master_motion
-        to: 'on'
-    condition:
-      - condition: state
-        entity_id: sensor.set_hold_mode
-        state: 'home'  
-    action:
-      - service: light.turn_on
-        data:
-          entity_id: light.master
-          color_temp: 154
-          brightness: 255       
+    
+                  
+         
+                        
+          
+          
