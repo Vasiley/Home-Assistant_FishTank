@@ -5,7 +5,7 @@ homeassistant:
       hidden: true
       persistence: true
       
-sensor:
+binary_sensor:
   - platform: rest
     resource: !secret MS_rest_40
     value_template: '{{ value_json.state.presence }}'

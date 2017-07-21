@@ -16,9 +16,6 @@ homeassistant:
     binary_sensor.kids_hallway_motion:
       friendly_name: Kids Hallway Motion
       device_class: motion
-    binary_sensor.bathroom_motion:
-      friendly_name: Bathroom Motion
-      device_class: motion      
     binary_sensor.master_motion:
       friendly_name: Master Motion
       device_class: motion
@@ -39,8 +36,7 @@ homeassistant:
       icon: mdi:battery
     sensor.motion_sensor_master_battery:
       icon: mdi:battery
-    sensor.motion_sensor_bathroom_battery:
-      icon: mdi:battery
+    
     
 ####### Binary sensor motion   #############  
 binary_sensor:  
@@ -77,11 +73,7 @@ sensor:
     value_template: '{{ value_json.state.temperature | float / 100 }}'
     unit_of_measurement: °C
     name: 'Master Temperature'    
-  - platform: rest
-    resource: !secret MS_rest_35
-    value_template: '{{ value_json.state.temperature | float / 100 }}'
-    unit_of_measurement: °C
-    name: 'Bathroom Temperature'
+
   - platform: rest
     resource: !secret MS_rest_23
     value_template: '{{ value_json.state.temperature | float / 100 }}'
@@ -139,12 +131,7 @@ sensor:
     unit_of_measurement: '%'
     scan_interval: 1800
     name: 'Motion Sensor Kids Bathroom Battery'
-  - platform: rest
-    resource: !secret MS_rest_35
-    value_template: '{{ value_json.config.battery }}'
-    unit_of_measurement: '%'
-    scan_interval: 1800
-    name: 'Motion Sensor Bathroom Battery'
+
   - platform: rest
     resource: !secret MS_rest_39
     value_template: '{{ value_json.config.battery }}'

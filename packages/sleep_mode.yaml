@@ -51,6 +51,8 @@ script:
           entity_id: light.bathroom
           color_temp: 426
           brightness: 125
+      - service: light.turn_off
+        entity_id: light.bathroom_vanity
       - service: switch.turn_off 
         data:
           entity_id: switch.network_switch_blue_iris_monitor 
@@ -82,4 +84,4 @@ script:
       - service: rest_command.sleep
       - service: rest_command.sleep 
      
-# rest_command sets profile of blue iris software     
+# rest_command changes profile on blue iris

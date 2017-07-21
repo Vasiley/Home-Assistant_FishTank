@@ -2,24 +2,19 @@
    view: yes
    name: Vas and Squrriels Castle
    entities:
-     - group.House_mode   
+     - group.House_mode
      - light.lamps
-     - light.dawns_lamp
-     - light.door_lamp
-     - light.herbs_lamp
      - light.kitchen
      - light.master_hallway
      - light.kitchen_table
      - light.laundry_room
      - light.kids_hallway
-     - light.bathroom
      - light.kids_bathroom
-     - light.living_room
      - light.master
      - light.carport
      - light.light_bulb
-     - light.master_closet
      - light.bathroom_vanity
+     - light.bathroom
      - group.Family
      - camera.dawn
      - camera.herb
@@ -27,7 +22,7 @@
      - group.alarm_panel
      - group.Usps_Mail
      - group.livingroomfan
-     
+    
   Devicesview:
    view: yes
    name: Equipment
@@ -89,6 +84,12 @@
      - group.camera_backdoor
      - group.camera_livingroom
      
+  Roomview:
+   view: yes
+   name: Rooms
+   entities:
+     - group.master_bath  
+      
   camera12:
    name: Park Driveway Rear
    entities:
@@ -168,14 +169,7 @@
      - sensor.pws_precip_today_in
      - sensor.pws_visibility_mi
      - sun.sun 
-     
-  TVRoom: 
-   name: Table Lamps  
-   entities:
-     - light.herbs_lamp
-     - light.dawns_lamp
-     - light.door_lamp
-     
+       
   DigitalLoggers:
    name: Network Switch
    entities:
