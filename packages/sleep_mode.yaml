@@ -53,10 +53,12 @@ script:
           brightness: 125
       - service: light.turn_off
         entity_id: light.bathroom_vanity
+      - service: automation.turn_off
+        entity_id: automation.motion_bathroom_sleep_on       
       - service: switch.turn_off 
         data:
           entity_id: switch.network_switch_blue_iris_monitor 
-      - delay: '00:00:45'
+      - delay: '00:00:10'
       - service: light.turn_off
         data:
           entity_id: light.lamps
@@ -82,6 +84,8 @@ script:
         data: 
           entity_id: light.master    
       - service: rest_command.sleep
-      - service: rest_command.sleep 
+      - service: rest_command.sleep
+      - service: automation.turn_on
+        entity_id: automation.motion_bathroom_sleep_on       
      
 # rest_command changes profile on blue iris

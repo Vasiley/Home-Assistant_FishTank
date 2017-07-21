@@ -88,7 +88,8 @@
    view: yes
    name: Rooms
    entities:
-     - group.master_bath  
+     - group.master_bath
+     - group.master_bedroom      
       
   camera12:
    name: Park Driveway Rear
