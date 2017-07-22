@@ -61,7 +61,8 @@
      - group.Conditions
      - group.ForecastWeather
      - group.animated_radar
-     - camera.radar    
+     - camera.radar 
+     
   RoomSensors:
    view: yes
    name: Sensors
@@ -213,8 +214,8 @@
      
   Family:
     entities:
-     - device_tracker.herb_herb 
-     - device_tracker.dawn_baby
+     - sensor.herb
+     - sensor.dawn
      
   Routines:
     control: hidden
