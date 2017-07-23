@@ -2,6 +2,7 @@ homeassistant:
   customize:
     script.home_mode:
       friendly_name: Home
+      haaska_name: Home
       icon: mdi:home        
 
 #########################################################################################

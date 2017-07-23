@@ -1,12 +1,10 @@
 ##########Living Rooms###################
-     light.master_closet:
-        friendly_name: Master Closet     
      light.lamps:
         friendly_name: Table Lamps 
         persistence: true
           
 ##### Media Player   #######
-     media_player.living_room:
+     media_player.blueiris2:
         friendly_name: Plex
 ###### Scripts ##########
  
