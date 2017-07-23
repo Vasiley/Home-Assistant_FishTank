@@ -223,9 +223,11 @@ automation:
     trigger:
       - platform: state
         entity_id: light.bathroom_vanity
-        to: 'On'
+        to: 'on'
         for:
           hours: 1
+          minutes: 0
+          seconds: 0
     action:
       - service: automation.turn_on
         entity_id: automation.motion_bathroom_home_mode_on

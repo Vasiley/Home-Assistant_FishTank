@@ -34,9 +34,11 @@
      - group.NetworkDrives
      - group.Workstations
      - group.cameras
+     - group.hubs
      - group.NetworkSnmp
      - group.homeass_version
      - script.update_github
+     
   media:
    view: yes
    name: Media Players
@@ -466,3 +468,10 @@
    name: Animated Radar
    entities:
      - camera.Radar_Animated   
+     
+  hubs:
+   name: Hub's & Bridges
+   entities:
+     - sensor.harmony_hub
+     - sensor.hue_hub
+     - sensor.wink_hub     

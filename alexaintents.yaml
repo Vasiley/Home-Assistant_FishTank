@@ -3,12 +3,12 @@
       speech:
          type: plaintext
          text: >
-           {%- if is_state('device_tracker.dawn_baby', 'home') and
-                  is_state('device_tracker.herb_herb', 'home') -%}
+           {%- if is_state('sensor.dawn', 'home') and
+                  is_state('sensor.herb', 'home') -%}
              You are both home, you fool
            {%- else -%}
-             Dawn is at {{ states("device_tracker.dawn_baby") }}
-             and Herb is at {{ states("device_tracker.herb_herb") }}
+             Dawn is at {{ states("sensor.dawn") }}
+             and Herb is at {{ states("sensor.herb") }}
            {% endif %}
     LocateIntent:
       #action:
@@ -18,7 +18,7 @@
       speech:
          type: plaintext
          text: >
-           {%- for state in states.device_tracker -%}
+           {%- for state in states.sensor -%}
            {%- if state.name.lower() == User.lower() -%}
            {{ state.name }} is at {{ state.state }}
            {%- elif loop.last -%}
@@ -30,10 +30,27 @@
       speech:
         type: plaintext
         text: >
-          {% for state in states.sensor -%}
+          {%- for state in states.sensor -%}
           {%- if loop.first %}The {% elif loop.last %} and the {% else %}, the {% endif -%}
           {{ state.name | lower }} is {{state.state}} {{- state.attributes.unit_of_measurement}}
-          {%- endfor -%}     
+          {%- endfor -%}  
+          
+    NetworkIntent:
+      speech:
+        type: plaintext
+        text: > 
+           Download is {{ states("sensor.speedtest_download") }} Mbs and
+           Ping is  {{ states("sensor.speedtest_ping") }} milliseconds
+           {%- set domains = [states.sensor ] %}
+           {%- for domain in domains %}
+           {% for item in domain %}
+           {%- if item.state | lower == 'offline' %}
+           {{- item.attributes.friendly_name }} is {{ item.state }}
+           {% endif %}
+           {%- endfor %}
+           {%- endfor %}  
+           Everything else is Online 
+            
     KitchenIntent:
       speech:
         type: plaintext
@@ -80,3 +97,5 @@
       speech:
         type: plaintext
         text: You have {{states('sensor.usps_mail')}} pieces of mail in mail box
+        
+        

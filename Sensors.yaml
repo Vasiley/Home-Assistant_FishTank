@@ -30,14 +30,7 @@
           {% else %}
             mdi:battery-alert
           {% endif %}
-          
-# geo locate for device trackers
 
-- platform: google_geocode
-  name: Dawn
-  api_key: !secret family_geo_locate
-  origin: device_tracker.dawn_baby     
-  options: both
           
 
 
