@@ -18,7 +18,10 @@
         friendly_name: Tropical Twilight
      script.supernatural:
         friendly_name: SuperNatural
-    
+        
+     sensor.haaska_names:   
+        friendly_name: Haaska 
+        icon: mdi:microphone-outline
     
               
 

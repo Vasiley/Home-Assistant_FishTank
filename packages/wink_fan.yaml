@@ -13,6 +13,8 @@ homeassistant:
     script.living_room_fan_auto:
       friendly_name: "Breeze"
       icon: mdi:fan
+      Haaska_hidden: false
+      haaska_name: Breeze
       
     script.refresh_wink:
       friendly_name: " Refresh Wink"
@@ -20,13 +22,17 @@ homeassistant:
       
     sensor.fan_speed:
       icon: mdi:speedometer
+      haaska_hidden: true
    
     binary_sensor.gang:
       friendly_name: Fan Connection
       icon: mdi:nfc
+      haaska_hidden: true
     
     light.light_bulb:
-      friendly_name: Living Room Fan Light    
+      friendly_name: Living Room Light
+      haaska_hidden: false
+      haaska_name: Living Room Light      
 
 sensor:
   - platform: template

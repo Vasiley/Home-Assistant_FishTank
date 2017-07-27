@@ -8,7 +8,6 @@ homeassistant:
       hidden: false
       persistence: true
     automation.master_bath_shower_time_off:
-      haaska_name: Finished Shower
       haaska_hidden: true
       hidden: false
       persistence: true
@@ -45,9 +44,13 @@ homeassistant:
     sensor.motion_sensor_bathroom_battery:
       icon: mdi:battery       
     script.shower_time_on:
-      friendly_name: Shower Time    
+      friendly_name: Shower Time  
+      haaska_hidden: false
+      haaska_name: Shower Time       
     script.shower_time_off:
       friendly_name: Finished Shower
+      haaska_hidden: false
+      haaska_name: Finished Shower
     light.bathroom:
       persistence: false
 

@@ -12,12 +12,15 @@ sensor:
   - platform: usps
     username: !secret usps_username
     password: !secret usps_password
+    scan_interval: 1800
   - platform: ups
     username: !secret ups_username
     password: !secret ups_password
+    scan_interval: 1800
   - platform: fedex
     username: !secret fedex_username
     password: !secret fedex_password
+    scan_interval: 1800
   - platform: template
     sensors:
       packages_in_transit:

@@ -5,21 +5,39 @@ homeassistant:
       friendly_name: "Porch Lights On"
       haaska_hidden: true
       hidden: false
+      persistence: true
       
     automation.porch_lights_off:
       friendly_name: "Porch Lights Off"
       haaska_hidden: true
       hidden: false   
+      persistence: true
 
     automation.carport_bright_and_white_on_motion:
       friendly_name: "Porch Lights White On Motion"
       haaska_hidden: true
       hidden: false 
+      persistence: true
 
     automation.back_to_yellow_dim_after_Motion:
-      friendly_name: "Porch Lights yellow no Motion"
+      friendly_name: "Porch Lights Yellow No Motion"
       haaska_hidden: true
-      hidden: false   
+      hidden: false 
+      persistence: true
+
+    script.bright_outside:
+      friendly_name: "Porch Lights Bright"
+      haaska_hidden: false
+      haaska_name: Porch Lights Bright
+
+    script.normal_outside:
+      friendly_name: "Porch Lights Normal"
+      haaska_hidden: false
+      haaska_name: Porch Lights Normal 
+      
+    light.carport:
+      persistence: true    
+      
 
 group:
   carport_lights:
@@ -31,6 +49,8 @@ group:
      - automation.porch_lights_off
      - automation.carport_bright_and_white_on_motion
      - automation.back_to_yellow_dim_after_Motion
+     - script.bright_outside
+     - script.normal_outside
      
 automation:
   - alias: Porch Lights on
@@ -85,9 +105,36 @@ automation:
         entity_id: light.carport
         state: 'on'
     action:
-      - delay: '00:00:30'
+      - delay: '00:005:00'
       - service: light.turn_on
         data:
           entity_id: light.carport
           color_temp: 426
-          brightness: 125           
+          brightness: 125 
+
+# Turn Carport lights on bright till i turn off
+script:
+  bright_outside:
+    sequence:
+      - service: automation.turn_off
+        entity_id: automation.carport_bright_and_white_on_motion
+      - service: automation.turn_off
+        entity_id: automation.back_to_yellow_dim_after_Motion
+      - service: light.turn_on
+        data:
+          entity_id: light.carport    
+          color_temp: 154
+          brightness: 255   
+  normal_outside:
+    sequence:
+      - service: automation.turn_on
+        entity_id: automation.carport_bright_and_white_on_motion
+      - service: automation.turn_on
+        entity_id: automation.back_to_yellow_dim_after_Motion
+      - service: light.turn_on
+        data:
+          entity_id: light.carport
+          color_temp: 426
+          brightness: 125    
+
+        

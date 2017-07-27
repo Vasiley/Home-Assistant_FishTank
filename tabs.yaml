@@ -93,7 +93,13 @@
    entities:
      - group.master_bath
      - group.master_bedroom 
-     - group.carport_lights     
+     - group.carport_lights  
+     - group.haaska_sensor_display
+     
+  haaska_sensor_display:
+   name: Haaska Names
+   entities:
+     - sensor.haaska_names  
       
   camera12:
    name: Park Driveway Rear
