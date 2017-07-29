@@ -2,17 +2,50 @@ homeassistant:
   customize:
     sensor.deliveries_today:
       icon: mdi:package-variant
+      
     sensor.packages_in_transit:
       icon: mdi:truck-fast
+      
     sensor.fedex:
       icon: mdi:truck-fast
       
+    sensor.mail_mail:
+      friendly_name: Usps Mail
+      
+    sensor.mail_packages:
+      friendly_name: Usps Packages
+      
+    camera.mail_mail:
+      friendly_name: Mail Scan's
+
+group:
+  mailscan_card:
+   name: Mail Scans
+   entities:
+     - camera.mail_mail  
+
+  usps_mail_card:
+   name: Mail
+   entities:
+     - sensor.mail_mail
+     - sensor.mail_packages     
+     - sensor.packages_in_transit
+     - sensor.deliveries_today
+     - sensor.fedex
+     - sensor.ups  
+      
+usps:
+  username: !secret usps_username
+  password: !secret ups_password
+  name: Mail 
+  interval: 5      
+      
 ############### Mail Sensor   ###############################
 sensor:
-  - platform: usps
-    username: !secret usps_username
-    password: !secret usps_password
-    scan_interval: 1800
+  # - platform: usps
+    # username: !secret usps_username
+    # password: !secret usps_password
+    # scan_interval: 1800
   - platform: ups
     username: !secret ups_username
     password: !secret ups_password
@@ -49,3 +82,29 @@ sensor:
           {% endmacro %}
           {{delivered(states.sensor.usps_packages)|int + delivered(states.sensor.ups)|int + delivered(states.sensor.fedex)|int}}
 ############################################################      
+
+automation:
+  - alias: Tell me I got Mail
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.mail_mail
+        above: 0
+    action:
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'You Have Mail Today Check Dashboard' 
+          
+  - alias: Tell me I got Packages
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.mail_packages 
+        above: 0
+    action:
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'You Have a Usps Package On the Way Check Dashboard'      
+   

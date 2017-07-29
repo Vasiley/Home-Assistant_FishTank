@@ -69,10 +69,10 @@ tts:
     cache_dir: /tmp/tts
     time_memory: 300
 
-media_player: !include players.yaml
+#media_player: in package
 
 group: !include tabs.yaml
-camera: !include cameras.yaml
+#camera: In packages
 
 #switch: # Moved to packages
 

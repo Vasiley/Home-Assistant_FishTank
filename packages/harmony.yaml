@@ -3,6 +3,13 @@ homeassistant:
     sensor.remote_entertainment:
       icon: mdi:theater
 
+group:
+  harmony_card:
+   name: Entertainment Center
+   entities:
+     - remote.entertainment
+     - sensor.remote_entertainment      
+      
 remote:
   - platform: harmony
     name: Entertainment

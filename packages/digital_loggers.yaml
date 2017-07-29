@@ -17,7 +17,20 @@ homeassistant:
       icon: mdi:power-settings 
     script.network_reboot:
       friendly_name: Network Reboot
-      icon: mdi:power-settings   
+      icon: mdi:power-settings  
+
+group:
+  DigitalLoggers_card:
+   name: Network Switch
+   entities:
+     - switch.network_switch_charter_modem
+     - switch.network_switch_asus_router
+     - switch.network_switch_blue_iris_monitor
+     - switch.network_switch_blue_iris_pc
+     - switch.network_switch_comnet_switch
+     - switch.network_switch_hue
+     - script.webswitch_reboot
+     - script.network_reboot      
       
 switch:
   - platform: digitalloggers

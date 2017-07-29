@@ -3,6 +3,14 @@ homeassistant:
     script.gone_on:
       friendly_name: Away   
       icon: mdi:security-home
+      
+      
+group:
+  alarm_panel_card:
+   name: Alarm
+   entities:
+     - alarm_control_panel.ha_alarm
+     - sensor.blue_iris_profile       
 ##############################################################################
 ###### see home mode package for setting of the mode house is in      ########
 ######   ie sleep home or away  (sets cameras thermostat and some lights  ####

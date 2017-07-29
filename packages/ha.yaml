@@ -4,7 +4,15 @@ homeassistant:
       friendly_name: New Ha Release  
     script.update_home_assistant_home:
       friendly_name: Home Assistant Update
-      icon: mdi:update       
+      icon: mdi:update  
+
+group:
+  homeass_version_card:
+   name: Home Assistant Version
+   entities:
+     - sensor.ha_version
+     - sensor.installed_version
+     - script.update_home_assistant_home      
 
 sensor:
   ###### VERSIONS

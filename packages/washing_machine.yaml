@@ -2,7 +2,14 @@ homeassistant:
   customize:
     script.start_washer:
       friendly_name: Washer
-      
+
+group:
+  washing_machine_card:
+   name: Washing Machine
+   entities:
+     - input_select.washing_machine_status
+     - sensor.washer_status
+     
 input_select:
   washing_machine_status:
     name: Laundry

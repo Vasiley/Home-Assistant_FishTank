@@ -10,6 +10,35 @@ homeassistant:
 ecobee:
   api_key: !secret ecobee_api_key
   hold_temp: True
+  
+group:
+  room_occupancy_card:
+   name: Occupancy
+   entities:
+     - binary_sensor.thermostat_occupancy   
+     - binary_sensor.ruths_room_occupancy
+     - binary_sensor.master_bedroom_occupancy
+     - binary_sensor.living_room_occupancy  
+  ecobee_sensors_card:
+   name: Ecobee Temp Sensors
+   entities:
+     - sensor.master_bedroom_temperature   
+     - sensor.living_room_temperature
+     - sensor.ruths_room_temperature
+     - sensor.thermostat_humidity
+     - sensor.thermostat_temperature
+  climate_temp_card:
+   name: Climate
+   entities:
+     - climate.thermostat
+     - sensor.operating_mode
+     - sensor.hvac_fan
+     - sensor.thermostat_humidity
+     - sensor.thermostat_temperature
+     - sensor.master_bedroom_temperature   
+     - sensor.living_room_temperature
+     - sensor.ruths_room_temperature
+     - sensor.pws_Temp_f     
 
 
 ######  ecobee3 Mode Sensors  

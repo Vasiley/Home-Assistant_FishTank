@@ -32,7 +32,19 @@ homeassistant:
     light.light_bulb:
       friendly_name: Living Room Light
       haaska_hidden: false
-      haaska_name: Living Room Light      
+      haaska_name: Living Room Light   
+
+group:
+  livingroomfan_card:
+   control: hidden
+   name: Living Room Fan
+   entities:
+     - fan.living_room_fan
+     - script.living_room_fan_auto
+     - sensor.fan_speed
+     - binary_sensor.gang
+     - script.refresh_wink
+     - switch.king_of_fans__inc_hdc52eastwindfan_0016b720_1      
 
 sensor:
   - platform: template

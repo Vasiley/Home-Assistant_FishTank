@@ -16,76 +16,74 @@
      - light.bathroom_vanity
      - light.bathroom
      - group.Family
-     - camera.dawn
-     - camera.herb
-     - group.Climate_temp
-     - group.alarm_panel
-     - group.Usps_Mail
-     - group.livingroomfan
-    
+     - group.climate_temp_card
+     - group.alarm_panel_card
+     - group.usps_mail_card
+     - group.livingroomfan_card
+     - group.washing_machine_card
+     - group.harmony_card
+     
   Devicesview:
    view: yes
    name: Equipment
    entities:
-     - group.PI
-     - group.Ads_Blocked
-     - group.DigitalLoggers
-     - group.NetworkNmap
-     - group.NetworkDrives
-     - group.Workstations
-     - group.cameras
-     - group.hubs
-     - group.NetworkSnmp
-     - group.homeass_version
+     - group.PI_card
+     - group.Ads_Blocked_card
+     - group.DigitalLoggers_card
+     - group.NetworkNmap_card
+     - group.NetworkDrives_status_card
+     - group.Workstations_status_card
+     - group.cameras_status_card
+     - group.hubs_card
+     - group.NetworkSnmp_card
+     - group.homeass_version_card
      - script.update_github
      
   media:
    view: yes
    name: Media Players
    entities:
-     - group.Kodi_media_player
-     - group.Blue_iris_media_player
-     - group.Samsung_tv_media_player
-     - group.Onkyo_avr
-     - group.Ruths_roku_media_player
-     - group.KodiBlueIris_media_player
-#     - media_player.kodi
-#     - media_player._living_room_un65ju6400
-#     - media_player.smart_tv
-#     - media_player.blueiris2
-#     - media_player.onkyo
-#     - media_player.ruths_roku
+     - group.Kodi_media_player_card
+     - group.Blue_iris_media_player_card
+     - group.Samsung_tv_media_player_card
+     - group.Onkyo_avr_card
+     - group.Ruths_roku_media_player_card
+     - group.KodiBlueIris_media_player_card
    
   Weather_view:
    view: yes
    name: Weather
    entities:
-     - group.Conditions
-     - group.ForecastWeather
-     - group.animated_radar
-     - camera.radar 
+     - group.Conditions_card
+     - group.ForecastWeather_card
+     - group.animated_radar_card
+     - group.still_image_radar_card
      
   RoomSensors:
    view: yes
    name: Sensors
    entities:
      - group.Temperature_Info
-     - group.Motion
+     - group.ecobee_sensors_card
+     - group.Motion_card
      - group.Battery
-     - group.room_occupancy
-     - group.Dimmers_status
-     - group.blue_iris_motion
+     - group.room_occupancy_card
+     - group.Dimmers_status_card
+     - group.blue_iris_motion_card
      
   MyCameras:
    view: yes
    name: Cameras
    entities:
-     - group.camera12
-     - group.camera_driveway
-     - group.camera_swamp
-     - group.camera_yard
-     - group.camera_backdoor
-     - group.camera_livingroom
+     - group.camera12_card
+     - group.camera_driveway_card
+     - group.camera_swamp_card
+     - group.camera_yard_card
+     - group.camera_backdoor_card
+     - group.camera_livingroom_card
+     - group.mailscan_card
+     - group.camera_dawn_card
+     - group.camera_herb_card
      
   Roomview:
    view: yes
@@ -94,37 +92,7 @@
      - group.master_bath
      - group.master_bedroom 
      - group.carport_lights  
-     - group.haaska_sensor_display
-     
-  haaska_sensor_display:
-   name: Haaska Names
-   entities:
-     - sensor.haaska_names  
-      
-  camera12:
-   name: Park Driveway Rear
-   entities:
-     - camera.number_12 
-  camera_driveway:
-   name: Driveway
-   entities:
-     - camera.driveway
-  camera_swamp:
-   name: Swamp
-   entities:
-     - camera.swamp   
-  camera_yard:
-   name: Yard
-   entities:
-     - camera.yard 
-  camera_backdoor:
-   name: Back Door
-   entities:
-     - camera.back_door 
-  camera_livingroom:
-   name: Living Room
-   entities:
-     - camera.Living_Room_Camera  
+     - group.haaska_sensor_display_card
      
   Fun_Stuff:
    view: yes
@@ -138,89 +106,19 @@
      - script.supernatural
      - group.Routines
      
-  PI:
-   name: HA
+  PI_card:
+   name: Pi
    entities:
      - sensor.speedtest_download  
      - sensor.speedtest_upload
      - sensor.speedtest_ping
      - sensor.cpu_use
      - sensor.ram_free
-     - sensor.disk_use_home     
+     - sensor.disk_use_home
      - sensor.ssl_expire
      - sensor.myipopendnscom
      - input_select.log_level
-     
-  ForecastWeather:
-   name: Predication
-   entities:
-     - sensor.dark_sky_summary   
-     - sensor.dark_sky_daily_summary
-     - sensor.dark_sky_hourly_summary
-     - sensor.dark_sky_minutely_summary
-     - sensor.dark_sky_daily_high_temperature
-     - sensor.dark_sky_daily_low_temperature
-     - sensor.dark_sky_precip_probability
-     - sensor.dark_sky_nearest_storm_bearing
-     - sensor.dark_sky_nearest_storm_distance
-
-  Conditions:
-   name: Current Weather
-   entities:
-     - sensor.pws_observation_time
-     - sensor.pws_alerts
-     - sensor.pws_weather
-     - sensor.pws_Temp_f
-     - sensor.pws_feelslike_f 
-     - sensor.pws_wind_dir
-     - sensor.pws_wind_mph
-     - sensor.pws_wind_gust_mph
-     - sensor.pws_relative_humidity
-     - sensor.pws_precip_1hr_in
-     - sensor.pws_precip_today_in
-     - sensor.pws_visibility_mi
-     - sun.sun 
-       
-  DigitalLoggers:
-   name: Network Switch
-   entities:
-     - switch.network_switch_charter_modem
-     - switch.network_switch_asus_router
-     - switch.network_switch_blue_iris_monitor
-     - switch.network_switch_blue_iris_pc
-     - switch.network_switch_comnet_switch
-     - switch.network_switch_hue
-     - script.webswitch_reboot
-     - script.network_reboot
-     
-  NetworkNmap:
-   name: Network Equipment
-   entities:
-     - sensor.asus_router
-     - sensor.cisco_router
-     - sensor.switch1
-     - sensor.switch2
-     
-  NetworkDrives:
-   name: Nas Drives
-   entities:
-     - sensor.media_nas
-     - sensor.network_nas
-     
-  Workstations:
-    entities:
-     - sensor.blue_iris_workstation
-     - sensor.network_workstation 
-     
-  Cameras:
-    entities:
-     - sensor.number12_camera
-     - sensor.driveway_camera
-     - sensor.shed_camera
-     - sensor.backdoor_camera
-     - sensor.frontdoor_camera
-     - sensor.swamp_camera
-     
+           
   Family:
     entities:
      - sensor.herb
@@ -249,35 +147,6 @@
      - script.samsungtv_off
      - script.samsungtv_on
      
-  Kitchen_sensor:
-   name: Kitchen Info
-   entities:
-     - sensor.kitchen_temperature
-#     - sensor.motion_sensor_kitchen_battery
-     - sensor.kitchen_battery_motion
-     - sensor.kitchen_motion   
-     
-  Hallway_sensor:
-   name: Hallway Info
-   entities:
-     - sensor.motion_sensor_hallway_battery
-     - sensor.hallway_temperature
-     - sensor.hallway_motion
-     
-  LaundryRoom_sensor:
-   name: Laundry Room Info
-   entities:
-     - sensor.motion_sensor_laundry_battery
-     - sensor.laundry_temperature
-     - sensor.laundry_room_motion
-     
-  KidsHallway_sensor:
-   name: Kids Hallway Info
-   entities:
-     - sensor.kids_hallway_temperature
-     - sensor.motion_sensor_kids_hall_battery
-     - sensor.kids_hallway_motion
-     
   Temperature_Info: 
    name: Temperature
    entities:
@@ -288,25 +157,7 @@
      - sensor.master_temperature
      - sensor.bathroom_temperature
      - sensor.kids_bathroom_temperature
-     
-  KidsBathroom1:
-   name: Ruths Bathroom
-   entities:    
-     - sensor.kids_bathroom_temperature
-     - sensor.kids_bathroom_motion
-     
-  Motion:
-   name: Motion
-   entities:
-     - binary_sensor.kitchen_motion
-     - binary_sensor.hallway_motion
-     - binary_sensor.laundry_room_motion
-     - binary_sensor.kids_hallway_motion
-     - binary_sensor.kids_bathroom_motion
-     - binary_sensor.bathroom_motion
-     - binary_sensor.master_motion
-     
-     
+       
   Battery:
    name: Battery
    entities:
@@ -322,77 +173,7 @@
      - sensor.kids_bathroom_dimmer_battery
      - sensor.kitchen_table_dimmer_battery
      - sensor.master_closet_dimmer_battery
-     
-  Dimmers_status:
-   name: Dimmers
-   entities:
-     - sensor.master_bathroom_dimmer_last_update
-     - sensor.master_bathroom_dimmer_state 
-     - sensor.kitchen_table_dimmer_last_update     
-     - sensor.kitchen_table_dimmer_state
-     - sensor.kids_bathroom_dimmer_last_update
-     - sensor.kids_bathroom_dimmer_state
-     - sensor.master_closet_dimmer_last_update
-     - sensor.master_closet_dimmer_state
-     
-  Ecobee_sensors:
-   name: Ecobee Temp Sensors
-   entities:
-     - sensor.master_bedroom_temperature   
-     - sensor.living_room_temperature
-     - sensor.ruths_room_temperature
-     - sensor.thermostat_humidity
-     
-  NetworkSnmp:
-   name: Bandwidth
-   entities:
-#    - sensor.internet_speed_in
-#    - sensor.internet_speed_out
-     - sensor.ping_time
-     - sensor.wan_traffic_in_mean
-     - sensor.wan_traffic_out_mean
-     - sensor.lan_load_in_mean
-     - sensor.lan_load_out_mean
-    
-  Climate_temp:
-   name: Climate
-   entities:
-     - climate.thermostat
-     - sensor.operating_mode
-     - sensor.hvac_fan
-     - sensor.thermostat_humidity
-     - sensor.thermostat_temperature
-     - sensor.master_bedroom_temperature   
-     - sensor.living_room_temperature
-     - sensor.ruths_room_temperature
-     - sensor.pws_Temp_f
-     
-  Kodi_media_player:
-   name: Kodi
-   entities:
-     - media_player.kodi
-  Blue_iris_media_player:
-   name: Plex
-   entities:
-     - media_player.blueiris2
-  Samsung_tv_media_player:
-   name: Samsung
-   entities:
-     - media_player._living_room_un65ju6400
-     - media_player.smart_tv
-  Onkyo_avr:
-   name: Onkyo Amp
-   entities:
-     - media_player.onkyo     
-  Ruths_roku_media_player:
-   name: Ruths Roku
-   entities:
-     - media_player.ruths_roku
-  KodiBlueIris_media_player:
-   name: Kodi Blue Iris
-   entities:
-     - media_player.kodi_blue_iris 
-     
+            
   House_mode:
    name: Home Mode
    control: hidden
@@ -402,83 +183,5 @@
      - script.home_mode
      - script.gone_on
      - script.nap_time
-     - remote.entertainment
-     - sensor.remote_entertainment
-     - input_select.washing_machine_status
-     - sensor.washer_status
-     
-  room_occupancy:
-   name: Occupancy
-   entities:
-     - binary_sensor.thermostat_occupancy   
-     - binary_sensor.ruths_room_occupancy
-     - binary_sensor.master_bedroom_occupancy
-     - binary_sensor.living_room_occupancy
-  alarm_panel:
-   name: Alarm
-   entities:
-     - alarm_control_panel.ha_alarm
-     - sensor.blue_iris_profile     
-  homeass_version:
-   name: Home Assistant Version
-   entities:
-     - sensor.ha_version
-     - sensor.installed_version
-     - script.update_home_assistant_home
-  blue_iris_motion:
-   name: Camera Motion
-   entities:
-     - binary_sensor.motion_outdoor_shed 
-     - binary_sensor.motion_outdoor_driveway
-     - binary_sensor.motion_outdoor_number12
-     - binary_sensor.motion_outdoor_swamp
-     - binary_sensor.motion_outdoor_frontdoor
-     - binary_sensor.motion_outdoor_backdoor
-     
-  Ads_Blocked:
-   name: Ads Blocked  
-   entities:
-     - switch.pihole
-     - sensor.ads_blocked_today
-     - sensor.ads_percentage_today
-     - sensor.dns_queries_today
-     - sensor.domains_being_blocked
-     - sensor.ads_blocked_today
-     - sensor.unique_domains
-     - sensor.queries_forwarded
-     - sensor.queries_cached
-     - sensor.pihole_dns
-     - sensor.pihole_blocking
-        
-  Usps_Mail:
-   name: Mail
-   entities:
-     - sensor.usps_mail
-     - sensor.usps_packages     
-     - sensor.packages_in_transit
-     - sensor.deliveries_today
-     - sensor.fedex
-     - sensor.ups
-     
-  livingroomfan:
-   control: hidden
-   name: Living Room Fan
-   entities:
-     - fan.living_room_fan
-     - script.living_room_fan_auto
-     - sensor.fan_speed
-     - binary_sensor.gang
-     - script.refresh_wink
-     - switch.king_of_fans__inc_hdc52eastwindfan_0016b720_1
-     
-  animated_radar:
-   name: Animated Radar
-   entities:
-     - camera.Radar_Animated   
-     
-  hubs:
-   name: Hub's & Bridges
-   entities:
-     - sensor.harmony_hub
-     - sensor.hue_hub
-     - sensor.wink_hub     
+       
+      

@@ -19,6 +19,19 @@ homeassistant:
       icon: mdi:clock
     sensor.master_closet_dimmer_state:
       icon: mdi:remote
+      
+group:
+  Dimmers_status_card:
+   name: Dimmers
+   entities:
+     - sensor.master_bathroom_dimmer_last_update
+     - sensor.master_bathroom_dimmer_state 
+     - sensor.kitchen_table_dimmer_last_update     
+     - sensor.kitchen_table_dimmer_state
+     - sensor.kids_bathroom_dimmer_last_update
+     - sensor.kids_bathroom_dimmer_state
+     - sensor.master_closet_dimmer_last_update
+     - sensor.master_closet_dimmer_state        
      
 sensor:     
       ######## Kids Bathroom

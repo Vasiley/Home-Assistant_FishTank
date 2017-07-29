@@ -75,6 +75,44 @@ homeassistant:
       friendly_name: Wan Ip
       icon: mdi:wan 
       
+group:
+  hubs_card:
+   name: Hub's & Bridges
+   entities:
+     - sensor.harmony_hub
+     - sensor.hue_hub
+     - sensor.wink_hub 
+     
+  cameras_status_card:
+    name: Cameras
+    entities:
+     - sensor.number12_camera
+     - sensor.driveway_camera
+     - sensor.shed_camera
+     - sensor.backdoor_camera
+     - sensor.frontdoor_camera
+     - sensor.swamp_camera
+     
+  NetworkDrives_status_card:
+   name: Nas Drives
+   entities:
+     - sensor.media_nas
+     - sensor.network_nas     
+
+  Workstations_status_card:
+   name: Workstations
+   entities:
+     - sensor.blue_iris_workstation
+     - sensor.network_workstation 
+     
+  NetworkNmap_status_card:
+   name: Network Equipment
+   entities:
+     - sensor.asus_router
+     - sensor.cisco_router
+     - sensor.switch1
+     - sensor.switch2   
+     
 sensor:
   ############## Public Ip
   - platform: dnsip

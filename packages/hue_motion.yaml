@@ -1,5 +1,7 @@
 homeassistant:
   customize:
+  
+ 
   ################################################
   ## Binary Sensor
   ################################################
@@ -33,7 +35,17 @@ homeassistant:
     sensor.motion_sensor_kids_bathroom_battery:
       icon: mdi:battery
     
-    
+group:
+  Motion_card:
+   name: Motion
+   entities:
+     - binary_sensor.kitchen_motion
+     - binary_sensor.hallway_motion
+     - binary_sensor.laundry_room_motion
+     - binary_sensor.kids_hallway_motion
+     - binary_sensor.kids_bathroom_motion
+     - binary_sensor.bathroom_motion
+     - binary_sensor.master_motion     
     
 ####### Binary sensor motion   #############  
 binary_sensor:  

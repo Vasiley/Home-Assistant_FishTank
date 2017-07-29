@@ -4,8 +4,7 @@
         persistence: true
           
 ##### Media Player   #######
-     media_player.blueiris2:
-        friendly_name: Plex
+    
 ###### Scripts ##########
  
      script.spring:
@@ -19,9 +18,7 @@
      script.supernatural:
         friendly_name: SuperNatural
         
-     sensor.haaska_names:   
-        friendly_name: Haaska 
-        icon: mdi:microphone-outline
+     
     
               
 

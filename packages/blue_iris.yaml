@@ -18,6 +18,17 @@ homeassistant:
     binary_sensor.motion_outdoor_swamp:
       friendly_name: Swamp
       device_class: motion
+      
+group:
+  blue_iris_motion_card:
+   name: Camera Motion
+   entities:
+     - binary_sensor.motion_outdoor_shed 
+     - binary_sensor.motion_outdoor_driveway
+     - binary_sensor.motion_outdoor_number12
+     - binary_sensor.motion_outdoor_swamp
+     - binary_sensor.motion_outdoor_frontdoor
+     - binary_sensor.motion_outdoor_backdoor      
 
 #######################################################################################################################
 ###### Sets profile on blue iris   ####################################################################################
