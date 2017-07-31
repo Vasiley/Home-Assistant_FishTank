@@ -22,7 +22,7 @@
      - group.livingroomfan_card
      - group.washing_machine_card
      - group.harmony_card
-     
+     - group.blinds_kitchen_card
   Devicesview:
    view: yes
    name: Equipment
@@ -36,6 +36,7 @@
      - group.cameras_status_card
      - group.hubs_card
      - group.NetworkSnmp_card
+     - group.esp_devices_card
      - group.homeass_version_card
      - script.update_github
      

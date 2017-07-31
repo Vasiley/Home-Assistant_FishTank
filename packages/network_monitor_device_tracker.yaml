@@ -74,6 +74,9 @@ homeassistant:
     sensor.myipopendnscom:
       friendly_name: Wan Ip
       icon: mdi:wan 
+    sensor.esp_kitchen_blinds:
+      friendly_name: Kitchen Blinds Controller
+      entity_picture: /local/nodemcu.jpeg      
       
 group:
   hubs_card:
@@ -112,6 +115,11 @@ group:
      - sensor.cisco_router
      - sensor.switch1
      - sensor.switch2   
+  
+  esp_devices_card:
+   name: Esp Controller's
+   entities: 
+     - sensor.esp_kitchen_blinds
      
 sensor:
   ############## Public Ip
@@ -205,7 +213,12 @@ sensor:
   - platform: template
     sensors:
       wink_hub:
-        value_template: '{% if is_state("binary_sensor.wink_hub_2", "on") %}Online{% else %}Offline{% endif %}'        
+        value_template: '{% if is_state("binary_sensor.wink_hub_2", "on") %}Online{% else %}Offline{% endif %}'
+  - platform: template
+    sensors:
+      esp_kitchen_blinds:
+        value_template: '{% if is_state("device_tracker.5ccf7fb19112", "home") %}Online{% else %}Offline{% endif %}'      
+  
         
 device_tracker:
   - platform: nmap_tracker
@@ -226,7 +239,6 @@ automation:
       entity_id:
         - sensor.wink_fan_gang
         - sensor.network_workstation
-        - sensor.network_workstation
         - sensor.blue_iris_workstation
         - sensor.network_nas
         - sensor.media_nas
@@ -243,6 +255,7 @@ automation:
         - sensor.harmony_hub
         - sensor.hue_hub
         - sensor.wink_hub
+        - sensor.esp_kitchen_blinds
     condition:
       - condition: template
         value_template: "{% if trigger.from_state and trigger.to_state %} True {% else %} False {% endif %}"
