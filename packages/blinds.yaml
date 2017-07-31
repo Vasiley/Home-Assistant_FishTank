@@ -66,10 +66,7 @@ automation:
     action:
       - service: script.turn_on
         entity_id: script.blinds_open
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.kitchen_blinds_status
-          option: 'Open'
+     
   - alias: Blinds Halfway
     trigger:
       - platform: state
@@ -85,10 +82,7 @@ automation:
     action:
       - service: script.turn_on
         entity_id: script.blinds_halfway
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.kitchen_blinds_status
-          option: 'Halfway'
+      
   - alias: Blinds Closed
     trigger:
       - platform: state
@@ -103,22 +97,31 @@ automation:
     action:
       - service: script.turn_on
         entity_id: script.blinds_closed
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.kitchen_blinds_status
-          option: 'Closed'          
+
 script:
   blinds_closed:
     sequence:
-      - service: shell_command.blinds_closed
+      - service: shell_command.kitchen_blinds_closed
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.kitchen_blinds_status
+          option: 'Closed'
   blinds_halfway:
     sequence:
-      - service: shell_command.blinds_halfway
+      - service: shell_command.kitchen_blinds_halfway
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.kitchen_blinds_status
+          option: 'Halfway'
   blinds_open:
     sequence:
-      - service: shell_command.blinds_open    
-    
+      - service: shell_command.kitchen_blinds_open    
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.kitchen_blinds_status
+          option: 'Open'
+          
 shell_command:
-  blinds_closed: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,05"
-  blinds_halfway: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,90"
-  blinds_open: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,180" 
+  kitchen_blinds_closed: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,05"
+  ktichen_blinds_halfway: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,90"
+  kitchen_blinds_open: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,180" 
