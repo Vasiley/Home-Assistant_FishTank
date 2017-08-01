@@ -119,8 +119,8 @@ zha:
 #  usb_path: /dev/ttyUSB0
 
 wink:
-  email: !secret wink_email
-  password: !secret wink_password
+#  email: !secret wink_email
+#  password: !secret wink_password
   
 #  refresh_token: Y68ELx0nrLagi_NphUl8vD4HYhcmRoEg
 

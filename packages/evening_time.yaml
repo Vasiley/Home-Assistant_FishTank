@@ -7,7 +7,7 @@ automation:
   - alias: Evening Time
     trigger:
       - platform: time
-        after: '19:01'
+        at: '19:01'
     condition:
       - condition: state
         entity_id: sensor.set_hold_mode

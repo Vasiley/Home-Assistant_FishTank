@@ -8,13 +8,7 @@ homeassistant:
       
     sensor.fedex:
       icon: mdi:truck-fast
-      
-    sensor.mail_mail:
-      friendly_name: Usps Mail
-      
-    sensor.mail_packages:
-      friendly_name: Usps Packages
-      
+    
     camera.mail_mail:
       friendly_name: Mail Scan's
 
@@ -27,8 +21,8 @@ group:
   usps_mail_card:
    name: Mail
    entities:
-     - sensor.mail_mail
-     - sensor.mail_packages     
+     - sensor.usps_mail
+     - sensor.usps_packages    
      - sensor.packages_in_transit
      - sensor.deliveries_today
      - sensor.fedex

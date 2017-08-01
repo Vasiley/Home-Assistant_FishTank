@@ -7,7 +7,7 @@ logger:
     homeassistant.components.camera: critical
     homeassistant.components.sun: critical
     homeassistant.components.remote: critical
-    homeassistant.components.switch: debug
+    homeassistant.components.switch: critical
     homeassistant.components.sensor: critical
     homeassistant.components.script: critical
     homeassistant.components.tts: critical
@@ -23,7 +23,8 @@ logger:
     homeassistant.components.discovery: critical
     homeassistant.components.light: critical
     homeassistant.components.ecobee: critical
-    homeassistant.components.wink: debug
+    homeassistant.components.wink: critical
+    homeassistant.custom_components: critical
     bellows.uart: critical
     homeassistant.core: critical
     homeassistant.helpers.script: warn
