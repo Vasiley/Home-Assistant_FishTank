@@ -84,8 +84,9 @@ mqtt:
   username: !secret mqtt_username
   password: !secret mqtt_password
 
-alexa: 
-intent_script: !include alexaintents.yaml
+
+intent_script: !include intent_scripts.yaml
+alexa:
 
 script: !include scripts.yaml
 

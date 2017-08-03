@@ -1,4 +1,4 @@
-  #intents:
+#intents:
     WhereAreWeIntent:
       speech:
          type: plaintext
@@ -97,5 +97,4 @@
       speech:
         type: plaintext
         text: You have {{states('sensor.usps_mail')}} pieces of mail in mail box
-        
         
