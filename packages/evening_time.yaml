@@ -2,6 +2,8 @@ homeassistant:
   customize:
     script.movie_time:
       friendly_name: Movie Time
+      hasska_name: Movie Time
+      
 ########## Evening Time ##############
 automation:
   - alias: Evening Time
@@ -17,7 +19,9 @@ automation:
        data:
          entity_id: light.lamps
          color_temp: 426
-         brightness: 125  
+         brightness: 125 
+     - service: script.turn_on
+       entity_id: script.blinds_halfway         
 
 script:
   movie_time: 
@@ -45,3 +49,5 @@ script:
           color_temp: 426
           brightness: 125
           transition: 45    
+      - service: script.turn_on
+        entity_id: script.blinds_closed    

@@ -1,15 +1,23 @@
 homeassistant:
   customize:
     sensor.ha_version:   
-      friendly_name: New Ha Release  
+      friendly_name: New Ha Release 
+      hasska_hidden: true      
     script.update_home_assistant_home:
       friendly_name: Home Assistant Update
       icon: mdi:update  
+      hasska_hidden: true
+    sensor.hass_uptime:
+      friendly_name: Home Assistant Uptime
+      icon: mdi:home-assistant
+      hasska_hidden: true
+    
 
 group:
   homeass_version_card:
-   name: Home Assistant Version
+   name: Home Assistant Info
    entities:
+     - sensor.hass_uptime
      - sensor.ha_version
      - sensor.installed_version
      - script.update_home_assistant_home      
@@ -39,7 +47,27 @@ sensor:
             mdi:checkbox-marked
           {% else %}
             mdi:checkbox-blank-outline
-          {% endif %}  
+          {% endif %} 
+
+  - platform: command_line
+    name: "HASS Uptime"
+    command: echo "$(($(date +%s) - $(date -d "$(head -n1 /home/homeassistant/.homeassistant/home-assistant.log | cut -d' ' -f-2)" +%s)))"
+    scan_interval: 600
+    value_template: >-
+      {% set uptime = value | int %}
+      {% set seconds = uptime % 60 %}
+      {% set minutes = ((uptime % 3600) / 60) | int %}
+      {% set hours = ((uptime % 86400) / 3600) | int %}
+      {% set days = (uptime / 86400) | int %}
+      {%- if days > 0 -%}
+        {%- if days == 1 -%}
+          1 day
+        {%- else -%}
+          {{ days }} days
+        {%- endif -%}
+        {{ ', ' }}
+      {%- endif -%}
+      {{ '%02d' % hours }}:{{ '%02d' % minutes }}          
 script:
   update_home_assistant_home:
     sequence: 

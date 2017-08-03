@@ -55,6 +55,6 @@
      text: !include alexa_confirm.yaml    
   MailIntent:
     speech:
-     text: You have {{states('sensor.usps_mail')}} pieces of mail in mail box 
+     text: You have {{states('sensor.usps_mail')}} pieces of mail in the mail box 
         
         

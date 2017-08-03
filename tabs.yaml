@@ -59,6 +59,7 @@
      - group.ForecastWeather_card
      - group.animated_radar_card
      - group.still_image_radar_card
+     - group.3_day_forcast
      
   RoomSensors:
    view: yes
