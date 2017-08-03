@@ -84,7 +84,8 @@ mqtt:
   username: !secret mqtt_username
   password: !secret mqtt_password
 
-alexa: !include alexaintents.yaml
+alexa: 
+intent_script: !include alexaintents.yaml
 
 script: !include scripts.yaml
 
@@ -119,8 +120,10 @@ zha:
 #  usb_path: /dev/ttyUSB0
 
 wink:
-#  email: !secret wink_email
-#  password: !secret wink_password
+  email: !secret wink_email
+  password: !secret wink_password
+#  client_id: !secret wink_client_id
+#  client_secret: !secret wink_client_secret
   
 #  refresh_token: Y68ELx0nrLagi_NphUl8vD4HYhcmRoEg
 

@@ -58,7 +58,7 @@ automation:
         to: 'home' 
       - platform: numeric_state
         entity_id: sensor.pws_Temp_f 
-        below: 89 
+        below: 85
     condition:
       - condition: state
         entity_id: sensor.set_hold_mode
@@ -122,6 +122,6 @@ script:
           option: 'Open'
           
 shell_command:
-  kitchen_blinds_closed: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,05"
-  ktichen_blinds_halfway: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,90"
-  kitchen_blinds_open: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,180" 
+  kitchen_blinds_closed: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,35"
+  kitchen_blinds_halfway: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,70"
+  kitchen_blinds_open: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,105" 
