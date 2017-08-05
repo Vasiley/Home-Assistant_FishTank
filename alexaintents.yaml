@@ -11,10 +11,6 @@
              and Herb is at {{ states("sensor.herb") }}
            {% endif %}
     LocateIntent:
-      #action:
-       # service: notify.notify
-        #data_template:
-         # message: The location of {{ User }} has been queried via Alexa.
       speech:
          type: plaintext
          text: >
