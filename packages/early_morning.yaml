@@ -14,7 +14,19 @@ script:
       - service: switch.turn_on
         data:
           entity_id: switch.network_switch_blue_iris_monitor
-      - delay: '00:00:01'    
+      - delay: '00:00:01' 
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.kitchen_blinds_status
+          option: 'Halfway'  
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.harmony
+          option: 'Classic Music'
+      - service: media_player.volume_set
+        data_template:
+          entity_id: media_player.onkyo
+          volume_level: '.85'          
       - service: light.turn_on
         data:      
           entity_id: light.herbs_lamp

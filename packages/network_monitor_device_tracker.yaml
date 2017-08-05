@@ -102,11 +102,11 @@ group:
      - sensor.media_nas
      - sensor.network_nas     
 
-  Workstations_status_card:
-   name: Workstations
-   entities:
-     - sensor.blue_iris_workstation
-     - sensor.network_workstation 
+#  Workstations_status_card:
+#   name: Workstations
+#   entities:
+#     - sensor.network_workstation 
+# sensor.blue_iris_workstation
      
   NetworkNmap_status_card:
    name: Network Equipment
