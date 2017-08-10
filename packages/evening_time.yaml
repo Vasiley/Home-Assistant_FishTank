@@ -2,7 +2,15 @@ homeassistant:
   customize:
     script.movie_time:
       friendly_name: Movie Time
-      hasska_name: Movie Time
+      haaska_name: Movie Time
+    script.evening_time:
+      friendly_name: Evening Time
+      haaska_name: Evening Time
+    automation.evening_time:
+      haaska_hidden: true
+      friendly_name: Evening Time
+
+      
       
 ########## Evening Time ##############
 automation:
@@ -15,13 +23,8 @@ automation:
         entity_id: sensor.set_hold_mode
         state: 'home'
     action: 
-     - service: light.turn_on
-       data:
-         entity_id: light.lamps
-         color_temp: 426
-         brightness: 125 
-     - service: script.turn_on
-       entity_id: script.blinds_halfway         
+     - service: script.evening_time
+             
 
 script:
   movie_time: 
@@ -51,3 +54,14 @@ script:
           transition: 45    
       - service: script.turn_on
         entity_id: script.blinds_closed    
+  evening_time:
+    sequence:
+      - service: light.turn_on
+        data:
+          entity_id: light.lamps
+          color_temp: 426
+          brightness: 125 
+      - service: script.turn_on
+        entity_id: script.blinds_halfway
+    
+        

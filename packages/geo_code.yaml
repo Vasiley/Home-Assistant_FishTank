@@ -19,6 +19,6 @@ sensor:
     name: Herb
     api_key: !secret family_geo_locate
     origin: device_tracker.herb_herb    
-    options: full    
+    options: both
     
    

@@ -1,0 +1,61 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "User",
+          "type": "AMAZON.US_FIRST_NAME"
+        }
+      ],
+      "intent": "LocateIntent"
+    },
+    {
+      "intent": "WhereAreWeIntent"
+    },
+    {
+      "intent": "OverviewIntent"
+    },
+    {
+      "intent": "NetworkIntent"
+    },
+    {
+      "intent": "KitchenIntent"
+    },
+    {
+      "intent": "LaundryroomIntent"
+    },
+    {
+      "intent": "MailIntent"
+    },
+    {
+      "intent": "HallwayIntent"
+    },
+    {
+      "intent": "KidsHallwayIntent"
+    },
+    {
+      "intent": "BatteryLevelsIntent"
+    },
+    {
+      "intent": "itisyourbirthday"
+    },
+    {
+      "slots": [
+        {
+          "name": "Scene",
+          "type": "Scenes"
+        }
+      ],
+      "intent": "ActivateSceneIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "Script",
+          "type": "Scripts"
+        }
+      ],
+      "intent": "RunScriptIntent"
+    }
+  ]
+}

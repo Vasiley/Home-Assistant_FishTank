@@ -18,6 +18,13 @@ homeassistant:
     binary_sensor.motion_outdoor_swamp:
       friendly_name: Swamp
       device_class: motion
+    automation.back_to_white_after_motion:
+      friendly_name: Bi White no Motion
+      haaska_hidden: true
+    automation.back_to_yellow_dim_after_motion:
+      friendly_name: Bi Red with Motion
+      haaska_hidden: true
+      
       
 group:
   blue_iris_motion_card:

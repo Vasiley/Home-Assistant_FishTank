@@ -110,7 +110,10 @@ group:
   still_image_radar_card:
    name: Still Radar
    entities:
-     - camera.radar   
+     - camera.radar
+     
+#weather:
+# - platform: yweather     
   
 camera:
   - platform: generic

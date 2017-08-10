@@ -1,0 +1,21 @@
+LocateIntent Where is {User}
+LocateIntent Where's {User}
+LocateIntent Where {User} is
+LocateIntent Where did {User} go
+WhereAreWeIntent where we are
+OverviewIntent Overview
+NetworkIntent Network Status
+KitchenIntent Kitchen Temperature
+KitchenIntent What is Temperature in Kitchen
+LaundryroomIntent Laundry Room Temperature
+LaundryroomIntent What is Laundry Room Temperature
+MailIntent Do I have Mail
+HallwayIntent Hallway Temperatur
+HallwayIntent What is Hallway Temperature
+KidsHallwayIntent Kids Hallway Temperature
+KidsHallwayIntent What is Kids Hallway Temperature
+BatteryLevelsIntent What are Motion Sensor Battery Levels
+BatteryLevelsIntent What are Battery Levels
+itisyourbirthday it is my birthday
+ActivateSceneIntent activate {Scene}
+RunScriptIntent run {Script}

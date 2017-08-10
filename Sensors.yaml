@@ -30,7 +30,7 @@
           {% else %}
             mdi:battery-alert
           {% endif %}
-          
+
 
     
           

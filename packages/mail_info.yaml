@@ -1,5 +1,7 @@
 homeassistant:
   customize:
+    sensor.usps_mail_2:
+      friendly_name: Mail Sensor
     sensor.deliveries_today:
       icon: mdi:package-variant
       
@@ -22,6 +24,7 @@ group:
    name: Mail
    entities:
      - sensor.usps_mail
+     - sensor.usps_mail_2
      - sensor.usps_packages    
      - sensor.packages_in_transit
      - sensor.deliveries_today
@@ -39,7 +42,7 @@ sensor:
   - platform: usps
     username: !secret usps_username
     password: !secret usps_password
-    scan_interval: 1800
+    scan_interval: 900
   - platform: ups
     username: !secret ups_username
     password: !secret ups_password

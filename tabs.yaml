@@ -23,6 +23,7 @@
      - group.washing_machine_card
      - group.harmony_card
      - group.blinds_kitchen_card
+    
   Devicesview:
    view: yes
    name: Equipment
@@ -62,7 +63,8 @@
      - group.animated_radar_card
      - group.still_image_radar_card
      - group.3_day_forcast
-     
+#    - weather.weather_today 
+
   RoomSensors:
    view: yes
    name: Sensors
@@ -97,6 +99,7 @@
      - group.master_bedroom 
      - group.carport_lights  
      - group.haaska_sensor_display_card
+     - group.livingroom_card
      
   Fun_Stuff:
    view: yes
@@ -141,6 +144,8 @@
      - script.alarm_flashonoff
      - script.start_washer
      - script.nap_time
+     - script.movie_time
+     - script.evening_time
      
   Effects:
     control: hidden

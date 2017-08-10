@@ -67,5 +67,6 @@ script:
       - service: tts.google_say
         data:
           entity_id: media_player.kodi_blue_iris
-          message: 'Home Mode is Activated'  
+          message: 'Home Mode is Activated' 
+          volume_level: '.99'          
        

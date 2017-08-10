@@ -111,9 +111,9 @@ config:
 shell_command:
   update_git: gitupdate.sh
   
-zha:
-  usb_path: /dev/zigbee
-  database_path: /home/homeassistant/.homeassistant/zigbee.db
+#zha:
+#  usb_path: /dev/zigbee
+#  database_path: /home/homeassistant/.homeassistant/zigbee.db
 #zigbee:
 #  device: /dev/ttyUSB1
 

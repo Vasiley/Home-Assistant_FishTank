@@ -42,7 +42,10 @@ homeassistant:
       friendly_name: Bathroom Motion
       device_class: motion 
     sensor.motion_sensor_bathroom_battery:
-      icon: mdi:battery       
+      icon: mdi:battery  
+    sensor.bathroom_temperature:
+      friendly_name: Master Bath Temperature
+            
     script.shower_time_on:
       friendly_name: Shower Time  
       haaska_hidden: false

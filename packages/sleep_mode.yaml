@@ -3,6 +3,7 @@ homeassistant:
     script.lamps_on:
       friendly_name: Sleep
       icon: mdi:sleep
+      haaska_name: Sleep
 
 #########################################################################################
 #                                                                                   ##### 
@@ -12,6 +13,10 @@ homeassistant:
 script:        
   lamps_on:
     sequence:
+      - service: tts.google_say
+        data:
+          entity_id: media_player.kodi_blue_iris
+          message: 'Sleep is Activated Good Night'
       - service: climate.set_hold_mode
         data:
           entity_id: climate.thermostat
@@ -20,11 +25,7 @@ script:
       - service: media_player.turn_off 
         data:
           entity_id: media_player.onkyo
-      - delay: '00:00:02'      
-      - service: tts.google_say
-        data:
-          entity_id: media_player.kodi_blue_iris
-          message: 'Sleep is Activated Good Night'     
+      - delay: '00:00:01'          
       - service: remote.turn_off
         data:     
           entity_id: remote.entertainment
@@ -75,7 +76,13 @@ script:
       - service: light.turn_off
         data:
           entity_id: light.master_hallway 
-      - delay: '00:00:45'          
+      - delay: '00:00:45'
+      - wait_template: "{{ states.binary_sensor.kitchen_motion.state == 'off' }}"
+        timeout: '00:00:30'        
+      - wait_template: "{{ states.binary_sensor.hallway_motion.state == 'off' }}"  
+        timeout: '00:00:30'
+      - wait_template: "{{ states.binary_sensor.bathroom_motion.state == 'off' }}"  
+        timeout: '00:00:30'      
       - service: light.turn_off
         data:      
           entity_id: light.bathroom

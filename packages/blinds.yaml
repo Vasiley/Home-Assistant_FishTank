@@ -2,23 +2,23 @@ homeassistant:
   customize:
     script.blinds_closed:
       friendly_name: Blinds Closed
-      hasska_name: Close Blinds
+      haaska_name: Close Blinds
     script.blinds_halfway:
       friendly_name: Blinds Halfway
-      hasska_name: Blinds Halfway
+      haaska_name: Blinds Halfway
     script.blinds_open:
       friendly_name: Blinds Open
-      hasska_name: Open Blinds
+      haaska_name: Open Blinds
     input_select.kitchen_blinds_status:
       persistent: true
     sensor.kitchen_blinds_state:
       persistent: true
     automation.blinds_closed:
-      hasska_hidden: true
+      haaska_hidden: true
     automation.blinds_halfway:
-      hasska_hidden: true
+      haaska_hidden: true
     automation.blinds_open:
-      hasska_hidden: true    
+      haaska_hidden: true    
       
 group:
   blinds_kitchen_card:
@@ -101,25 +101,25 @@ automation:
 script:
   blinds_closed:
     sequence:
-      - service: shell_command.kitchen_blinds_closed
       - service: input_select.select_option
         data:
           entity_id: input_select.kitchen_blinds_status
           option: 'Closed'
+      - service: shell_command.kitchen_blinds_closed    
   blinds_halfway:
     sequence:
-      - service: shell_command.kitchen_blinds_halfway
       - service: input_select.select_option
         data:
           entity_id: input_select.kitchen_blinds_status
           option: 'Halfway'
+      - service: shell_command.kitchen_blinds_halfway    
   blinds_open:
     sequence:
-      - service: shell_command.kitchen_blinds_open    
       - service: input_select.select_option
         data:
           entity_id: input_select.kitchen_blinds_status
           option: 'Open'
+      - service: shell_command.kitchen_blinds_open     
           
 shell_command:
   kitchen_blinds_closed: "curl -X GET http://192.168.1.239/control?cmd=Servo,1,0,35"

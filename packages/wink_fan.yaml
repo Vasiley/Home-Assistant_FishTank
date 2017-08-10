@@ -9,13 +9,21 @@ homeassistant:
       friendly_name: "Fan Turn On"
       haaska_hidden: true
       hidden: true
-
+      
+    automation.fan_low_with_hvac_automation: 
+      friendly_name: Low with Ac
+      haaska_hidden: true
+      
+    automation.fan_medium_with_hvac_automation:
+      friendly_name: Meduim without Ac
+      haaska_hidden: true
+      
     script.living_room_fan_auto:
       friendly_name: "Breeze"
       icon: mdi:fan
       Haaska_hidden: false
       haaska_name: Breeze
-      
+            
     script.refresh_wink:
       friendly_name: " Refresh Wink"
       icon: mdi:update
@@ -44,8 +52,10 @@ group:
      - sensor.fan_speed
      - binary_sensor.gang
      - script.refresh_wink
-     - switch.king_of_fans__inc_hdc52eastwindfan_0016b720_1      
+     - switch.king_of_fans__inc_hdc52eastwindfan_0016b720_1 
+     
 
+  
 sensor:
   - platform: template
     sensors:
