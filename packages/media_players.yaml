@@ -17,10 +17,10 @@ group:
    name: Samsung
    entities:
      - media_player.smart_tv
-  Onkyo_avr_card:
-   name: Onkyo Amp
+  stereo_avr_card:
+   name: stereo Amp
    entities:
-     - media_player.onkyo     
+     - media_player.stereo     
   Ruths_roku_media_player_card:
    name: Ruths Roku
    entities:
@@ -44,7 +44,7 @@ media_player:
     include_non_clients: false
   - platform: onkyo
     host: 192.168.1.131
-    name: Onkyo
+    name: Stereo
     sources:
       dvd: 'Blue Iris'
       game: 'PS4'
@@ -53,6 +53,7 @@ media_player:
       tv-cd: 'TV'
       tuner: 'Radio'
       net: 'Net'
+      
   - platform: roku
     host: 192.168.1.228
 #- platform: roku

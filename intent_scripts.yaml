@@ -19,6 +19,16 @@
     speech:
       text: !include intent_templates/NetworkIntent.yaml
    ### called with What is my Network Status
+
+  MediaPlayerSourceIntent:
+    action:
+      - service: media_player.select_source
+        data_template:
+          entity_id: 'media_player.{{player|replace(" ", "_")|lower}}'
+          source: '{{source}}'
+    speech:
+   #   type: plain
+      text: 'OK. Changing {{player}} to {{source}}'   
    
   KitchenIntent:
     speech:

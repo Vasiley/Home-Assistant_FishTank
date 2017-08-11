@@ -23,7 +23,7 @@ script:
           message: 'Nap Time'  
       - service: media_player.volume_set
         data_template:
-          entity_id: media_player.onkyo
+          entity_id: media_player.stereo
           volume_level: '.99'  
       - service: switch.turn_off 
         data:

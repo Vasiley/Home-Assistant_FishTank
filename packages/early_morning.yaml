@@ -23,7 +23,7 @@ script:
       - delay: '00:00:02'    
       - service: media_player.volume_set
         data_template:
-          entity_id: media_player.onkyo
+          entity_id: media_player.stereo
           volume_level: '.60'        
       - service: light.turn_on
         data:      

@@ -23,6 +23,7 @@
      - group.washing_machine_card
      - group.harmony_card
      - group.blinds_kitchen_card
+     - script.media_player_source
     
   Devicesview:
    view: yes
@@ -50,7 +51,7 @@
      - group.Kodi_media_player_card
      - group.Blue_iris_media_player_card
      - group.Samsung_tv_media_player_card
-     - group.Onkyo_avr_card
+     - group.stereo_avr_card
      - group.Ruths_roku_media_player_card
      - group.KodiBlueIris_media_player_card
    
