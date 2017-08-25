@@ -11,11 +11,10 @@ homeassistant:
   unit_system: imperial
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Chicago
-  customize: !include Customize.yaml
+#  customize: 
   packages: !include_dir_named packages
 
-####Zone files
-zone: !include zones.yaml
+
 
 # Show links to resources in log and frontend
 # introduction:
@@ -26,8 +25,8 @@ frontend:
 http:
   # Uncomment this to add a password (recommended!)
    api_password: !secret http_password
-   ssl_certificate: !secret http_ssl_cert
-   ssl_key: !secret http_ssl_key
+#   ssl_certificate: !secret http_ssl_cert
+#   ssl_key: !secret http_ssl_key
    base_url: !secret http_base_url
    use_x_forwarded_for: True
    trusted_networks:
@@ -54,20 +53,20 @@ conversation:
 #logger: in package
 
 # Track the sun
-sun:
+#sun:
 
 browser:
   url: !secret browser
 
 # Sensors
-sensor: !include Sensors.yaml
+#sensor: !include Sensors.yaml
 
 # Text to speech
-tts:
-  - platform: google
-    cache: true
-    cache_dir: /tmp/tts
-    time_memory: 300
+#tts:
+#  - platform: google
+#    cache: true
+#    cache_dir: /tmp/tts
+#    time_memory: 300
 
 #media_player: in package
 
@@ -76,41 +75,32 @@ group: !include tabs.yaml
 
 #switch: # Moved to packages
 
-mqtt:
-  broker: m10.cloudmqtt.com
-  port: 13636
-  client_id: home-assistant-1
-  keepalive: 60
-  username: !secret mqtt_username
-  password: !secret mqtt_password
+#mqtt:
+#  broker: m10.cloudmqtt.com
+#  port: 13636
+#  client_id: home-assistant-1
+#  keepalive: 60
+#  username: !secret mqtt_username
+#  password: !secret mqtt_password
 
 
-intent_script: !include intent_scripts.yaml
-alexa:
 
-script: !include scripts.yaml
 
-automation old: !include automations old.yaml
+#script: !include scripts.yaml
 
-light:
-  platform: hue
-  host: 192.168.1.185
-  allow_unreachable: True
+#automation old: !include automations old.yaml
 
-scene: !include Scenes.yaml
 
-notify:
-  - name: Pushbullet
-    platform: pushbullet
-    api_key: !secret pushbullet_api_key
 
-rest_command: !include restcommands.yaml
+#notify:
+#  - name: Pushbullet
+#    platform: pushbullet
+#    api_key: !secret pushbullet_api_key
+
+#rest_command: !include restcommands.yaml
 
 config:
 
-shell_command:
-  update_git: gitupdate.sh
-  
 #zha:
 #  usb_path: /dev/zigbee
 #  database_path: /home/homeassistant/.homeassistant/zigbee.db
@@ -120,20 +110,15 @@ shell_command:
 #zwave:
 #  usb_path: /dev/ttyUSB0
 
-wink:
-  email: !secret wink_email
-  password: !secret wink_password
+#wink:
+#  email: !secret wink_email
+#  password: !secret wink_password
 #  client_id: !secret wink_client_id
 #  client_secret: !secret wink_client_secret
   
 #  refresh_token: Y68ELx0nrLagi_NphUl8vD4HYhcmRoEg
 
-# panel_iframe:
-  # home_assistant:
-    # title: 'Home Assistant'
-    # icon: mdi:file-document
-    # url: 'https://home-assistant.io/docs/'
-     # https://github.com/Vasiley/Home-AssistantConfig
+
      
 
     
