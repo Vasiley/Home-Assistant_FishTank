@@ -1,0 +1,128 @@
+homeassistant:
+  customize:
+    input_boolean.boolean_morning_moon:
+      friendly_name: Morning Moon
+      hasska_hidden: true
+#      persistent: true
+    input_boolean.boolean_sunrise:
+      friendly_name: Sunrise
+      hasska_hidden: true
+#      persistent: true
+    input_boolean.boolean_midday_sunny:
+      friendly_name: Midday Sunny
+      hasska_hidden: true
+#      persistent: true
+    input_boolean.boolean_midday_cloudy:
+      friendly_name: Midday Cloudy
+      hasska_hidden: true
+#      persistent: true
+    input_boolean.boolean_afternoon:
+      friendly_name: Afternoon
+      hasska_hidden: true
+#      persistent: true
+    input_boolean.boolean_evening:
+      friendly_name: Evening Time
+      hasska_hidden: true
+#      persistent: true
+    input_boolean.boolean_sunset:
+      friendly_name: Sunset
+      hasska_hidden: true
+#      persistent: true
+    input_boolean.boolean_moon_lights_off:
+      friendly_name: Moon Lights Off
+      hasska_hidden: true
+#      persistent: true
+    input_boolean.boolean_thunderstorm:
+      friendly_name: Thunderstorm
+      hasska_hidden: true
+#      persistent: true
+    input_boolean.boolean_rain:
+      friendly_name: Rain
+      hasska_hidden: true
+#      persistent: true
+    sensor.small_tank_lights_mode:
+      friendly_name: Small Tank Light Mode
+      hasska_hidden: true
+      icon: mdi:fish
+    sensor.small_tank_lights_weather:
+      friendly_name: Small Tank Lights Weather Effect
+      hasska_hidden: true
+      icon: mdi:fish  
+
+group:
+  input_boolean_card:
+    name: Input Boolean Tank Light Mode
+    entities:
+      - input_boolean.boolean_morning_moon
+      - input_boolean.boolean_sunrise
+      - input_boolean.boolean_midday_sunny
+      - input_boolean.boolean_midday_cloudy
+      - input_boolean.boolean_afternoon
+      - input_boolean.boolean_evening
+      - input_boolean.boolean_sunset
+      - input_boolean.boolean_moon_lights_off
+      - input_boolean.boolean_thunderstorm
+      - input_boolean.boolean_rain
+      - sensor.small_tank_lights_mode
+      - sensor.small_tank_lights_weather
+      
+input_boolean:
+  boolean_morning_moon:
+    initial: off
+  boolean_sunrise:
+    initial: off
+  boolean_midday_sunny:
+    initial: off
+  boolean_midday_cloudy:
+    initial: off
+  boolean_afternoon:
+    initial: off
+  boolean_evening:
+    initial: off
+  boolean_sunset:
+    initial: off
+  boolean_moon_lights_off:
+    initial: off
+  boolean_thunderstorm:
+    initial: off  
+  boolean_rain:
+    initial: off   
+
+sensor:
+  - platform: template
+    sensors:
+      small_tank_lights_mode:
+        value_template: >-
+          {% if states('input_boolean.boolean_morning_moon') == 'on' %}
+              Morning Moon
+          {% elif states('input_boolean.boolean_sunrise') == 'on' %}
+              Sunrise
+          {% elif states('input_boolean.boolean_midday_sunny') == 'on' %}
+              Midday Sunny
+          {% elif states('input_boolean.boolean_afternoon') == 'on' %}
+              Afternoon
+          {% elif states('input_boolean.boolean_evening') == 'on' %}
+              Evening
+          {% elif states('input_boolean.boolean_sunset') == 'on' %}
+              Sunset
+          {% elif states('input_boolean.boolean_moon_lights_off') == 'on' %}
+              Lights Off
+          {% else %}
+              None
+          {% endif %}
+          
+  - platform: template
+    sensors:
+      small_tank_lights_weather: 
+        value_template: >-
+           {% if states('input_boolean.boolean_thunderstorm') == 'on' %}
+              Thunderstorm's
+           {% elif states('input_boolean.boolean_rain') == 'on' %}
+              Rain          
+           {% elif states('input_boolean.boolean_midday_cloudy') == 'on' %}
+              Midday Cloudy
+           {% else %}
+              None
+           {% endif %}  
+              
+                          

@@ -1,9 +1,13 @@
   Default_view:
    view: yes
-   name: 10 gallon Fish Tank
+   name: 20 gallon Fish Tank
    entities:
-     - group.House_mode
-    
+     - group.ha_temp_humd_card
+     - group.ForecastWeather_card
+     - group.relay_card
+     - group.water_sensors
+     - group.lighting_card
+        
   Devicesview:
    view: yes
    name: Equipment
@@ -11,7 +15,14 @@
      - group.PI_card
      - group.homeass_version_card
      
-     
+  automations_view:
+   view: yes
+   name: Automations
+   entities:
+     - group.heater_card
+     - group.lighting_automations_card
+     - group.input_boolean_card
+         
   PI_card:
    name: Pi
    entities:
@@ -19,5 +30,7 @@
      - sensor.ram_free
      - sensor.disk_use_home
      - input_select.log_level
+     
+     
            
       

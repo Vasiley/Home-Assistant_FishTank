@@ -4,29 +4,17 @@ homeassistant:
   # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude
   longitude: !secret longitude
-
-  # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 1
-  # metric for Metric, imperial for Imperial
   unit_system: imperial
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Chicago
-#  customize: 
   packages: !include_dir_named packages
-
-
-
-# Show links to resources in log and frontend
-# introduction:
-
-# Enables the frontend
+  
 frontend:
 
 http:
-  # Uncomment this to add a password (recommended!)
    api_password: !secret http_password
-#   ssl_certificate: !secret http_ssl_cert
-#   ssl_key: !secret http_ssl_key
+   ssl_certificate: !secret http_ssl_cert
+   ssl_key: !secret ssl_key
    base_url: !secret http_base_url
    use_x_forwarded_for: True
    trusted_networks:
@@ -34,91 +22,25 @@ http:
      - 192.168.1.0/24
    ip_ban_enabled: True
    login_attempts_threshold: 5
-# Checks for available updates
+
 updater:
 
-# Recorder in a package
-
-# Discover some devices automatically
-#discovery:
-
-# Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
-#history: #Enables support for tracking state changes over time. In a Package
-
-#logbook: View all events in a logbook in a package
-
-
-#logger: in package
-
-# Track the sun
-#sun:
+sun:
 
 browser:
   url: !secret browser
 
-# Sensors
-#sensor: !include Sensors.yaml
-
-# Text to speech
-#tts:
-#  - platform: google
-#    cache: true
-#    cache_dir: /tmp/tts
-#    time_memory: 300
-
-#media_player: in package
 
 group: !include tabs.yaml
-#camera: In packages
 
-#switch: # Moved to packages
-
-#mqtt:
-#  broker: m10.cloudmqtt.com
-#  port: 13636
-#  client_id: home-assistant-1
-#  keepalive: 60
-#  username: !secret mqtt_username
-#  password: !secret mqtt_password
-
-
-
-
-#script: !include scripts.yaml
-
-#automation old: !include automations old.yaml
-
-
-
-#notify:
-#  - name: Pushbullet
-#    platform: pushbullet
-#    api_key: !secret pushbullet_api_key
-
-#rest_command: !include restcommands.yaml
+mqtt:
+  broker: 192.168.1.101
+  port: 1883
+  client_id: home-assistant-1
+  keepalive: 60
+  username: !secret mqtt_username
+  password: !secret mqtt_password
 
 config:
-
-#zha:
-#  usb_path: /dev/zigbee
-#  database_path: /home/homeassistant/.homeassistant/zigbee.db
-#zigbee:
-#  device: /dev/ttyUSB1
-
-#zwave:
-#  usb_path: /dev/ttyUSB0
-
-#wink:
-#  email: !secret wink_email
-#  password: !secret wink_password
-#  client_id: !secret wink_client_id
-#  client_secret: !secret wink_client_secret
-  
-#  refresh_token: Y68ELx0nrLagi_NphUl8vD4HYhcmRoEg
-
-
-     
-
-    

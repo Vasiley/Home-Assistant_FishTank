@@ -1,0 +1,52 @@
+homeassistant:
+  customize:
+    sensor.dht_sensor_temperature:   
+      friendly_name: Ha Temperature 
+      icon: mdi:temperature-fahrenheit
+      hasska_hidden: true  
+      unit_of_measurement: '°F'      
+    sensor.dht_sensor_humidity:
+      friendly_name: Ha Humidity
+      icon: mdi:water-percent
+      hasska_hidden: true
+      unit_of_measurement: '%'
+    sensor.water_temp:
+      friendly_name: Water Temp
+      icon: mdi:temperature-fahrenheit
+      hasska_hidden: true
+          
+      
+group:
+  ha_temp_humd_card:
+   name: Home Assistant Exterior Temps
+   entities:
+     - sensor.dht_sensor_temperature
+     - sensor.dht_sensor_humidity
+     
+  water_sensors:
+   name: Small Tank Sensors
+   entities:
+     - sensor.water_temp   
+     
+sensor:
+  - platform: dht
+    sensor: DHT22
+    pin: 4
+    temperature_offset: 15.0
+    humidity_offset: -3.2
+    monitored_conditions:
+      - temperature
+      - humidity
+
+  - platform: onewire
+    names:
+      28-0516a31216ff: Water Temp      
+     
+#### cmds to get second temp from pi     
+#### sudo modprobe w1-gpio   
+#### sudo dtoverlay w1-gpio gpiopin=17 pullup=0 # header pin 11
+#### ls /sys/bus/w1/devices/
+
+#### To enable the one-wire interface you need to add the following line to /boot/config.txt, before rebooting your Pi:
+#### dtoverlay=w1-gpio
+#### dtoverlay=w1-gpio,gpiopin=x 

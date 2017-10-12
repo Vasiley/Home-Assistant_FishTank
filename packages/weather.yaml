@@ -1,0 +1,19 @@
+homeassistant:
+  customize:
+    sensor.current_weather:
+      icon: mdi:alert-outline
+      friendly_name: Current Weather
+      
+group:
+  ForecastWeather_card:
+   name: Weather
+   entities:
+     - sensor.current_weather  
+     - sun.sun      
+     - sensor.moon
+sensor:
+  - platform: rest
+    resource: !secret weather_rest
+    value_template: '{{ value_json.state }}'
+    name: Current Weather
+  - platform: moon 

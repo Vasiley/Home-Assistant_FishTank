@@ -1,0 +1,7 @@
+homeassistant:
+  customize:
+    automation.heater_off:
+      friendly_name: Heater Off
+    automation.heater_on:
+      friendly_name: Heater On
+      

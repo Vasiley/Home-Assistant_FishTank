@@ -1,0 +1,36 @@
+homeassistant:
+  customize:
+    automation.heater_off:
+      friendly_name: Heater Off
+    automation.heater_on:
+      friendly_name: Heater On
+      
+group:
+  heater_card:
+   name: Heater
+   entities:
+     - automation.heater_off
+     - automation.heater_on   
+     - switch.relay_four      
+automation:
+  - alias: heater on
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.water_temp  
+        below: 76
+    action:
+      - service: switch.turn_on
+        entity_id: switch.relay_four
+      
+  - alias: heater off
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.water_temp  
+        above: 77
+    action:
+      - service: switch.turn_off
+        entity_id: switch.relay_four
+              
+       

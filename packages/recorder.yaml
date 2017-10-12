@@ -10,7 +10,6 @@ recorder:
       - notify
       - scene
       - light
-      - sun
       - tts
       - device_tracker
       - mqtt
@@ -38,6 +37,6 @@ recorder:
       - sensor.pws_precip_today_in
       - sensor.pws_visibility_mi
       - camera.radar
-      - sun.sun
+      
   db_url: !secret recorder_db_url
   purge_days: 10
