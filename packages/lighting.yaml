@@ -26,6 +26,9 @@ homeassistant:
       hasska_hidden: true
     automation.moon_lights_off_step_4:
       friendly_name: Lights Off
+      hasska_hidden: true     
+    automation.moon_lights_off_step_5:
+      friendly_name: Fade Moon Lights
       hasska_hidden: true      
     automation.weather_change_thunderstorms:
       friendly_name: Thunderstorms Off
@@ -47,7 +50,7 @@ group:
    name: Fish Tank Leds
    entities:
      - light.fish_tank_leds
-     - input_slider.smalltank_led_animation_speed
+     - input_number.smalltank_led_animation_speed
      - script.led_white_fish_tank
      - script.led_blue_full_moon
      - sensor.small_tank_lights_mode
@@ -66,8 +69,9 @@ group:
       - automation.weather_change_thunderstorms      
       - automation.sunset_leds_step_1   
       - automation.sunset_white_step_2
-      - automation.moon_lights_full_moon_sunset_step_3  
-      - automation.moon_lights_off_step_4
+      - automation.moon_lights_full_moon_sunset_step_3 
+      - automation.moon_lights_off_step_4     
+      - automation.moon_lights_off_step_5
       - automation.rain   
       - automation.weather_change_rain      
       
@@ -110,7 +114,7 @@ automation:
     hide_entity: true
     trigger:
       - platform: state
-        entity_id: input_slider.smalltank_led_animation_speed
+        entity_id: input_number.smalltank_led_animation_speed
     action:
       - service: mqtt.publish
         data_template:
@@ -193,6 +197,10 @@ automation:
       - platform: sun
         event: sunset
         offset: "-02:00:00"
+    condition:
+      - condition: state
+        entity_id: input_boolean.boolean_midday_cloudy
+        state: 'off'        
     action:
       - service: input_boolean.turn_off
         data:
@@ -200,10 +208,12 @@ automation:
       - service: input_boolean.turn_on
         data:
           entity_id: input_boolean.boolean_afternoon
+      - service: switch.turn_on
+        entity_id: switch.relay_three    
       - service: light.turn_on
         data:
           entity_id: light.fish_tank_leds
-          effect: solid
+#          effect: solid
           brightness: 255
           rgb_color: [255,166,87]
           transition: 1800
@@ -239,10 +249,12 @@ automation:
       - service: input_boolean.turn_on
         data:
           entity_id: input_boolean.boolean_sunset
+      - service: switch.turn_off
+        entity_id: switch.relay_three     
       - service: light.turn_on
         data:
           entity_id: light.fish_tank_leds
-          effect: solid
+#          effect: solid
           brightness: 255
           rgb_color: [5,0,152]
           transition: 1800
@@ -260,12 +272,34 @@ automation:
           entity_id: group.input_boolean_card
       - service: input_boolean.turn_on
         data:
-          entity_id: input_boolean.boolean_moon_lights_off
-      - service: light.turn_off
+          entity_id: input_boolean.boolean_moon_fade
+      - service: light.turn_on
         data:
           entity_id: light.fish_tank_leds
-          transition: 1800      
-      
+          brightness: 1
+          rgb_color: [0,0,0]
+          transition: 1800  
+          
+  - alias: "Moon Lights Off Step 5"
+    initial_state: true
+    hide_entity: false
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: "02:31:00"
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: group.input_boolean_card
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.boolean_moon_lights_off
+      - service: light.turn_off
+        entity_id: light.fish_tank_leds
+                  
+          
+ #     - service: light.turn_off
+  #      entity_id: light.fish_tank_leds
 ######### Weather Effects     #######################
 
   - alias: "midday_partlycloudy_overcast"
@@ -341,7 +375,7 @@ automation:
         entity_id: light.fish_tank_leds
       - service: switch.turn_off
         entity_id: switch.relay_three
-      - service: input_slider.select_value
+      - service: input_number.select_value
         data:
           entity_id: smalltank_led_animation_speed
           value: 11.0          
@@ -478,7 +512,7 @@ automation:
                        {% endif %}   
              
          
-input_slider:
+input_number:
   smalltank_led_animation_speed:
     name: Fish Tank Animation Speed
     initial: 150

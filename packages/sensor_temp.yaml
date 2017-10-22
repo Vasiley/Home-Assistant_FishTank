@@ -26,7 +26,7 @@ group:
   water_sensors:
    name: Small Tank Sensors
    entities:
-     - sensor.water_temp   
+     - sensor.water_temp_temperature
      
 sensor:
   - platform: dht

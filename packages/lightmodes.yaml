@@ -28,6 +28,9 @@ homeassistant:
       friendly_name: Sunset
       hasska_hidden: true
 #      persistent: true
+    input_boolean.boolean_moon_fade:
+      friendly_name: Fade Moon Lights
+      hasska_hidden: true
     input_boolean.boolean_moon_lights_off:
       friendly_name: Moon Lights Off
       hasska_hidden: true
@@ -60,6 +63,7 @@ group:
       - input_boolean.boolean_afternoon
       - input_boolean.boolean_evening
       - input_boolean.boolean_sunset
+      - input_boolean.boolean_moon_fade
       - input_boolean.boolean_moon_lights_off
       - input_boolean.boolean_thunderstorm
       - input_boolean.boolean_rain
@@ -81,6 +85,8 @@ input_boolean:
     initial: off
   boolean_sunset:
     initial: off
+  boolean_moon_fade:
+    initial: off  
   boolean_moon_lights_off:
     initial: off
   boolean_thunderstorm:

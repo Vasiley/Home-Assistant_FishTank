@@ -26,9 +26,9 @@
   PI_card:
    name: Pi
    entities:
-     - sensor.cpu_use
-     - sensor.ram_free
-     - sensor.disk_use_home
+     - sensor.cpu_used
+     - sensor.ram_available
+     - sensor.disk_used_home
      - input_select.log_level
      
      
