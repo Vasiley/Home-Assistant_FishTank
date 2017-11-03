@@ -265,7 +265,7 @@ automation:
     trigger:
       - platform: sun
         event: sunset
-        offset: "02:00:00"
+        offset: "01:00:00"
     action:
       - service: input_boolean.turn_off
         data:
@@ -307,10 +307,10 @@ automation:
     hide_entity: false
     trigger:
       - platform: state
-        entity_id: sensor.current_weather
+        entity_id: sensor.fish_tank_weather_current
         to: 'Partly Cloudy' 
       - platform: state
-        entity_id: sensor.current_weather
+        entity_id: sensor.fish_tank_weather_current
         to: 'Overcast'  
     condition:
       condition: or
@@ -344,7 +344,7 @@ automation:
     hide_entity: false
     trigger:
       - platform: state
-        entity_id: sensor.current_weather
+        entity_id: sensor.fish_tank_weather_current
         to: 'Thunderstorms'
     action:
       - service: input_boolean.turn_on
@@ -365,7 +365,7 @@ automation:
     hide_entity: false
     trigger:
       - platform: state
-        entity_id: sensor.current_weather
+        entity_id: sensor.fish_tank_weather_current
         to: 'Rain'
     action:
       - service: input_boolean.turn_on
@@ -392,7 +392,7 @@ automation:
     hide_entity: false
     trigger:
       - platform: state
-        entity_id: sensor.current_weather
+        entity_id: sensor.fish_tank_weather_current
         from: 'Thunderstorms'
     action:    
       - service: input_boolean.turn_off
@@ -430,13 +430,13 @@ automation:
     hide_entity: false
     trigger:
       - platform: state
-        entity_id: sensor.current_weather
+        entity_id: sensor.fish_tank_weather_current
         from: 'Overcast'
       - platform: state
-        entity_id: sensor.current_weather
+        entity_id: sensor.fish_tank_weather_current
         from: 'Partly Cloudy' 
       - platform: state
-        entity_id: sensor.current_weather
+        entity_id: sensor.fish_tank_weather_current
         from: 'Mostly Cloudy'          
     condition:
       condition: or
@@ -478,7 +478,7 @@ automation:
     hide_entity: false
     trigger:
       - platform: state
-        entity_id: sensor.current_weather
+        entity_id: sensor.fish_tank_weather_current
         from: 'Rain'
     action:    
       - service: input_boolean.turn_off

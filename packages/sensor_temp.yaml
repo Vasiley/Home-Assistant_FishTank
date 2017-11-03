@@ -14,6 +14,10 @@ homeassistant:
       friendly_name: Water Temp
       icon: mdi:temperature-fahrenheit
       hasska_hidden: true
+    sensor.temp_reading:
+      friendly_name: Water Temp Reading
+      icon: mdi:temperature-fahrenheit
+      hasska_hidden: true  
           
       
 group:
@@ -24,9 +28,11 @@ group:
      - sensor.dht_sensor_humidity
      
   water_sensors:
-   name: Small Tank Sensors
+   name: Small Tank Temp Sensors
    entities:
      - sensor.water_temp_temperature
+     - input_boolean.boolean_tank_temp_warning
+     - sensor.temp_reading
      
 sensor:
   - platform: dht
@@ -40,8 +46,20 @@ sensor:
 
   - platform: onewire
     names:
-      28-0516a31216ff: Water Temp      
-     
+      28-0516a31216ff: Water Temp  
+      
+  - platform: template
+    sensors:
+      temp_reading:    
+        value_template: >-
+                     {% if states('sensor.water_temp_temperature') == 'Unknown' %} 
+                          Unknown
+                     {% elif states('sensor.water_temp_temperature') == 'Value' %}
+                        Ok
+                     {% else %}
+                        Ok
+                     {% endif %}              
+                 
 #### cmds to get second temp from pi     
 #### sudo modprobe w1-gpio   
 #### sudo dtoverlay w1-gpio gpiopin=17 pullup=0 # header pin 11

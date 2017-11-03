@@ -11,9 +11,26 @@ group:
      - sensor.current_weather  
      - sun.sun      
      - sensor.moon
+     - sensor.fish_tank_weather_condition
+     - sensor.fish_tank_weather_current
+     - sensor.fish_tank_weather_pressure
+     - sensor.fish_tank_weather_visibility
+     - sensor.fish_tank_weather_wind_speed
+    
+     
 sensor:
   - platform: rest
     resource: !secret weather_rest
     value_template: '{{ value_json.state }}'
     name: Current Weather
+    
   - platform: moon 
+      
+  - platform: yweather
+    monitored_conditions:
+      - weather
+      - weather_current
+      - wind_speed
+      - pressure
+      - visibility
+    name: Fish Tank Weather    

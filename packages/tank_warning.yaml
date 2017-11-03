@@ -1,0 +1,21 @@
+
+group:
+  warning_card:
+   control: hidden
+   name: Fish Tank Tank Warning
+   entities:
+     - binary_sensor.tank_warning
+     
+binary_sensor:
+  - platform: template
+    sensors:
+      tank_warning:
+        friendly_name: "Tank Warning"
+        entity_id:
+          - input_boolean.boolean_tank_water_level_warning
+          - input_boolean.boolean_tank_temp_warning
+          
+        value_template: >-
+          {{ is_state('input_boolean.boolean_tank_water_level_warning', 'on')
+             or is_state('input_boolean.boolean_tank_temp_warning', 'on') }}
+            

@@ -4,6 +4,14 @@ homeassistant:
       friendly_name: Heater Off
     automation.heater_on:
       friendly_name: Heater On
+    automation.tank_temp_needs_attention:
+      friendly_name: Tank Needs Attention
+    automation.tank_temp_ok:
+      friendly_name: Tank Ok    
+    input_boolean.boolean_tank_temp_warning:
+      friendly_name: Tank Temp Warning
+      hasska_hidden: true
+#      persistent: true  
       
 group:
   heater_card:
@@ -11,13 +19,20 @@ group:
    entities:
      - automation.heater_off
      - automation.heater_on   
-     - switch.relay_four      
+     - switch.relay_four   
+     - input_boolean.boolean_tank_temp_warning
+     - automation.tank_temp_needs_attention
+     
+input_boolean:
+  boolean_tank_temp_warning:
+    initial: off
+    
 automation:
   - alias: heater on
     initial_state: 'on'
     trigger:
       - platform: numeric_state
-        entity_id: sensor.water_temp  
+        entity_id: sensor.water_temp_temperature
         below: 76
     action:
       - service: switch.turn_on
@@ -27,10 +42,42 @@ automation:
     initial_state: 'on'
     trigger:
       - platform: numeric_state
-        entity_id: sensor.water_temp  
+        entity_id: sensor.water_temp_temperature
         above: 77
     action:
       - service: switch.turn_off
         entity_id: switch.relay_four
-              
-       
+        
+ #### This turns on boolean so that main ha will send a txt and push that there is a problem             
+  - alias: Tank Temp needs attention
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.water_temp_temperature
+        below: 68
+      - platform: numeric_state
+        entity_id: sensor.water_temp_temperature
+        above: 80 
+      - platform: state
+        entity_id: sensor.no_temp_reading
+        to: 'Unknown'        
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.boolean_tank_temp_warning   
+           
+  - alias: Tank Temp ok
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.water_temp_temperature
+        above: 68
+      - platform: numeric_state
+        entity_id: sensor.water_temp_temperature
+        below: 80
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.boolean_tank_temp_warning         
+          
+          
