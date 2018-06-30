@@ -36,17 +36,17 @@ automation:
         below: 76
     action:
       - service: switch.turn_on
-        entity_id: switch.relay_four
+        entity_id: switch.relay_two
       
   - alias: heater off
     initial_state: 'on'
     trigger:
       - platform: numeric_state
         entity_id: sensor.water_temp_temperature
-        above: 77
+        above: 78
     action:
       - service: switch.turn_off
-        entity_id: switch.relay_four
+        entity_id: switch.relay_two
         
  #### This turns on boolean so that main ha will send a txt and push that there is a problem             
   - alias: Tank Temp needs attention

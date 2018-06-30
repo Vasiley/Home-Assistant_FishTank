@@ -32,15 +32,26 @@ sun:
 browser:
   url: !secret browser
 
-
 group: !include tabs.yaml
 
 mqtt:
-  broker: 192.168.1.101
+  broker: 192.168.1.153
   port: 1883
-  client_id: home-assistant-1
+  client_id: home-assistant-2
   keepalive: 60
-  username: !secret mqtt_username
-  password: !secret mqtt_password
+  username: !secret mqtt_username_main
+  password: !secret mqtt_password_main
 
 config:
+
+mqtt_statestream:
+  base_topic: small_tank
+  publish_attributes: false
+  publish_timestamps: false
+  exclude:
+    domains:
+      - sun
+      - moon
+      - automation
+      - group
+

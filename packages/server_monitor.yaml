@@ -1,0 +1,73 @@
+homeassistant:
+  customize:
+    sensor.signal_strength:
+      icon: mdi:signal
+      hasska_hidden: true
+    sensor.link_quality:
+      icon: mdi:link-variant
+      hasska_hidden: true
+group:
+  ha_server_card:
+   name: Home Assistant Server Status
+   entities:
+     - sensor.server_cpu_temperature
+     - sensor.cpu_used
+     - sensor.ram_available
+     - sensor.ram_used
+     - sensor.disk_used_home
+     - sensor.check_charger
+     - input_select.log_level
+     - sensor.signal_strength
+     - sensor.link_quality
+
+
+sensor:
+######## Equipment ########
+
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_free
+      - type: processor_use
+      - type: memory_use
+
+  - platform: command_line
+    name: Server Cpu Temperature
+    command: cat /sys/class/thermal/thermal_zone0/temp
+    unit_of_measurement: '°C'
+    value_template: '{{ (value|int / 1000 )|round(1) }}'
+
+  ########## Wifi Signal and Link Quality
+
+  - platform: command_line
+    name: Signal Strength
+    command: "iwconfig wlan0 | grep -i signal"
+    value_template: >
+      {{ value.split(' ')[4].split('=')[1][1:] }}
+    unit_of_measurement: 'dBm'
+
+  - platform: command_line
+    name: Link Quality
+    command: "iwconfig wlan0 | grep -i signal"
+    value_template: >
+      {{ value.split(' ')[1].split('=')[1]  }}
+
+  - platform: command_line
+    name: 'System: undervoltage status'
+    command: vcgencmd get_throttled
+    scan_interval: 120
+
+  - platform: template
+    sensors:
+      check_charger:
+        friendly_name: "System: Charger"
+        value_template: >
+          {% if is_state("sensor.system_undervoltage_status", "throttled=0x0") -%}
+             No throttling detected
+          {% elif regex_match(states("sensor.system_undervoltage_status"), "throttled=0x4", ignorecase=FALSE) or
+              regex_match(states("sensor.system_undervoltage_status"), "throttled=0x5", ignorecase=FALSE) -%}
+              Throttling detected {{ states("sensor.system_number_of_undervoltage_messages") }} {{ state_attr("sensor.system_number_of_undervoltage_messages", "unit_of_measurement") }}
+          {% else -%}
+              There is a problem with your power supply or system, state {{ states("sensor.system_undervoltage_status") }} reported
+          {%- endif %}

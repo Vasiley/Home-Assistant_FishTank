@@ -26,6 +26,7 @@ group:
    entities:
      - sensor.dht_sensor_temperature
      - sensor.dht_sensor_humidity
+     - sensor.server_cpu_temperature
      
   water_sensors:
    name: Small Tank Temp Sensors
@@ -35,10 +36,11 @@ group:
      - sensor.temp_reading
      
 sensor:
+      
   - platform: dht
     sensor: DHT22
     pin: 4
-    temperature_offset: 15.0
+    temperature_offset: -9.9
     humidity_offset: -3.2
     monitored_conditions:
       - temperature

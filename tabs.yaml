@@ -14,7 +14,7 @@
    view: yes
    name: Equipment
    entities:
-     - group.PI_card
+     - group.ha_server_card
      - group.homeass_version_card
      
   automations_view:
@@ -25,13 +25,10 @@
      - group.lighting_automations_card
      - group.input_boolean_card
          
-  PI_card:
-   name: Pi
-   entities:
-     - sensor.cpu_used
-     - sensor.ram_available
-     - sensor.disk_used_home
-     - input_select.log_level
+#  PI_card:
+#   name: Pi
+ #  entities:
+ #     - group.ha_server_card
      
      
            

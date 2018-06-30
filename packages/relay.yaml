@@ -1,17 +1,22 @@
 homeassistant:
   customize:
- #   switch.relay_one:
- #    icon: mdi:water-pump
- #     friendly_name: White Lights
- #   switch.relay_two:
- #     icon: mdi:led-strip
- #     friendly_name: Blue Lights Left
     switch.relay_three:
+     icon: mdi:water-pump
+     friendly_name: HOB Filter
+     
+    switch.relay_one:
       icon: mdi:led-strip
       friendly_name: White Lights
-    switch.relay_four:
+      
+    switch.relay_two:
       icon: mdi:thermometer-lines
-      friendly_name: Heater  
+      friendly_name: Heater    
+      
+    switch.relay_four:
+     icon: mdi:led-strip
+     friendly_name: Fish Tank Led Controller
+    
+   
 group:
   relay_card:
    control: hidden
@@ -25,8 +30,8 @@ group:
 switch:
   - platform: rpi_gpio
     ports:
-      18: Relay One
+      18: Relay Three
+      25: Relay One
       23: Relay Two
-      25: Relay Three
       24: Relay Four 
     invert_logic: true  

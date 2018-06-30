@@ -142,7 +142,7 @@ automation:
           entity_id: light.fish_tank_leds
           brightness: 255
           rgb_color: [5,0,152]
-          transition: 1800
+          transition: 300
 
   - alias: "Sunrise"
     initial_state: true
@@ -185,7 +185,7 @@ automation:
           brightness: 255
           rgb_color: [5,0,152]
       - service: switch.turn_on
-        entity_id: switch.relay_three 
+        entity_id: switch.relay_one
 
   
         
@@ -209,14 +209,14 @@ automation:
         data:
           entity_id: input_boolean.boolean_afternoon
       - service: switch.turn_on
-        entity_id: switch.relay_three    
+        entity_id: switch.relay_one
       - service: light.turn_on
         data:
           entity_id: light.fish_tank_leds
 #          effect: solid
           brightness: 255
           rgb_color: [255,166,87]
-          transition: 1800
+          transition: 300
           
   - alias: "Sunset white Step 2"
     initial_state: true
@@ -233,7 +233,7 @@ automation:
         data:
           entity_id: input_boolean.boolean_evening
       - service: switch.turn_off
-        entity_id: switch.relay_three    
+        entity_id: switch.relay_one
         
   - alias: "Moon Lights Full Moon Sunset Step 3"
     initial_state: true
@@ -250,14 +250,14 @@ automation:
         data:
           entity_id: input_boolean.boolean_sunset
       - service: switch.turn_off
-        entity_id: switch.relay_three     
+        entity_id: switch.relay_one     
       - service: light.turn_on
         data:
           entity_id: light.fish_tank_leds
 #          effect: solid
           brightness: 255
           rgb_color: [5,0,152]
-          transition: 1800
+          transition: 300
 
   - alias: "Moon Lights Off Step 4"
     initial_state: true
@@ -278,7 +278,7 @@ automation:
           entity_id: light.fish_tank_leds
           brightness: 1
           rgb_color: [0,0,0]
-          transition: 1800  
+          transition: 300  
           
   - alias: "Moon Lights Off Step 5"
     initial_state: true
@@ -295,11 +295,12 @@ automation:
         data:
           entity_id: input_boolean.boolean_moon_lights_off
       - service: light.turn_off
-        entity_id: light.fish_tank_leds
-                  
-          
- #     - service: light.turn_off
-  #      entity_id: light.fish_tank_leds
+        entity_id: light.fish_tank_leds          
+      # - service: switch.turn_off
+        # entity_id: switch.relay_four
+      # - delay: '00:00:05'  
+      # - service: switch.turn_on
+        # entity_id: switch.relay_four  
 ######### Weather Effects     #######################
 
   - alias: "midday_partlycloudy_overcast"
@@ -337,7 +338,7 @@ automation:
           brightness: 255
           effect: cloudy
       - service: switch.turn_off
-        entity_id: switch.relay_three
+        entity_id: switch.relay_one
         
   - alias: "Thunderstorms"
     initial_state: true
@@ -353,7 +354,7 @@ automation:
       - service: light.turn_off
         entity_id: light.fish_tank_leds
       - service: switch.turn_off
-        entity_id: switch.relay_three  
+        entity_id: switch.relay_one  
       - service: light.turn_on
         data:
           entity_id: light.fish_tank_leds
@@ -374,7 +375,7 @@ automation:
       - service: light.turn_off
         entity_id: light.fish_tank_leds
       - service: switch.turn_off
-        entity_id: switch.relay_three
+        entity_id: switch.relay_one
       - service: input_number.select_value
         data:
           entity_id: smalltank_led_animation_speed

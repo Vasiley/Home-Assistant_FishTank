@@ -11,7 +11,12 @@ homeassistant:
       friendly_name: Home Assistant Uptime
       icon: mdi:home-assistant
       hasska_hidden: true
-    
+    sensor.signal_strength:
+      icon: mdi:signal
+      hasska_hidden: true      
+    sensor.link_quality:
+      icon: mdi:link-variant 
+      hasska_hidden: true    
 
 group:
   homeass_version_card:
@@ -20,6 +25,8 @@ group:
      - sensor.hass_uptime
      - sensor.ha_version
      - sensor.installed_version
+     - sensor.signal_strength
+     - sensor.link_quality
      - script.update_home_assistant_home      
 
 sensor:
@@ -48,7 +55,7 @@ sensor:
           {% else %}
             mdi:checkbox-blank-outline
           {% endif %} 
-
+          
   - platform: command_line
     name: "HASS Uptime"
     command: echo "$(($(date +%s) - $(date -d "$(head -n1 /home/homeassistant/.homeassistant/home-assistant.log | cut -d' ' -f-2)" +%s)))"
@@ -67,7 +74,23 @@ sensor:
         {%- endif -%}
         {{ ', ' }}
       {%- endif -%}
-      {{ '%02d' % hours }}:{{ '%02d' % minutes }}          
+      {{ '%02d' % hours }}:{{ '%02d' % minutes }} 
+      
+########## Wifi Signal and Link Quality
+
+  - platform: command_line
+    name: Signal Strength
+    command: "iwconfig wlan0 | grep -i signal"
+    value_template: >
+      {{ value.split(' ')[4].split('=')[1][1:] }}
+    unit_of_measurement: 'dBm'
+
+  - platform: command_line
+    name: Link Quality
+    command: "iwconfig wlan0 | grep -i signal"
+    value_template: >
+      {{ value.split(' ')[1].split('=')[1]  }} 
+      
 script:
   update_home_assistant_home:
     sequence: 
