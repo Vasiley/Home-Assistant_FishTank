@@ -58,6 +58,12 @@ sensor:
     command: vcgencmd get_throttled
     scan_interval: 120
 
+  - platform: command_line
+    name: 'System: number_of_undervoltage_messages'
+    command: "dmesg | grep Under-voltage | wc -l"
+    unit_of_measurement: 'times'
+    scan_interval: 120
+
   - platform: template
     sensors:
       check_charger:

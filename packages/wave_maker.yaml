@@ -1,0 +1,142 @@
+homeassistant:
+  customize:
+    script.pump_cycle_on:
+     icon: mdi:water-pump
+     friendly_name: Wave Maker On
+    script.pump_cycle_off:
+     icon: mdi:water-pump
+     friendly_name: Wave Maker Off
+    script.feeding_time_on:
+      friendly_name: Feeding Time On
+    script.feeding_time_off:
+      friendly_name: Feeding Time Off
+    input_boolean.boolean_feeding_time_on:
+      friendly_name: Feeding Time
+    input_boolean.pump_on:
+      friendly_name: Wave Maker On
+    input_boolean.pump_off:
+      friendly_name: Wave Maker Off 
+    automation.pump_routine_start:
+      friendly_name: Wave Maker Start Routine
+    automation.pump_on_routine:
+      friendly_name: Wave Maker Cycle On
+    automation.pump_off_routine:
+      friendly_name: Wave Maker Cycle Off    
+    automation.pump_off:
+      friendly_name: Wave Maker Off    
+
+group:
+  wave_maker_card:
+   control: hidden
+   name: Wave Maker
+   entities:
+     - script.pump_cycle_on
+     - script.pump_cycle_off
+     - script.feeding_time_off
+     - script.feeding_time_off
+     - input_boolean.boolean_feeding_time_on
+     - input_boolean.pump_on
+     - input_boolean.pump_off
+     - automation.pump_routine_start
+     - automation.pump_on_routine
+     - automation.pump_off_routine
+     - automation.pump_off
+     
+input_boolean:
+  boolean_feeding_time_on:
+    initial: off
+  pump_on:
+    initial: off
+  pump_off:
+    initial: off
+
+script:
+  pump_cycle_off:
+    sequence:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.pump_off
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.pump_on
+      - delay: '00:30:00'
+      - service: script.turn_on
+        entity_id: script.pump_cycle_on
+
+  pump_cycle_on:
+    sequence:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.pump_off
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.pump_on
+      - delay: '00:30:00'
+      - service: script.turn_on
+        entity_id: script.pump_cycle_off
+        
+  feeding_time_on:
+    sequence:
+      - delay: '00:00:01'
+      - service: switch.turn_off
+        entity_id: 
+          - switch.relay_one
+          - switch.relay_three
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.boolean_feeding_time_on
+      
+
+  feeding_time_off:
+    sequence:
+      - delay: '00:00:01'
+      - service: switch.turn_on
+        entity_id: 
+          - switch.relay_one
+          - switch.relay_three
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.boolean_feeding_time_on
+      - service: script.turn_on
+        entity_id: script.pump_cycle_on
+        
+automation:
+  - alias: 'pump_routine_start'
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.boolean_midday
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.pump_cycle_on
+  
+  - alias: 'pump_on_routine'
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.pump_on
+        to: 'on'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.relay_one
+
+  - alias: 'pump_off_routine'
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.pump_off
+        to: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.relay_one 
+
+  - alias: 'pump_off'
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.boolean_leds_off
+        to: 'on'
+    action:
+      - service: script.turn_off
+        entity_id: 
+          - script.pump_cycle_off
+          - script.pump_cycle_on
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.pump_on
+        
+        

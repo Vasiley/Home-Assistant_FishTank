@@ -1,0 +1,35 @@
+homeassistant:
+  customize:
+    automation.midnight_blue:
+      friendly_name: Midnight Blue
+      hasska_hidden: true
+    input_boolean.boolean_midnight_blue:
+      friendly_name: Midnight Blue
+      hasska_hidden: true
+
+input_boolean:
+  boolean_midnight_blue:
+    initial: off
+
+automation:
+  - alias: "midnight_blue"
+    initial_state: true
+    hide_entity: false
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: "-01:00:00"
+      - platform: sun
+        event: sunset
+        offset: "00:30:00"  
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: group.input_boolean_card
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.boolean_midnight_blue
+      - service: shell_command.midnight_blue
+
+shell_command:
+  midnight_blue: 'echo -n "b" > /dev/ttyACM0 115200'

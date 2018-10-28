@@ -1,0 +1,36 @@
+homeassistant:
+  customize:
+    automation.moon_lights:
+      friendly_name: Moon Lights
+      hasska_hidden: true
+    input_boolean.boolean_moonlight:
+      friendly_name: Moon Light
+      hasska_hidden: true
+
+input_boolean:
+  boolean_moonlight:
+    initial: off
+    
+automation:
+  - alias: "moon_lights"
+    initial_state: true
+    hide_entity: false
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: "00:45:00"
+    condition:
+      - condition: state
+        entity_id: sensor.moon
+        state: 'full_moon'        
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: group.input_boolean_card
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.boolean_moonlight
+      - service: shell_command.moon
+
+shell_command:
+    moon: 'echo -n "z" > /dev/ttyACM0 115200'

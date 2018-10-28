@@ -1,0 +1,32 @@
+homeassistant:
+  customize:
+    automation.leds_off:
+      friendly_name: Leds Off
+      hasska_hidden: true
+    input_boolean.boolean_leds_off:
+      friendly_name: Leds Off
+      hasska_hidden: true
+
+input_boolean:
+  boolean_leds_off:
+    initial: off
+    
+automation:
+  - alias: "leds_off"
+    initial_state: true
+    hide_entity: false
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: "01:00:00"
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: group.input_boolean_card
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.boolean_leds_off
+      - service: shell_command.leds_off
+
+shell_command:
+    leds_off: 'echo -n "o" > /dev/ttyACM0 115200'

@@ -1,0 +1,38 @@
+homeassistant:
+  customize:
+    input_boolean.boolean_morning_evening:
+      friendly_name: Morning/Evening
+      hasska_hidden: true
+    automation.morning_evening:
+      friendly_name: Morning/Evening
+      hasska_hidden: true      
+      
+input_boolean:
+  boolean_morning_evening:
+    initial: off
+    
+automation:
+  - alias: "morning_evening"
+    initial_state: true
+    hide_entity: false
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: "00:30:00"
+      - platform: sun
+        event: sunset
+        offset: "-02:00:00"
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: group.input_boolean_card
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.boolean_morning_evening
+      - service: shell_command.morning_evening
+
+      
+shell_command:
+  morning_evening: 'echo -n "e" > /dev/ttyACM0 115200'      
+    
+    

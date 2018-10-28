@@ -3,20 +3,18 @@ homeassistant:
     switch.relay_three:
      icon: mdi:water-pump
      friendly_name: HOB Filter
-     
+
     switch.relay_one:
-      icon: mdi:led-strip
-      friendly_name: White Lights
-      
+      friendly_name: Wave Pump
+
     switch.relay_two:
       icon: mdi:thermometer-lines
-      friendly_name: Heater    
-      
+      friendly_name: Heater
+
     switch.relay_four:
-     icon: mdi:led-strip
-     friendly_name: Fish Tank Led Controller
-    
-   
+      friendly_name: Not Used
+
+
 group:
   relay_card:
    control: hidden
@@ -33,5 +31,5 @@ switch:
       18: Relay Three
       25: Relay One
       23: Relay Two
-      24: Relay Four 
-    invert_logic: true  
+      24: Relay Four
+    invert_logic: true

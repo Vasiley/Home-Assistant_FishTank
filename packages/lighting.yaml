@@ -1,542 +1,351 @@
 homeassistant:
-  customize:
-    automation.moon_lights_full_moon_sunrise:
-      friendly_name: Morning Moon
-      hasska_hidden: true
-    automation.sunrise:
-      friendly_name: Sunrise
-      hasska_hidden: true
-    automation.midday_sunny:
-      friendly_name: Midday Sunny
-      hasska_hidden: true
-    automation.midday_partlycloudy_overcast:
-      friendly_name: Midday Cloudy
-      hasska_hidden: true
-    automation.thunderstorms:   
-      friendly_name: Thunderstorms
-      hasska_hidden: true
-    automation.sunset_leds_step_1:
-      friendly_name: Afternoon 
-      hasska_hidden: true      
-    automation.sunset_white_step_2:
-      friendly_name: Evening
-      hasska_hidden: true
-    automation.moon_lights_full_moon_sunset_step_3:  
-      friendly_name: Sunset
-      hasska_hidden: true
-    automation.moon_lights_off_step_4:
-      friendly_name: Lights Off
-      hasska_hidden: true     
-    automation.moon_lights_off_step_5:
-      friendly_name: Fade Moon Lights
-      hasska_hidden: true      
-    automation.weather_change_thunderstorms:
-      friendly_name: Thunderstorms Off
-      hasska_hidden: true
-    automation.weather_change_cloudy:
-      friendly_name: Cloudy Off
-      hasska_hidden: true 
-    automation.rain:
-      friendly_name: Rain
-      hasska_hidden: true      
-    automation.weather_change_rain:
-      friendly_name: Rain Off
-      hasska_hidden: true      
-      
- 
+#   customize:
+
+
+#     automation.midmorning:
+#       friendly_name: Midmorning
+#       hasska_hidden: true
+#     automation.midday_sunny:
+#       friendly_name: Midday Sunny
+#       hasska_hidden: true
+#     # automation.midday_partlycloudy_overcast:
+#     #   friendly_name: Midday Cloudy
+#     #   hasska_hidden: true
+#     # automation.thunderstorms:
+#     #   friendly_name: Thunderstorms
+#     #   hasska_hidden: true
+
+#     automation.leds_off:
+#       friendly_name: Lights Off
+#       hasska_hidden: true
+    # automation.moon_lights_off_step_5:
+    #   friendly_name: Fade Moon Lights
+    #   hasska_hidden: true
+    # automation.weather_change_thunderstorms:
+    #   friendly_name: Thunderstorms Off
+    #   hasska_hidden: true
+    # automation.weather_change_cloudy:
+    #   friendly_name: Cloudy Off
+    #   hasska_hidden: true
+    # automation.rain:
+    #   friendly_name: Rain
+    #   hasska_hidden: true
+    # automation.weather_change_rain:
+    #   friendly_name: Rain Off
+    #   hasska_hidden: true
+
+
 group:
   lighting_card:
    control: hidden
    name: Fish Tank Leds
    entities:
-     - light.fish_tank_leds
-     - input_number.smalltank_led_animation_speed
-     - script.led_white_fish_tank
-     - script.led_blue_full_moon
+#      - script.led_white_fish_tank
+#      - script.led_off
+#      - script.led_blue
+#      - script.led_daylight
+#      - script.led_sunrise
+#      - script.led_midmorning
+#      - script.led_sunset
      - sensor.small_tank_lights_mode
      - sensor.small_tank_lights_weather
-     
+
   lighting_automations_card:
     control: hidden
     name: Fish Tank Leds Automations
-    entities:      
-      - automation.moon_lights_full_moon_sunrise
+    entities:
+      - automation.moon_lights
+      - automation.midnight_blue
       - automation.sunrise
-      - automation.midday_sunny
-      - automation.midday_partlycloudy_overcast
-      - automation.weather_change_cloudy
-      - automation.thunderstorms  
-      - automation.weather_change_thunderstorms      
-      - automation.sunset_leds_step_1   
-      - automation.sunset_white_step_2
-      - automation.moon_lights_full_moon_sunset_step_3 
-      - automation.moon_lights_off_step_4     
-      - automation.moon_lights_off_step_5
-      - automation.rain   
-      - automation.weather_change_rain      
-      
-light:
-  - platform: mqtt_json
-    name: fish_tank_leds
-    state_topic: "vasiley/fishtankled"
-    command_topic: "vasiley/fishtankled/set"
-    effect: true
-    effect_list:
-      - bpm
-      - candy cane
-      - confetti
-      - cyclon rainbow
-      - dots
-      - fire
-      - glitter
-      - juggle
-      - lightning
-      - noise
-      - police all
-      - police one
-      - rainbow
-      - rainbow with glitter
-      - ripple
-      - sinelon
-      - solid
-      - twinkle
-      - cloudy
-    brightness: true
-    flash: true
-    rgb: true
-    color_temp: true
-    optimistic: false
-    qos: 0
+      - automation.morning_evening
+      - automation.midday
+      # - automation.midday_partlycloudy_overcast
+      # - automation.weather_change_cloudy
+      # - automation.thunderstorms
+      # - automation.weather_change_thunderstorms
+      - automation.sunset
+      # - automation.sunset_white_step_2
+#      - automation.moon_lights_sunset
 
-automation:
-  - alias: "LED Animation Speed"
-    initial_state: true
-    hide_entity: true
-    trigger:
-      - platform: state
-        entity_id: input_number.smalltank_led_animation_speed
-    action:
-      - service: mqtt.publish
-        data_template:
-          topic: "vasiley/fishtankled/set"
-          payload: '{"transition":{{ trigger.to_state.state | int }}}'
+      - automation.leds_off
+      # - automation.moon_lights_off_step_5
+      # - automation.rain
+      # - automation.weather_change_rain
 
+# automation:
 
-############### Sunrise   ###########################
-  - alias: "Moon Lights Full Moon Sunrise"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: sun
-        event: sunrise
-        offset: "-01:00:00"
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: group.input_boolean_card
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_morning_moon
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          brightness: 255
-          rgb_color: [5,0,152]
-          transition: 300
-
-  - alias: "Sunrise"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: sun
-        event: sunrise
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: group.input_boolean_card
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_sunrise
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          brightness: 255
-          rgb_color: [255,166,87]
-          transition: 60
-
-################   MIDDAY    ##############################
-  - alias: "Midday Sunny"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: sun
-        event: sunrise
-        offset: "03:30:00"
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: group.input_boolean_card
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_midday_sunny
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          brightness: 255
-          rgb_color: [5,0,152]
-      - service: switch.turn_on
-        entity_id: switch.relay_one
-
-  
-        
   ############# Sunset    ########################################
-  - alias: "Sunset Leds Step 1"  
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: sun
-        event: sunset
-        offset: "-02:00:00"
-    condition:
-      - condition: state
-        entity_id: input_boolean.boolean_midday_cloudy
-        state: 'off'        
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: group.input_boolean_card
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_afternoon
-      - service: switch.turn_on
-        entity_id: switch.relay_one
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-#          effect: solid
-          brightness: 255
-          rgb_color: [255,166,87]
-          transition: 300
-          
-  - alias: "Sunset white Step 2"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: sun
-        event: sunset
-        offset: "-01:00:00"
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: group.input_boolean_card
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_evening
-      - service: switch.turn_off
-        entity_id: switch.relay_one
-        
-  - alias: "Moon Lights Full Moon Sunset Step 3"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: sun
-        event: sunset
-        offset: "00:00:00"
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: group.input_boolean_card
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_sunset
-      - service: switch.turn_off
-        entity_id: switch.relay_one     
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-#          effect: solid
-          brightness: 255
-          rgb_color: [5,0,152]
-          transition: 300
+  # - alias: "Sunset Leds Step 1"
+  #   initial_state: true
+  #   hide_entity: false
+  #   trigger:
+  #     - platform: sun
+  #       event: sunset
+  #       offset: "-02:00:00"
+  #   condition:
+  #     - condition: state
+  #       entity_id: input_boolean.boolean_midday_cloudy
+  #       state: 'off'
+  #   action:
+  #     - service: input_boolean.turn_off
+  #       data:
+  #         entity_id: group.input_boolean_card
+  #     - service: input_boolean.turn_on
+  #       data:
+  #         entity_id: input_boolean.boolean_afternoon
+  #     - service: script.turn_on
+  #       entity_id: script.led_blue
 
-  - alias: "Moon Lights Off Step 4"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: sun
-        event: sunset
-        offset: "01:00:00"
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: group.input_boolean_card
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_moon_fade
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          brightness: 1
-          rgb_color: [0,0,0]
-          transition: 300  
-          
-  - alias: "Moon Lights Off Step 5"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: sun
-        event: sunset
-        offset: "02:31:00"
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: group.input_boolean_card
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_moon_lights_off
-      - service: light.turn_off
-        entity_id: light.fish_tank_leds          
-      # - service: switch.turn_off
-        # entity_id: switch.relay_four
-      # - delay: '00:00:05'  
-      # - service: switch.turn_on
-        # entity_id: switch.relay_four  
+  #
+  # - alias: "dark"
+  #   initial_state: true
+  #   hide_entity: false
+  #   trigger:
+  #     - platform: sun
+  #       event: sunset
+  #       offset: "00:30:00"
+  #   action:
+  #     - service: input_boolean.turn_off
+  #       data:
+  #         entity_id: group.input_boolean_card
+  #     - service: input_boolean.turn_on
+  #       data:
+  #         entity_id: input_boolean.boolean_sunset
+  #     - service: script.turn_on
+  #       entity_id: script.led_off
+  #     - delay: '00:00:05'
+  #     - service: script.turn_on
+  #       entity_id: script.led_blue
+  #
+  # - alias: "leds_off"
+  #   initial_state: true
+  #   hide_entity: false
+  #   trigger:
+  #     - platform: sun
+  #       event: sunset
+  #       offset: "02:00:00"
+  #   action:
+  #     - service: input_boolean.turn_off
+  #       data:
+  #         entity_id: group.input_boolean_card
+  #     - service: input_boolean.turn_on
+  #       data:
+  #         entity_id: input_boolean.boolean_moon_fade
+  #     - delay: '00:00:05'
+  #     - service: script.turn_on
+  #       entity_id: script.led_off
+  # - alias: "Moon Lights Off Step 5"
+  #   initial_state: true
+  #   hide_entity: false
+  #   trigger:
+  #     - platform: sun
+  #       event: sunset
+  #       offset: "02:31:00"
+  #   action:
+  #     - service: input_boolean.turn_off
+  #       data:
+  #         entity_id: group.input_boolean_card
+  #     - service: input_boolean.turn_on
+  #       data:
+  #         entity_id: input_boolean.boolean_moon_lights_off
 ######### Weather Effects     #######################
 
-  - alias: "midday_partlycloudy_overcast"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: state
-        entity_id: sensor.fish_tank_weather_current
-        to: 'Partly Cloudy' 
-      - platform: state
-        entity_id: sensor.fish_tank_weather_current
-        to: 'Overcast'  
-    condition:
-      condition: or
-      conditions:
-        - condition: state
-          entity_id: input_boolean.boolean_midday_sunny
-          state: 'on'
-        - condition: state
-          entity_id: input_boolean.boolean_afternoon
-          state: 'on'
-        - condition: state
-          entity_id: input_boolean.boolean_evening
-          state: 'on'    
-    action:
-      # - service: input_boolean.turn_off
-        # data:
-          # entity_id: group.input_boolean_card
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_midday_cloudy
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          brightness: 255
-          effect: cloudy
-      - service: switch.turn_off
-        entity_id: switch.relay_one
-        
-  - alias: "Thunderstorms"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: state
-        entity_id: sensor.fish_tank_weather_current
-        to: 'Thunderstorms'
-    action:
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_thunderstorm
-      - service: light.turn_off
-        entity_id: light.fish_tank_leds
-      - service: switch.turn_off
-        entity_id: switch.relay_one  
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          brightness: 255
-          effect: lightning  
+  # - alias: "midday_partlycloudy_overcast"
+  #   initial_state: true
+  #   hide_entity: false
+  #   trigger:
+  #     - platform: state
+  #       entity_id: sensor.fish_tank_weather_current
+  #       to: 'Partly Cloudy'
+  #     - platform: state
+  #       entity_id: sensor.fish_tank_weather_current
+  #       to: 'Overcast'
+  #   condition:
+  #     condition: or
+  #     conditions:
+  #       - condition: state
+  #         entity_id: input_boolean.boolean_midday_sunny
+  #         state: 'on'
+  #       - condition: state
+  #         entity_id: input_boolean.boolean_afternoon
+  #         state: 'on'
+  #       - condition: state
+  #         entity_id: input_boolean.boolean_evening
+  #         state: 'on'
+  #   action:
+  #     - service: input_boolean.turn_on
+  #       data:
+  #         entity_id: input_boolean.boolean_midday_cloudy
+  #
+  # - alias: "Thunderstorms"
+  #   initial_state: true
+  #   hide_entity: false
+  #   trigger:
+  #     - platform: state
+  #       entity_id: sensor.fish_tank_weather_current
+  #       to: 'Thunderstorms'
+  #   action:
+  #     - service: input_boolean.turn_on
+  #       data:
+  #         entity_id: input_boolean.boolean_thunderstorm
+  #
+  # - alias: "Rain"
+  #   initial_state: true
+  #   hide_entity: false
+  #   trigger:
+  #     - platform: state
+  #       entity_id: sensor.fish_tank_weather_current
+  #       to: 'Rain'
+  #   action:
+  #     - service: input_boolean.turn_on
+  #       data:
+  #         entity_id: input_boolean.boolean_rain
+  #
+  # - alias: "Weather Change Thunderstorms"
+  #   initial_state: true
+  #   hide_entity: false
+  #   trigger:
+  #     - platform: state
+  #       entity_id: sensor.fish_tank_weather_current
+  #       from: 'Thunderstorms'
+  #   action:
+  #     - service: input_boolean.turn_off
+  #       data:
+  #         entity_id: input_boolean.boolean_thunderstorm
+  #     - service: automation.trigger
+  #       data_template:
+  #         entity_id: >
+  #                      {% if states('input_boolean.boolean_morning_moon') == 'on' %}
+  #                         automation.moon_lights_full_moon_sunrise
+  #                      {% elif states('input_boolean.boolean_sunrise') == 'on' %}
+  #                         automation.sunrise
+  #                      {% elif states('input_boolean.boolean_midday_sunny') == 'on' %}
+  #                         automation.midday_sunny
+  #                      {% elif states('input_boolean.boolean_afternoon') == 'on' %}
+  #                         automation.sunset_leds_step_1
+  #                      {% elif states('input_boolean.boolean_evening') == 'on' %}
+  #                         automation.sunset_white_step_2
+  #                      {% elif states('input_boolean.boolean_sunset') == 'on' %}
+  #                         automation.moon_lights_full_moon_sunset_step_3
+  #                      {% elif states('input_boolean.boolean_moon_lights_off') == 'on' %}
+  #                         automation.moon_lights_off_step_4
+  #                      {% else %}
+  #                         automation.midday_sunny
+  #                      {% endif %}
+  #
+  # - alias: "Weather Change Cloudy"
+  #   initial_state: true
+  #   hide_entity: false
+  #   trigger:
+  #     - platform: state
+  #       entity_id: sensor.fish_tank_weather_current
+  #       from: 'Overcast'
+  #     - platform: state
+  #       entity_id: sensor.fish_tank_weather_current
+  #       from: 'Partly Cloudy'
+  #     - platform: state
+  #       entity_id: sensor.fish_tank_weather_current
+  #       from: 'Mostly Cloudy'
+  #   condition:
+  #     condition: or
+  #     conditions:
+  #       - condition: state
+  #         entity_id: input_boolean.boolean_midday_sunny
+  #         state: 'on'
+  #       - condition: state
+  #         entity_id: input_boolean.boolean_afternoon
+  #         state: 'on'
+  #       - condition: state
+  #         entity_id: input_boolean.boolean_evening
+  #         state: 'on'
+  #   action:
+  #     - service: input_boolean.turn_off
+  #       data:
+  #         entity_id: input_boolean.boolean_midday_cloudy
+  #     - service: automation.trigger
+  #       data_template:
+  #         entity_id: >
+  #                      {% if states('input_boolean.boolean_midday_sunny') == 'on' %}
+  #                          automation.midday_sunny
+  #                      {% elif states('input_boolean.boolean_afternoon') == 'on' %}
+  #                          automation.sunset_leds_step_1
+  #                      {% elif states('input_boolean.boolean_evening') == 'on' %}
+  #                          automation.sunset_white_step_2
+  #                      {% else %}
+  #                         #  None
+  #                      {% endif %}
+  #
+  # - alias: "Weather Change Rain"
+  #   initial_state: true
+  #   hide_entity: false
+  #   trigger:
+  #     - platform: state
+  #       entity_id: sensor.fish_tank_weather_current
+  #       from: 'Rain'
+  #   action:
+  #     - service: input_boolean.turn_off
+  #       data:
+  #         entity_id: input_boolean.boolean_rain
+  #     - service: automation.trigger
+  #       data_template:
+  #         entity_id: >
+  #                      {% if states('input_boolean.boolean_morning_moon') == 'on' %}
+  #                         automation.moon_lights_full_moon_sunrise
+  #                      {% elif states('input_boolean.boolean_sunrise') == 'on' %}
+  #                         automation.sunrise
+  #                      {% elif states('input_boolean.boolean_midday_sunny') == 'on' %}
+  #                         automation.midday_sunny
+  #                      {% elif states('input_boolean.boolean_afternoon') == 'on' %}
+  #                         automation.sunset_leds_step_1
+  #                      {% elif states('input_boolean.boolean_evening') == 'on' %}
+  #                         automation.sunset_white_step_2
+  #                      {% elif states('input_boolean.boolean_sunset') == 'on' %}
+  #                         automation.moon_lights_full_moon_sunset_step_3
+  #                      {% elif states('input_boolean.boolean_moon_lights_off') == 'on' %}
+  #                         automation.moon_lights_off_step_4
+  #                      {% else %}
+  #                         automation.midday_sunny
+  #                      {% endif %}
 
-  - alias: "Rain"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: state
-        entity_id: sensor.fish_tank_weather_current
-        to: 'Rain'
-    action:
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.boolean_rain
-      - service: light.turn_off
-        entity_id: light.fish_tank_leds
-      - service: switch.turn_off
-        entity_id: switch.relay_one
-      - service: input_number.select_value
-        data:
-          entity_id: smalltank_led_animation_speed
-          value: 11.0          
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          brightness: 255
-          effect: glitter        
-          rgb_color: [009,000,230]
-###########   Return to previous state          
-  
-  - alias: "Weather Change Thunderstorms"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: state
-        entity_id: sensor.fish_tank_weather_current
-        from: 'Thunderstorms'
-    action:    
-      - service: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.boolean_thunderstorm
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          brightness: 255
-          rgb_color: [001,001,001]
-          effect: solid
-      - service: automation.trigger    
-        data_template: 
-          entity_id: >
-                       {% if states('input_boolean.boolean_morning_moon') == 'on' %}
-                          automation.moon_lights_full_moon_sunrise
-                       {% elif states('input_boolean.boolean_sunrise') == 'on' %}
-                          automation.sunrise
-                       {% elif states('input_boolean.boolean_midday_sunny') == 'on' %}
-                          automation.midday_sunny
-                       {% elif states('input_boolean.boolean_afternoon') == 'on' %}
-                          automation.sunset_leds_step_1
-                       {% elif states('input_boolean.boolean_evening') == 'on' %}
-                          automation.sunset_white_step_2 
-                       {% elif states('input_boolean.boolean_sunset') == 'on' %}
-                          automation.moon_lights_full_moon_sunset_step_3
-                       {% elif states('input_boolean.boolean_moon_lights_off') == 'on' %}
-                          automation.moon_lights_off_step_4
-                       {% else %}
-                          automation.midday_sunny                            
-                       {% endif %}     
-                          
-  - alias: "Weather Change Cloudy"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: state
-        entity_id: sensor.fish_tank_weather_current
-        from: 'Overcast'
-      - platform: state
-        entity_id: sensor.fish_tank_weather_current
-        from: 'Partly Cloudy' 
-      - platform: state
-        entity_id: sensor.fish_tank_weather_current
-        from: 'Mostly Cloudy'          
-    condition:
-      condition: or
-      conditions:
-        - condition: state
-          entity_id: input_boolean.boolean_midday_sunny
-          state: 'on'
-        - condition: state
-          entity_id: input_boolean.boolean_afternoon
-          state: 'on'
-        - condition: state
-          entity_id: input_boolean.boolean_evening
-          state: 'on'
-    action:   
-      - service: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.boolean_midday_cloudy 
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          brightness: 255
-          rgb_color: [001,001,001]
-          effect: solid
-      - service: automation.trigger    
-        data_template: 
-          entity_id: >
-                       {% if states('input_boolean.boolean_midday_sunny') == 'on' %}
-                           automation.midday_sunny
-                       {% elif states('input_boolean.boolean_afternoon') == 'on' %}
-                           automation.sunset_leds_step_1
-                       {% elif states('input_boolean.boolean_evening') == 'on' %}
-                           automation.sunset_white_step_2 
-                       {% else %}
-                          #  None
-                       {% endif %}                               
-  
-  - alias: "Weather Change Rain"
-    initial_state: true
-    hide_entity: false
-    trigger:
-      - platform: state
-        entity_id: sensor.fish_tank_weather_current
-        from: 'Rain'
-    action:    
-      - service: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.boolean_rain
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          brightness: 255
-          rgb_color: [001,001,001]
-          effect: solid
-      - service: automation.trigger    
-        data_template: 
-          entity_id: >
-                       {% if states('input_boolean.boolean_morning_moon') == 'on' %}
-                          automation.moon_lights_full_moon_sunrise
-                       {% elif states('input_boolean.boolean_sunrise') == 'on' %}
-                          automation.sunrise
-                       {% elif states('input_boolean.boolean_midday_sunny') == 'on' %}
-                          automation.midday_sunny
-                       {% elif states('input_boolean.boolean_afternoon') == 'on' %}
-                          automation.sunset_leds_step_1
-                       {% elif states('input_boolean.boolean_evening') == 'on' %}
-                          automation.sunset_white_step_2 
-                       {% elif states('input_boolean.boolean_sunset') == 'on' %}
-                          automation.moon_lights_full_moon_sunset_step_3
-                       {% elif states('input_boolean.boolean_moon_lights_off') == 'on' %}
-                          automation.moon_lights_off_step_4
-                       {% else %}
-                          automation.midday_sunny                            
-                       {% endif %}   
-             
-         
-input_number:
-  smalltank_led_animation_speed:
-    name: Fish Tank Animation Speed
-    initial: 150
-    min: 1
-    max: 150
-    step: 10
+# script:
+#   led_white_fish_tank:
+#     sequence:
+#       - delay: '00:00:01'
+#       - service: shell_command.white_on
+#   led_blue:
+#     sequence:
+#       - delay: '00:00:01'
+#       - service: shell_command.blue
+#   led_daylight:
+#     sequence:
+#       - delay: '00:00:01'
+#       - service: shell_command.daylight
+#   led_off:
+#     sequence:
+#       - delay: '00:00:01'
+#       - service: shell_command.all_off
+#   led_sunrise:
+#     sequence:
+#       - delay: '00:00:01'
+#       - service: shell_command.sunrise
+#   led_midmorning:
+#     sequence:
+#       - delay: '00:00:01'
+#       - service: shell_command.midmorning
+#   led_sunset:
+#     sequence:
+#       - delay: '00:00:01'
+#       - service: shell_command.sunset
+#   # led_moonlight:
+#   #   sequence:
+#   #     - delay: '00:00:01'
+#   #     - service: shell_command.moonlight
+#
+# shell_command:
+#   white_on: 'echo -e  -n "w" > /dev/ttyACM0
 
-script:
-  led_white_fish_tank:
-    sequence:
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          effect: solid
-          brightness: 255
-          rgb_color: [255,166,87]
 
-  led_blue_full_moon:
-    sequence:
-      - service: light.turn_on
-        data:
-          entity_id: light.fish_tank_leds
-          effect: solid
-          brightness: 255
-          rgb_color: [5,0,152]
-       
+
+
+
+

@@ -1,0 +1,32 @@
+homeassistant:
+  customize:
+    input_boolean.boolean_sunset:
+      friendly_name: Sunset
+      hasska_hidden: true
+    automation.sunset:
+      friendly_name: Sunset
+      hasska_hidden: true
+
+input_boolean:
+  boolean_sunset:
+    initial: off
+
+automation:
+  - alias: "sunset"
+    initial_state: true
+    hide_entity: false
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: "-00:30:00"
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: group.input_boolean_card
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.boolean_sunset
+      - service: shell_command.sunset
+
+shell_command:
+  sunset: 'echo -n "a" > /dev/ttyACM0 115200'

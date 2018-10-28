@@ -1,25 +1,29 @@
 homeassistant:
   customize:
-    sensor.dht_sensor_temperature:   
-      friendly_name: Ha Temperature 
+    sensor.dht_sensor_temperature:
+      friendly_name: Hood Temperature
       icon: mdi:temperature-fahrenheit
-      hasska_hidden: true  
-      unit_of_measurement: '°F'      
+      hasska_hidden: true
+      unit_of_measurement: '°F'
     sensor.dht_sensor_humidity:
-      friendly_name: Ha Humidity
+      friendly_name: Hood Humidity
       icon: mdi:water-percent
       hasska_hidden: true
       unit_of_measurement: '%'
-    sensor.water_temp:
-      friendly_name: Water Temp
+    # sensor.water_temp:
+    #   friendly_name: Water Temp
+    #   icon: mdi:temperature-fahrenheit
+    #   hasska_hidden: true
+    # sensor.temp_reading:
+    #   friendly_name: Water Temp Reading
+    #   icon: mdi:temperature-fahrenheit
+    #   hasska_hidden: true
+    sensor.water_temperature:
+      freindly_name: Water Temp Reading
       icon: mdi:temperature-fahrenheit
       hasska_hidden: true
-    sensor.temp_reading:
-      friendly_name: Water Temp Reading
-      icon: mdi:temperature-fahrenheit
-      hasska_hidden: true  
-          
-      
+      unit_of_measurement: '°F'
+
 group:
   ha_temp_humd_card:
    name: Home Assistant Exterior Temps
@@ -27,16 +31,21 @@ group:
      - sensor.dht_sensor_temperature
      - sensor.dht_sensor_humidity
      - sensor.server_cpu_temperature
-     
+     - sensor.hood_temperature
+
   water_sensors:
    name: Small Tank Temp Sensors
    entities:
-     - sensor.water_temp_temperature
+     - sensor.water_temperature
      - input_boolean.boolean_tank_temp_warning
-     - sensor.temp_reading
-     
+
 sensor:
-      
+  - platform: template
+    sensors:
+      water_temperature:
+        value_template: '{{states.sensor.arduino.attributes.water_temp | round(1)}}'
+    scan_interval: 10
+    
   - platform: dht
     sensor: DHT22
     pin: 4
@@ -46,27 +55,16 @@ sensor:
       - temperature
       - humidity
 
-  - platform: onewire
-    names:
-      28-0516a31216ff: Water Temp  
-      
-  - platform: template
-    sensors:
-      temp_reading:    
-        value_template: >-
-                     {% if states('sensor.water_temp_temperature') == 'Unknown' %} 
-                          Unknown
-                     {% elif states('sensor.water_temp_temperature') == 'Value' %}
-                        Ok
-                     {% else %}
-                        Ok
-                     {% endif %}              
-                 
-#### cmds to get second temp from pi     
-#### sudo modprobe w1-gpio   
+  # - platform: arduino
+  #   pins:
+  #     2:
+  #       name: Temp Probe
+
+#### cmds to get second temp from pi
+#### sudo modprobe w1-gpio
 #### sudo dtoverlay w1-gpio gpiopin=17 pullup=0 # header pin 11
 #### ls /sys/bus/w1/devices/
 
 #### To enable the one-wire interface you need to add the following line to /boot/config.txt, before rebooting your Pi:
 #### dtoverlay=w1-gpio
-#### dtoverlay=w1-gpio,gpiopin=x 
+#### dtoverlay=w1-gpio,gpiopin=x

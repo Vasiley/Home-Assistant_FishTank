@@ -9,14 +9,14 @@
      - group.lighting_card
      - group.water_level_card
      - group.warning_card
-        
+
   Devicesview:
    view: yes
    name: Equipment
    entities:
      - group.ha_server_card
      - group.homeass_version_card
-     
+     - group.fishtank_backup_ups_card       
   automations_view:
    view: yes
    name: Automations
@@ -24,12 +24,9 @@
      - group.heater_card
      - group.lighting_automations_card
      - group.input_boolean_card
-         
+     - group.wave_maker_card 
+
 #  PI_card:
 #   name: Pi
  #  entities:
  #     - group.ha_server_card
-     
-     
-           
-      

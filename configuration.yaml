@@ -1,6 +1,6 @@
 homeassistant:
   # Name of the location where Home Assistant is running
-  name: Vas & Squrriels Castle
+  name: Vas & Squrriels Fish Tank
   # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude
   longitude: !secret longitude
@@ -8,7 +8,7 @@ homeassistant:
   unit_system: imperial
   time_zone: America/Chicago
   packages: !include_dir_named packages
-  
+
 frontend:
 
 http:
@@ -22,10 +22,6 @@ http:
      - 192.168.1.0/24
    ip_ban_enabled: True
    login_attempts_threshold: 5
-
-updater:
-
-conversation:
 
 sun:
 
@@ -48,10 +44,15 @@ mqtt_statestream:
   base_topic: small_tank
   publish_attributes: false
   publish_timestamps: false
-  exclude:
+  include:
     domains:
-      - sun
-      - moon
-      - automation
-      - group
+      - sensor
+      - binary_sensor
+      - switch
 
+sensor:
+  - platform: serial
+    serial_port: /dev/ttyACM0
+    name: Arduino
+    baudrate: 115200
+#    scan_interval: 10
